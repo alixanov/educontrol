@@ -297,10 +297,10 @@ export default function AttendanceReportsPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
             {t('reportsPageTitle')}
           </h1>
-          <p className="text-sm text-slate-500 mt-0.5">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
             {t('reportsPageSubtitle')}
           </p>
         </div>
@@ -309,7 +309,7 @@ export default function AttendanceReportsPage() {
           <button
             onClick={handleManualRefresh}
             disabled={refreshing}
-            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium bg-white text-slate-700 border border-slate-300 rounded-lg hover:bg-slate-50 transition shadow-sm"
+            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition shadow-sm"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin' : ''}`} />
             <span>{t('refreshBtn')}</span>
@@ -327,15 +327,15 @@ export default function AttendanceReportsPage() {
       </div>
 
       {/* PERIOD SELECTOR TABS & DATE RANGE BAR */}
-      <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Preset Period Buttons */}
-        <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs w-full md:w-auto">
+        <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700 text-xs w-full md:w-auto">
           <button
             onClick={() => setPeriodType('today')}
             className={`px-3 py-1.5 rounded-lg font-bold transition flex-1 md:flex-initial text-center ${
               periodType === 'today'
-                ? 'bg-blue-900 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-blue-900 dark:bg-blue-600 text-white shadow-xs'
+                : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             {t('periodToday')}
@@ -344,8 +344,8 @@ export default function AttendanceReportsPage() {
             onClick={() => setPeriodType('week')}
             className={`px-3 py-1.5 rounded-lg font-bold transition flex-1 md:flex-initial text-center ${
               periodType === 'week'
-                ? 'bg-blue-900 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-blue-900 dark:bg-blue-600 text-white shadow-xs'
+                : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             {t('periodWeek')}
@@ -354,8 +354,8 @@ export default function AttendanceReportsPage() {
             onClick={() => setPeriodType('month')}
             className={`px-3 py-1.5 rounded-lg font-bold transition flex-1 md:flex-initial text-center ${
               periodType === 'month'
-                ? 'bg-blue-900 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-blue-900 dark:bg-blue-600 text-white shadow-xs'
+                : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             {t('periodMonth')}
@@ -364,8 +364,8 @@ export default function AttendanceReportsPage() {
             onClick={() => setPeriodType('custom')}
             className={`px-3 py-1.5 rounded-lg font-bold transition flex-1 md:flex-initial text-center ${
               periodType === 'custom'
-                ? 'bg-blue-900 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-blue-900 dark:bg-blue-600 text-white shadow-xs'
+                : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             {t('periodCustom')}
@@ -374,7 +374,7 @@ export default function AttendanceReportsPage() {
 
         {/* Date Inputs Range */}
         <div className="flex items-center gap-2 text-xs w-full md:w-auto">
-          <Calendar className="w-4 h-4 text-slate-400 flex-shrink-0" />
+          <Calendar className="w-4 h-4 text-slate-400 dark:text-slate-500 flex-shrink-0" />
           <input
             type="date"
             value={startDate}
@@ -382,9 +382,9 @@ export default function AttendanceReportsPage() {
               setStartDate(e.target.value);
               setPeriodType('custom');
             }}
-            className="px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 font-medium text-xs focus:outline-none focus:ring-1 focus:ring-blue-900"
+            className="px-2.5 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 font-medium text-xs focus:outline-none focus:ring-1 focus:ring-blue-900"
           />
-          <span className="text-slate-400 font-semibold">—</span>
+          <span className="text-slate-400 dark:text-slate-500 font-semibold">—</span>
           <input
             type="date"
             value={endDate}
@@ -392,54 +392,54 @@ export default function AttendanceReportsPage() {
               setEndDate(e.target.value);
               setPeriodType('custom');
             }}
-            className="px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 font-medium text-xs focus:outline-none focus:ring-1 focus:ring-blue-900"
+            className="px-2.5 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 font-medium text-xs focus:outline-none focus:ring-1 focus:ring-blue-900"
           />
         </div>
 
         {/* Quick Period Summary KPI */}
-        <div className="flex items-center gap-3 text-xs bg-blue-50/60 border border-blue-100 px-3 py-1.5 rounded-lg w-full md:w-auto justify-between md:justify-start">
+        <div className="flex items-center gap-3 text-xs bg-blue-50/60 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/50 px-3 py-1.5 rounded-lg w-full md:w-auto justify-between md:justify-start">
           <div className="flex items-center gap-1.5">
-            <span className="text-slate-600">{language === 'uz' ? 'Jami qaydlar:' : 'Всего явок:'}</span>
-            <strong className="text-blue-900 font-bold">{stats.total}</strong>
+            <span className="text-slate-600 dark:text-slate-400">{language === 'uz' ? 'Jami qaydlar:' : 'Всего явок:'}</span>
+            <strong className="text-blue-900 dark:text-blue-400 font-bold">{stats.total}</strong>
           </div>
-          <span>•</span>
+          <span className="text-slate-300 dark:text-slate-700">•</span>
           <div className="flex items-center gap-1.5">
-            <span className="text-emerald-700">{language === 'uz' ? 'O‘z vaqtida:' : 'Вовремя:'}</span>
-            <strong className="text-emerald-800 font-bold">{stats.onTimeCount}</strong>
+            <span className="text-emerald-700 dark:text-emerald-400">{language === 'uz' ? 'O‘z vaqtida:' : 'Вовремя:'}</span>
+            <strong className="text-emerald-800 dark:text-emerald-300 font-bold">{stats.onTimeCount}</strong>
           </div>
-          <span>•</span>
+          <span className="text-slate-300 dark:text-slate-700">•</span>
           <div className="flex items-center gap-1.5">
-            <span className="text-amber-700">{language === 'uz' ? 'Kechikish:' : 'Опоздания:'}</span>
-            <strong className="text-amber-800 font-bold">{stats.lateCount}</strong>
+            <span className="text-amber-700 dark:text-amber-400">{language === 'uz' ? 'Kechikish:' : 'Опоздания:'}</span>
+            <strong className="text-amber-800 dark:text-amber-300 font-bold">{stats.lateCount}</strong>
           </div>
         </div>
       </div>
 
       {/* Filter Controls Bar: Search, Department, Status */}
-      <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
         {/* Search */}
         <div className="relative w-full sm:w-72">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder={t('searchTeacherPlaceholder')}
-            className="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-900 text-slate-800 placeholder-slate-400"
+            className="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-900 text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500"
           />
         </div>
 
         {/* Department filter */}
         <div className="flex items-center gap-2 w-full sm:w-auto">
-          <Filter className="w-4 h-4 text-slate-400" />
+          <Filter className="w-4 h-4 text-slate-400 dark:text-slate-500" />
           <select
             value={selectedDept}
             onChange={(e) => setSelectedDept(e.target.value)}
-            className="text-xs bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-700 focus:outline-none font-medium w-full sm:w-auto"
+            className="text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-700 dark:text-slate-200 focus:outline-none font-medium w-full sm:w-auto"
           >
             <option value="ALL">{t('allDepartments')}</option>
             {departments.map((dept) => (
-              <option key={dept} value={dept}>{dept}</option>
+              <option key={dept} value={dept} className="dark:bg-slate-900 dark:text-white">{dept}</option>
             ))}
           </select>
         </div>
@@ -449,7 +449,7 @@ export default function AttendanceReportsPage() {
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value)}
-            className="text-xs bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-700 focus:outline-none font-medium w-full sm:w-auto"
+            className="text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-700 dark:text-slate-200 focus:outline-none font-medium w-full sm:w-auto"
           >
             <option value="">{language === 'uz' ? 'Barcha holatlar' : 'Все статусы'}</option>
             <option value="PRESENT">{language === 'uz' ? 'O‘z vaqtida' : 'Вовремя'}</option>
@@ -461,7 +461,7 @@ export default function AttendanceReportsPage() {
         {(status || search || selectedDept !== 'ALL') && (
           <button
             onClick={handleResetFilters}
-            className="text-xs text-rose-600 hover:text-rose-700 font-semibold px-2 py-1 transition flex items-center gap-1"
+            className="text-xs text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 font-semibold px-2 py-1 transition flex items-center gap-1 cursor-pointer"
           >
             <X className="w-3.5 h-3.5" />
             <span>{t('resetFilters')}</span>
@@ -470,11 +470,11 @@ export default function AttendanceReportsPage() {
       </div>
 
       {/* Table: Timesheet Records */}
-      <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="bg-slate-100/75 border-b border-slate-200 text-slate-600 font-semibold uppercase tracking-wider">
+              <tr className="bg-slate-100/75 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 font-semibold uppercase tracking-wider">
                 <th className="py-3 px-4">{t('colFio')}</th>
                 <th className="py-3 px-4">{t('colTabNo')}</th>
                 <th className="py-3 px-4">{t('colDept')}</th>
@@ -486,16 +486,16 @@ export default function AttendanceReportsPage() {
                 <th className="py-3 px-4 text-right">{t('colActions')}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {loading ? (
                 <tr>
-                  <td colSpan={9} className="py-12 text-center text-slate-400">
+                  <td colSpan={9} className="py-12 text-center text-slate-400 dark:text-slate-500">
                     {language === 'uz' ? 'Tabel ma’lumotlari yuklanmoqda...' : 'Загрузка записей табеля...'}
                   </td>
                 </tr>
               ) : filteredRecords.length === 0 ? (
                 <tr>
-                  <td colSpan={9} className="py-12 text-center text-slate-400">
+                  <td colSpan={9} className="py-12 text-center text-slate-400 dark:text-slate-500">
                     {language === 'uz' ? 'Tanlangan davr uchun qaydlar topilmadi.' : 'Записей по заданным критериям не найдено.'}
                   </td>
                 </tr>
@@ -533,7 +533,7 @@ export default function AttendanceReportsPage() {
                   }
 
                   return (
-                    <tr key={rec.id} className="hover:bg-slate-50 transition">
+                    <tr key={rec.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
                       {/* Teacher name & photo */}
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-2.5">
@@ -541,101 +541,101 @@ export default function AttendanceReportsPage() {
                             <img
                               src={student.photoUrl}
                               alt=""
-                              className="w-7 h-7 rounded-lg object-cover border border-slate-200"
+                              className="w-7 h-7 rounded-lg object-cover border border-slate-200 dark:border-slate-700"
                             />
                           ) : (
-                            <div className="w-7 h-7 rounded-lg bg-blue-100 text-blue-900 flex items-center justify-center font-bold text-xs">
+                            <div className="w-7 h-7 rounded-lg bg-blue-100 dark:bg-blue-950/70 text-blue-900 dark:text-blue-300 flex items-center justify-center font-bold text-xs">
                               {student?.firstName?.slice(0, 1)}
                             </div>
                           )}
-                          <span className="font-bold text-slate-900">
+                          <span className="font-bold text-slate-900 dark:text-white">
                             {student?.firstName} {student?.lastName}
                           </span>
                         </div>
                       </td>
 
                       {/* Tab Number */}
-                      <td className="py-3 px-4 font-mono text-slate-600">
+                      <td className="py-3 px-4 font-mono text-slate-600 dark:text-slate-400">
                         {student?.studentCode || '—'}
                       </td>
 
                       {/* Department */}
-                      <td className="py-3 px-4 text-slate-600">
+                      <td className="py-3 px-4 text-slate-600 dark:text-slate-400">
                         {student?.department || '—'}
                       </td>
 
                       {/* Date */}
-                      <td className="py-3 px-4 font-mono text-slate-700">
+                      <td className="py-3 px-4 font-mono text-slate-700 dark:text-slate-300">
                         {rec.date}
                       </td>
 
                       {/* In Time */}
                       <td className="py-3 px-4 font-mono">
                         {rec.checkInTime ? (
-                          <span className="text-emerald-700 font-bold">
+                          <span className="text-emerald-700 dark:text-emerald-400 font-bold">
                             {new Date(rec.checkInTime).toLocaleTimeString('ru-RU', {
                               hour: '2-digit',
                               minute: '2-digit',
                             })}
                           </span>
                         ) : (
-                          <span className="text-slate-400">—</span>
+                          <span className="text-slate-400 dark:text-slate-500">—</span>
                         )}
                       </td>
 
                       {/* Out Time */}
                       <td className="py-3 px-4 font-mono">
                         {rec.checkOutTime ? (
-                          <span className="text-blue-700 font-bold">
+                          <span className="text-blue-700 dark:text-blue-400 font-bold">
                             {new Date(rec.checkOutTime).toLocaleTimeString('ru-RU', {
                               hour: '2-digit',
                               minute: '2-digit',
                             })}
                           </span>
                         ) : (
-                          <span className="text-slate-400">—</span>
+                          <span className="text-slate-400 dark:text-slate-500">—</span>
                         )}
                       </td>
 
                       {/* Worked Hours */}
-                      <td className="py-3 px-4 text-slate-700 font-medium">
+                      <td className="py-3 px-4 text-slate-700 dark:text-slate-300 font-medium">
                         {formatDuration(rec.checkInTime, rec.checkOutTime)}
                       </td>
 
                       {/* Discipline Status Badge */}
                       <td className="py-3 px-4">
                         {isAbsent ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-rose-50 text-rose-800 border border-rose-200">
-                            <UserX className="w-3 h-3 text-rose-600" />
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
+                            <UserX className="w-3 h-3 text-rose-600 dark:text-rose-400" />
                             <span>{language === 'uz' ? 'Kelmagan' : 'Не явился'}</span>
                           </span>
                         ) : isLateArrival && isEarlyDeparture ? (
-                          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-900 border border-amber-300">
-                            <AlertTriangle className="w-3 h-3 text-amber-700" />
+                          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
+                            <AlertTriangle className="w-3 h-3 text-amber-700 dark:text-amber-400" />
                             <span>+{formatMinutesToHours(lateMins)} / -{formatMinutesToHours(earlyMins)}</span>
                           </span>
                         ) : isLateArrival ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
-                            <AlertTriangle className="w-3 h-3 text-amber-600" />
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
+                            <AlertTriangle className="w-3 h-3 text-amber-600 dark:text-amber-400" />
                             <span>+{formatMinutesToHours(lateMins)}</span>
                           </span>
                         ) : isEarlyDeparture ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-orange-50 text-orange-800 border border-orange-200">
-                            <Clock className="w-3 h-3 text-orange-600" />
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-orange-50 dark:bg-orange-950/60 text-orange-800 dark:text-orange-300 border border-orange-200 dark:border-orange-800">
+                            <Clock className="w-3 h-3 text-orange-600 dark:text-orange-400" />
                             <span>-{formatMinutesToHours(earlyMins)}</span>
                           </span>
                         ) : rec.checkInTime && rec.checkOutTime ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                            <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                            <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
                             <span>{language === 'uz' ? 'O‘z vaqtida' : 'Вовремя'}</span>
                           </span>
                         ) : rec.checkInTime ? (
-                          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-blue-800 border border-blue-200">
-                            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
+                          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse" />
                             <span>{language === 'uz' ? 'Binoda' : 'В здании'}</span>
                           </span>
                         ) : (
-                          <span className="text-slate-400">—</span>
+                          <span className="text-slate-400 dark:text-slate-500">—</span>
                         )}
                       </td>
 
@@ -643,7 +643,7 @@ export default function AttendanceReportsPage() {
                       <td className="py-3 px-4 text-right">
                         <button
                           onClick={() => handleOpenEdit(rec)}
-                          className="p-1 rounded hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition"
+                          className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition cursor-pointer"
                           title={t('editEntry')}
                         >
                           <Edit className="w-3.5 h-3.5" />
@@ -660,15 +660,15 @@ export default function AttendanceReportsPage() {
 
       {/* Edit Record Modal */}
       {editingRecord && (
-        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <h3 className="text-base font-bold text-slate-900">
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 border border-slate-200 dark:border-slate-800 animate-scale-up">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">
                 {t('editEntry')}: {editingRecord.student?.firstName} {editingRecord.student?.lastName}
               </h3>
               <button
                 onClick={() => setEditingRecord(null)}
-                className="text-slate-400 hover:text-slate-600 p-1"
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 rounded-lg"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -676,49 +676,49 @@ export default function AttendanceReportsPage() {
 
             <div className="space-y-3 text-xs">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">{t('colDisciplineStatus')}:</label>
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">{t('colDisciplineStatus')}:</label>
                 <select
                   value={editStatus}
                   onChange={(e) => setEditStatus(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-800 focus:outline-none"
+                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none"
                 >
-                  <option value="PRESENT">{t('statusNorm')}</option>
-                  <option value="LATE">{t('statusLate')}</option>
-                  <option value="ABSENT">{t('statusAbsent')}</option>
+                  <option value="PRESENT" className="dark:bg-slate-900 dark:text-white">{t('statusNorm')}</option>
+                  <option value="LATE" className="dark:bg-slate-900 dark:text-white">{t('statusLate')}</option>
+                  <option value="ABSENT" className="dark:bg-slate-900 dark:text-white">{t('statusAbsent')}</option>
                 </select>
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">{t('colCheckIn')}:</label>
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">{t('colCheckIn')}:</label>
                 <input
                   type="time"
                   value={editInTime}
                   onChange={(e) => setEditInTime(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-800 focus:outline-none"
+                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">{t('colCheckOut')}:</label>
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">{t('colCheckOut')}:</label>
                 <input
                   type="time"
                   value={editOutTime}
                   onChange={(e) => setEditOutTime(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-800 focus:outline-none"
+                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none"
                 />
               </div>
             </div>
 
-            <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+            <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
               <button
                 onClick={() => setEditingRecord(null)}
-                className="px-3.5 py-1.5 text-xs text-slate-600 hover:bg-slate-100 rounded-lg font-medium transition"
+                className="px-3.5 py-1.5 text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg font-medium transition cursor-pointer"
               >
                 {t('cancelChanges')}
               </button>
               <button
                 onClick={handleSaveEdit}
-                className="px-4 py-1.5 text-xs bg-blue-900 hover:bg-blue-800 text-white rounded-lg font-bold shadow-xs transition"
+                className="px-4 py-1.5 text-xs bg-blue-900 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500 text-white rounded-lg font-bold shadow-xs transition cursor-pointer"
               >
                 {t('saveChanges')}
               </button>

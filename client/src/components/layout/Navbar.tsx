@@ -38,10 +38,19 @@ export const Navbar = ({ onToggleMenu }: { onToggleMenu?: () => void }) => {
   useEffect(() => {
     const checkServer = async () => {
       try {
+        const res = await fetch('/api/cameras', { method: 'HEAD' }).catch(() => null);
+        if (res && res.status > 0) {
+          setIsServerOnline(true);
+          return;
+        }
         await api.getDashboardMetrics();
         setIsServerOnline(true);
-      } catch (e) {
-        setIsServerOnline(false);
+      } catch (err: any) {
+        if (err?.response || err?.status || err?.message?.includes('401')) {
+          setIsServerOnline(true);
+        } else {
+          setIsServerOnline(false);
+        }
       }
     };
     checkServer();

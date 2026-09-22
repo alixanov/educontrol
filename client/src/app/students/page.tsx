@@ -738,10 +738,10 @@ export default function StudentsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
             {t('navStudents')}
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
             {language === 'uz'
               ? 'O‘qituvchilar va biometriya bazasi'
               : 'Реестр преподавателей и биометрии'}
@@ -750,7 +750,7 @@ export default function StudentsPage() {
 
         <button
           onClick={handleOpenAdd}
-          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-white text-xs font-semibold shadow-sm transition hover:opacity-95"
+          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-white text-xs font-semibold shadow-sm transition hover:opacity-95 cursor-pointer"
           style={{ background: '#1e3a5f' }}
         >
           <UserPlus className="w-4 h-4" />
@@ -759,24 +759,24 @@ export default function StudentsPage() {
       </div>
 
       {/* Filters Bar */}
-      <div className="bg-white p-3 sm:p-3.5 rounded-xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div className="bg-white dark:bg-slate-900 p-3 sm:p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-3 transition-colors">
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder={t('searchTeacherPlaceholder')}
-            className="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-900 text-slate-800 placeholder-slate-400"
+            className="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-900 dark:focus:ring-blue-500 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
           />
         </div>
 
         <div className="flex items-center gap-2 w-full sm:w-auto">
-          <Filter className="w-4 h-4 text-slate-400 shrink-0" />
+          <Filter className="w-4 h-4 text-slate-400 dark:text-slate-500 shrink-0" />
           <select
             value={department}
             onChange={(e) => setDepartment(e.target.value === departmentOptions[0] ? '' : e.target.value)}
-            className="text-xs bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 focus:outline-none font-medium w-full sm:w-auto"
+            className="text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-700 dark:text-slate-200 focus:outline-none font-medium w-full sm:w-auto"
           >
             {departmentOptions.map((d) => (
               <option key={d} value={d === departmentOptions[0] ? '' : d}>
@@ -790,25 +790,25 @@ export default function StudentsPage() {
       {/* Student List Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5">
         {loading ? (
-          <div className="col-span-full py-16 text-center text-slate-400 text-xs">
+          <div className="col-span-full py-16 text-center text-slate-400 dark:text-slate-500 text-xs">
             {language === 'uz' ? 'O‘qituvchilar ro‘yxati yuklanmoqda...' : 'Загрузка списка преподавателей...'}
           </div>
         ) : students.length === 0 ? (
-          <div className="col-span-full py-12 text-center bg-white rounded-xl border border-slate-200 p-6">
-            <div className="w-14 h-14 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center mx-auto mb-2.5 text-blue-700">
+          <div className="col-span-full py-12 text-center bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 transition-colors">
+            <div className="w-14 h-14 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-800 flex items-center justify-center mx-auto mb-2.5 text-blue-700 dark:text-blue-300">
               <Users className="w-7 h-7" />
             </div>
-            <h3 className="text-base font-bold text-slate-900">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">
               {language === 'uz' ? 'O‘qituvchilar tarkibi bo‘sh' : 'Штат преподавателей пуст'}
             </h3>
-            <p className="text-xs text-slate-500 mt-1 max-w-md mx-auto">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-md mx-auto">
               {language === 'uz'
                 ? 'O‘qituvchini ro‘yxatdan o‘tkazish uchun quyidagi tugmani bosing.'
                 : 'Нажмите кнопку ниже, чтобы зарегистрировать преподавателя.'}
             </p>
             <button
               onClick={handleOpenAdd}
-              className="mt-3.5 inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white text-xs font-semibold shadow-sm transition hover:opacity-95"
+              className="mt-3.5 inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white text-xs font-semibold shadow-sm transition hover:opacity-95 cursor-pointer"
               style={{ background: '#1e3a5f' }}
             >
               <UserPlus className="w-4 h-4" />
@@ -819,7 +819,7 @@ export default function StudentsPage() {
           students.map((student) => (
             <div
               key={student.id}
-              className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs hover:shadow-sm hover:border-slate-300 transition flex flex-col justify-between"
+              className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 shadow-xs dark:shadow-slate-950/40 hover:shadow-sm hover:border-slate-300 dark:hover:border-slate-700 transition flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-start gap-3">
@@ -828,18 +828,18 @@ export default function StudentsPage() {
                       <img
                         src={student.photoUrl}
                         alt={student.firstName}
-                        className="w-11 h-11 rounded-lg object-cover border border-slate-200 shadow-xs flex-shrink-0"
+                        className="w-11 h-11 rounded-lg object-cover border border-slate-200 dark:border-slate-700 shadow-xs flex-shrink-0"
                       />
                     ) : (
-                      <div className="w-11 h-11 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-400 flex-shrink-0">
+                      <div className="w-11 h-11 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400 dark:text-slate-500 flex-shrink-0">
                         <Camera className="w-5 h-5" />
                       </div>
                     )}
                     <div className="min-w-0">
-                      <h3 className="text-sm font-bold text-slate-900 truncate">
+                      <h3 className="text-sm font-bold text-slate-900 dark:text-white truncate">
                         {student.firstName} {student.lastName}
                       </h3>
-                      <p className="text-xs text-blue-700 font-mono font-medium">
+                      <p className="text-xs text-blue-700 dark:text-blue-400 font-mono font-medium">
                         {student.studentCode}
                       </p>
                     </div>
@@ -849,8 +849,8 @@ export default function StudentsPage() {
                     <span
                       className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase ${
                         student.status === 'ACTIVE'
-                          ? 'bg-green-50 text-green-700 border border-green-200'
-                          : 'bg-slate-100 text-slate-500'
+                          ? 'bg-green-50 dark:bg-emerald-950/60 text-green-700 dark:text-emerald-400 border border-green-200 dark:border-emerald-800'
+                          : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
                       }`}
                     >
                       {student.status === 'ACTIVE'
@@ -858,8 +858,8 @@ export default function StudentsPage() {
                         : (language === 'uz' ? 'Faol emas' : 'Неактивен')}
                     </span>
                     {student.faceDescriptor ? (
-                      <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200 flex items-center gap-0.5 whitespace-nowrap">
-                        <ShieldCheck className="w-3 h-3 text-blue-600" />
+                      <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 flex items-center gap-0.5 whitespace-nowrap">
+                        <ShieldCheck className="w-3 h-3 text-blue-600 dark:text-blue-400" />
                         {(() => {
                           try {
                             const parsed = JSON.parse(student.faceDescriptor);
@@ -871,34 +871,34 @@ export default function StudentsPage() {
                         })()}
                       </span>
                     ) : (
-                      <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200 whitespace-nowrap">
+                      <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800 whitespace-nowrap">
                         {language === 'uz' ? 'Biometriyasiz' : 'Нет биометрии'}
                       </span>
                     )}
                   </div>
                 </div>
 
-                <div className="mt-3 pt-2.5 border-t border-slate-100 space-y-1.5 text-xs text-slate-600">
+                <div className="mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800 space-y-1.5 text-xs text-slate-600 dark:text-slate-400">
                   <div className="space-y-0.5">
-                    <span className="text-slate-400 text-[10px]">{language === 'uz' ? `Kafedra / Bo‘lim:` : 'Кафедра / Отдел:'}</span>
-                    <p className="font-medium text-slate-800 leading-tight text-xs truncate">{student.department}</p>
+                    <span className="text-slate-400 dark:text-slate-500 text-[10px]">{language === 'uz' ? `Kafedra / Bo‘lim:` : 'Кафедра / Отдел:'}</span>
+                    <p className="font-medium text-slate-800 dark:text-slate-200 leading-tight text-xs truncate">{student.department}</p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-slate-400 text-[10px] flex-shrink-0">{language === 'uz' ? 'Lavozimi:' : 'Должность:'}</span>
-                    <span className="font-medium text-slate-800 truncate text-xs">{student.grade}</span>
+                    <span className="text-slate-400 dark:text-slate-500 text-[10px] flex-shrink-0">{language === 'uz' ? 'Lavozimi:' : 'Должность:'}</span>
+                    <span className="font-medium text-slate-800 dark:text-slate-200 truncate text-xs">{student.grade}</span>
                   </div>
                   <div className="space-y-0.5">
-                    <span className="text-slate-400 text-[10px]">{language === 'uz' ? 'Elektron pochta:' : 'Эл. почта:'}</span>
-                    <p className="font-medium text-slate-700 truncate text-xs">{student.email}</p>
+                    <span className="text-slate-400 dark:text-slate-500 text-[10px]">{language === 'uz' ? 'Elektron pochta:' : 'Эл. почта:'}</span>
+                    <p className="font-medium text-slate-700 dark:text-slate-300 truncate text-xs">{student.email}</p>
                   </div>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="mt-3.5 pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
+              <div className="mt-3.5 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
                 <button
                   onClick={() => handleViewProfile(student.id)}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-700 hover:text-blue-800 p-1"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 p-1 cursor-pointer"
                 >
                   <Eye className="w-3.5 h-3.5" />
                   <span>{language === 'uz' ? 'Davomat tarixi' : 'История посещений'}</span>
@@ -908,14 +908,14 @@ export default function StudentsPage() {
                   <button
                     onClick={() => handleOpenEdit(student)}
                     title={language === 'uz' ? 'Tahrirlash' : 'Редактировать'}
-                    className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition"
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
                   >
                     <Edit2 className="w-3.5 h-3.5" />
                   </button>
                   <button
                     onClick={() => handleDelete(student.id, `${student.firstName} ${student.lastName}`)}
                     title={language === 'uz' ? 'O‘chirish' : 'Удалить'}
-                    className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition cursor-pointer"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -928,24 +928,24 @@ export default function StudentsPage() {
 
       {/* Add / Edit Student Modal */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-4 sm:p-6 border border-slate-200 animate-scale-up max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-              <h2 className="text-base font-bold text-slate-900">
+        <div className="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl max-w-lg w-full p-4 sm:p-6 border border-slate-200 dark:border-slate-800 animate-scale-up max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+              <h2 className="text-base font-bold text-slate-900 dark:text-white">
                 {editingStudent
                   ? (language === 'uz' ? 'O‘qituvchi ma’lumotlarini tahrirlash' : 'Редактировать преподавателя')
                   : (language === 'uz' ? 'Yangi o‘qituvchini ro‘yxatga olish' : 'Регистрация преподавателя')}
               </h2>
               <button
                 onClick={handleCloseModal}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100"
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             {formError && (
-              <div className="mt-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
+              <div className="mt-4 p-3 rounded-lg bg-red-50 dark:bg-rose-950/50 border border-red-200 dark:border-rose-900/50 text-red-700 dark:text-rose-400 text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 flex-shrink-0" />
                 <span>{formError}</span>
               </div>
@@ -953,9 +953,9 @@ export default function StudentsPage() {
 
             <form onSubmit={handleSaveStudent} className="space-y-4 mt-4 text-xs">
               {/* Photo Enrollment Section with Biometric Status */}
-              <div className="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-3">
+              <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-3">
                 <div className="flex items-center justify-between">
-                  <label className="block font-bold text-slate-800">
+                  <label className="block font-bold text-slate-800 dark:text-slate-200">
                     {language === 'uz' ? 'Biometrik yuzni tanish uchun fotosurat' : 'Фото лица для биометрического распознавания'}
                   </label>
                   {isWebcamOpen && (
@@ -970,16 +970,16 @@ export default function StudentsPage() {
                         }}
                         className={`text-[10px] font-semibold px-2 py-0.5 rounded border transition flex items-center gap-1 ${
                           isMirrored
-                            ? 'bg-blue-50 text-blue-700 border-blue-200'
-                            : 'bg-slate-100 text-slate-700 border-slate-300'
+                            ? 'bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800'
+                            : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-600'
                         }`}
                         title={language === 'uz' ? 'Ko‘zgu rejimini o‘zgartirish' : 'Переключить зеркальный режим'}
                       >
                         <ArrowLeftRight className="w-3 h-3" />
                         <span>{language === 'uz' ? (isMirrored ? 'Ko‘zgu: BOR' : 'Ko‘zgu: YO‘Q') : (isMirrored ? 'Зеркало: ВКЛ' : 'Зеркало: ВЫКЛ')}</span>
                       </button>
-                      <span className="text-[10px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded border border-green-200 flex items-center gap-1">
-                        <Sparkles className="w-3 h-3 text-green-600 animate-spin" />
+                      <span className="text-[10px] font-bold text-green-700 dark:text-emerald-400 bg-green-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded border border-green-200 dark:border-emerald-800 flex items-center gap-1">
+                        <Sparkles className="w-3 h-3 text-green-600 dark:text-emerald-400 animate-spin" />
                         {language === 'uz' ? 'AVTO-SURAT YOQILGAN' : 'АВТО-СНИМОК ВКЛЮЧЁН'}
                       </span>
                     </div>
@@ -989,7 +989,7 @@ export default function StudentsPage() {
                 {isWebcamOpen ? (
                   <div className="space-y-3">
                     {/* 3-Angle Step Indicator */}
-                    <div className="grid grid-cols-3 gap-1.5 p-1.5 bg-slate-100 rounded-lg border border-slate-200">
+                    <div className="grid grid-cols-3 gap-1.5 p-1.5 bg-slate-100 dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800">
                       {ANGLE_CONFIG.map((ang, idx) => {
                         const isDone = angleIndex > idx;
                         const isCurrent = angleIndex === idx;
@@ -998,10 +998,10 @@ export default function StudentsPage() {
                             key={idx}
                             className={`px-2 py-1 rounded text-center text-[10px] font-semibold transition-all flex items-center justify-center gap-1 ${
                               isDone
-                                ? 'bg-green-100 text-green-800 border border-green-300'
+                                ? 'bg-green-100 dark:bg-emerald-950/70 text-green-800 dark:text-emerald-300 border border-green-300 dark:border-emerald-700'
                                 : isCurrent
                                 ? 'bg-blue-700 text-white shadow-sm'
-                                : 'bg-white text-slate-400 border border-slate-200'
+                                : 'bg-white dark:bg-slate-800 text-slate-400 dark:text-slate-500 border border-slate-200 dark:border-slate-700'
                             }`}
                           >
                             {isDone ? <span>✓ {ang.badge}</span> : <span>{ang.badge}</span>}
@@ -1010,7 +1010,7 @@ export default function StudentsPage() {
                       })}
                     </div>
 
-                    <div className="relative aspect-video rounded-lg overflow-hidden bg-black border border-slate-300 flex items-center justify-center">
+                    <div className="relative aspect-video rounded-lg overflow-hidden bg-black border border-slate-300 dark:border-slate-700 flex items-center justify-center">
                       <video
                         ref={modalVideoRef}
                         playsInline
@@ -1027,16 +1027,16 @@ export default function StudentsPage() {
                     </div>
 
                     {/* Auto-Capture Status & Progress Bar */}
-                    <div className="space-y-1.5 p-2.5 rounded-lg bg-white border border-slate-200">
+                    <div className="space-y-1.5 p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="font-semibold text-slate-700">{autoCaptureStatus}</span>
-                        <span className={autoCaptureProgress > 0 ? 'text-green-700 font-bold' : 'text-slate-400'}>
+                        <span className="font-semibold text-slate-700 dark:text-slate-300">{autoCaptureStatus}</span>
+                        <span className={autoCaptureProgress > 0 ? 'text-green-700 dark:text-emerald-400 font-bold' : 'text-slate-400 dark:text-slate-500'}>
                           {autoCaptureProgress}%
                         </span>
                       </div>
-                      <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                      <div className="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
                         <div
-                          className="h-full bg-green-600 rounded-full transition-all duration-150"
+                          className="h-full bg-green-600 dark:bg-emerald-500 rounded-full transition-all duration-150"
                           style={{ width: `${autoCaptureProgress}%` }}
                         />
                       </div>
@@ -1058,7 +1058,7 @@ export default function StudentsPage() {
                       <button
                         type="button"
                         onClick={handleStopWebcam}
-                        className="py-2 px-3 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold"
+                        className="py-2 px-3 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold"
                       >
                         {language === 'uz' ? 'Bekor qilish' : 'Отмена'}
                       </button>
@@ -1070,7 +1070,7 @@ export default function StudentsPage() {
                       {capturedAngles.length > 0 ? (
                         <div className="flex gap-2">
                           {capturedAngles.map((thumb, idx) => (
-                            <div key={idx} className="relative w-16 h-16 rounded-lg overflow-hidden border-2 border-slate-200 shadow-sm">
+                            <div key={idx} className="relative w-16 h-16 rounded-lg overflow-hidden border-2 border-slate-200 dark:border-slate-700 shadow-sm">
                               <img src={thumb} alt={`Ракурс ${idx + 1}`} className="w-full h-full object-cover" />
                               <span className="absolute bottom-0 inset-x-0 bg-slate-900/80 text-[8px] text-white text-center py-0.5 font-medium">
                                 {idx === 0
@@ -1083,7 +1083,7 @@ export default function StudentsPage() {
                           ))}
                         </div>
                       ) : (
-                        <div className="w-20 h-20 rounded-xl bg-white border-2 border-slate-200 overflow-hidden flex items-center justify-center flex-shrink-0 shadow-sm relative">
+                        <div className="w-20 h-20 rounded-xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 overflow-hidden flex items-center justify-center flex-shrink-0 shadow-sm relative">
                           {formData.photoUrl ? (
                             <img
                               src={formData.photoUrl}
@@ -1091,7 +1091,7 @@ export default function StudentsPage() {
                               className="w-full h-full object-cover"
                             />
                           ) : (
-                            <div className="text-center p-2 text-slate-400">
+                            <div className="text-center p-2 text-slate-400 dark:text-slate-500">
                               <Camera className="w-6 h-6 mx-auto mb-0.5" />
                               <span className="text-[9px]">{language === 'uz' ? 'Suratsiz' : 'Нет фото'}</span>
                             </div>
@@ -1104,14 +1104,13 @@ export default function StudentsPage() {
                           <button
                             type="button"
                             onClick={handleStartWebcam}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white font-semibold text-xs shadow-sm transition"
-                            style={{ background: '#1e3a5f' }}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white font-semibold text-xs shadow-sm transition bg-blue-900 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500"
                           >
                             <Video className="w-3.5 h-3.5" />
                             <span>{language === 'uz' ? 'Kamerani yoqish (3 rakurs)' : 'Включить камеру (3 ракурса)'}</span>
                           </button>
 
-                          <label className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold text-xs cursor-pointer shadow-sm transition">
+                          <label className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-xs cursor-pointer shadow-sm transition">
                             <Upload className="w-3.5 h-3.5" />
                             <span>{language === 'uz' ? 'Fayl yuklash' : 'Загрузить файл'}</span>
                             <input
@@ -1125,7 +1124,7 @@ export default function StudentsPage() {
 
                         {/* Biometric Descriptor Status */}
                         {descriptorStatus === 'loading' && (
-                          <div className="flex items-center gap-1.5 text-blue-700">
+                          <div className="flex items-center gap-1.5 text-blue-700 dark:text-blue-400">
                             <Loader2 className="w-3.5 h-3.5 animate-spin" />
                             <span className="text-[11px] font-medium">
                               {language === 'uz' ? 'Biometriya hisoblanmoqda...' : 'Извлечение биометрии...'}
@@ -1133,8 +1132,8 @@ export default function StudentsPage() {
                           </div>
                         )}
                         {descriptorStatus === 'success' && (
-                          <div className="flex items-center gap-1.5 text-green-700">
-                            <ShieldCheck className="w-3.5 h-3.5 flex-shrink-0 text-green-600" />
+                          <div className="flex items-center gap-1.5 text-green-700 dark:text-emerald-400">
+                            <ShieldCheck className="w-3.5 h-3.5 flex-shrink-0 text-green-600 dark:text-emerald-400" />
                             <span className="text-[11px] font-bold">
                               {capturedAngles.length === 3 || (formData.faceDescriptor && formData.faceDescriptor.startsWith('[['))
                                 ? (language === 'uz'
@@ -1147,7 +1146,7 @@ export default function StudentsPage() {
                           </div>
                         )}
                         {descriptorStatus === 'error' && (
-                          <div className="flex items-center gap-1.5 text-red-600">
+                          <div className="flex items-center gap-1.5 text-red-600 dark:text-rose-400">
                             <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
                             <span className="text-[11px] font-medium">
                               {language === 'uz' ? 'Yuz aniqlanmadi! Qaytadan suratga oling.' : 'Лицо не обнаружено! Сделайте фото заново.'}
@@ -1155,7 +1154,7 @@ export default function StudentsPage() {
                           </div>
                         )}
                         {descriptorStatus === 'idle' && !formData.photoUrl && (
-                          <p className="text-[11px] text-slate-400">
+                          <p className="text-[11px] text-slate-400 dark:text-slate-500">
                             {language === 'uz'
                               ? '«Kamerani yoqish» tugmasini bosing: tizim 3 rakursda suratga oladi.'
                               : 'Нажмите «Включить камеру»: система снимет лицо в 3 ракурсах.'}
@@ -1169,7 +1168,7 @@ export default function StudentsPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     {language === 'uz' ? 'Ism' : 'Имя'}
                   </label>
                   <input
@@ -1177,12 +1176,12 @@ export default function StudentsPage() {
                     required
                     value={formData.firstName}
                     onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/40"
                     placeholder={language === 'uz' ? 'Masalan: Shukurullo' : 'Например: Шукурулло'}
                   />
                 </div>
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     {language === 'uz' ? 'Familiya' : 'Фамилия'}
                   </label>
                   <input
@@ -1190,7 +1189,7 @@ export default function StudentsPage() {
                     required
                     value={formData.lastName}
                     onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/40"
                     placeholder={language === 'uz' ? 'Masalan: Alixonov' : 'Например: Алихонов'}
                   />
                 </div>
@@ -1198,7 +1197,7 @@ export default function StudentsPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     {language === 'uz' ? 'Tabel raqami / ID' : 'Табельный номер / ID'}
                   </label>
                   <input
@@ -1206,12 +1205,12 @@ export default function StudentsPage() {
                     required
                     value={formData.studentCode}
                     onChange={(e) => setFormData({ ...formData, studentCode: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-lg font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/40"
                     placeholder="TCH-2026-001"
                   />
                 </div>
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     {language === 'uz' ? 'Elektron pochta' : 'Электронная почта'}
                   </label>
                   <input
@@ -1219,7 +1218,7 @@ export default function StudentsPage() {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/40"
                     placeholder="teacher@educontrol.uz"
                   />
                 </div>
@@ -1228,13 +1227,13 @@ export default function StudentsPage() {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="block font-semibold text-slate-700 text-xs">
-                      {language === 'uz' ? `Kafedra / Bo\u2019lim` : 'Кафедра / Отдел'}
+                    <label className="block font-semibold text-slate-700 dark:text-slate-300 text-xs">
+                      {language === 'uz' ? `Kafedra / Bo‘lim` : 'Кафедра / Отдел'}
                     </label>
                     <button
                       type="button"
                       onClick={() => setIsAddingQuickDept(!isAddingQuickDept)}
-                      className="text-[11px] font-semibold text-blue-900 hover:text-blue-700 hover:underline inline-flex items-center gap-0.5 cursor-pointer"
+                      className="text-[11px] font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-600 hover:underline inline-flex items-center gap-0.5 cursor-pointer"
                     >
                       <Plus className="w-3 h-3" />
                       <span>{language === 'uz' ? 'Yangi qo‘shish' : '+ Новая'}</span>
@@ -1247,20 +1246,20 @@ export default function StudentsPage() {
                         value={quickDeptInput}
                         onChange={(e) => setQuickDeptInput(e.target.value)}
                         placeholder={language === 'uz' ? 'Kafedra nomi...' : 'Название кафедры...'}
-                        className="w-full px-2.5 py-1.5 text-xs bg-white border border-blue-400 rounded-lg focus:outline-none"
+                        className="w-full px-2.5 py-1.5 text-xs bg-white dark:bg-slate-800 border border-blue-500 rounded-lg text-slate-900 dark:text-white focus:outline-none"
                         autoFocus
                       />
                       <button
                         type="button"
                         onClick={handleQuickAddDept}
-                        className="px-2.5 py-1.5 bg-blue-900 text-white rounded-lg text-xs font-semibold hover:bg-blue-800 cursor-pointer"
+                        className="px-2.5 py-1.5 bg-blue-700 text-white rounded-lg text-xs font-semibold hover:bg-blue-600 cursor-pointer"
                       >
                         ✓
                       </button>
                       <button
                         type="button"
                         onClick={() => setIsAddingQuickDept(false)}
-                        className="px-2 py-1.5 text-slate-500 hover:text-slate-700 text-xs cursor-pointer"
+                        className="px-2 py-1.5 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 text-xs cursor-pointer"
                       >
                         ✕
                       </button>
@@ -1269,10 +1268,10 @@ export default function StudentsPage() {
                     <select
                       value={formData.department}
                       onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none text-xs"
+                      className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-lg focus:outline-none text-xs"
                     >
                       {departmentsList.map((dept) => (
-                        <option key={dept} value={dept}>
+                        <option key={dept} value={dept} className="dark:bg-slate-900 dark:text-white">
                           {dept}
                         </option>
                       ))}
@@ -1280,16 +1279,16 @@ export default function StudentsPage() {
                   )}
                 </div>
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     {language === 'uz' ? 'Lavozimi / Ilmiy darajasi' : 'Должность / Звание'}
                   </label>
                   <select
                     value={formData.grade}
                     onChange={(e) => setFormData({ ...formData, grade: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-lg focus:outline-none"
                   >
                     {TEACHER_RANKS[language].map((rank) => (
-                      <option key={rank} value={rank}>
+                      <option key={rank} value={rank} className="dark:bg-slate-900 dark:text-white">
                         {rank}
                       </option>
                     ))}
@@ -1297,19 +1296,18 @@ export default function StudentsPage() {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-slate-100 flex items-center justify-end gap-2">
+              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-end gap-2">
                 <button
                   type="button"
                   onClick={handleCloseModal}
-                  className="px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold"
+                  className="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold"
                 >
                   {language === 'uz' ? 'Bekor qilish' : 'Отмена'}
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-4 py-2 rounded-lg text-white font-semibold shadow-sm disabled:opacity-50"
-                  style={{ background: '#1e3a5f' }}
+                  className="px-4 py-2 rounded-lg text-white font-semibold shadow-sm disabled:opacity-50 bg-blue-900 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500"
                 >
                   {submitting
                     ? (language === 'uz' ? 'Saqlanmoqda...' : 'Сохранение...')
@@ -1325,38 +1323,38 @@ export default function StudentsPage() {
 
       {/* Student Detail Modal */}
       {viewingStudent && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-4 sm:p-6 border border-slate-200 animate-scale-up max-h-[85vh] flex flex-col">
-            <div className="flex items-start justify-between pb-4 border-b border-slate-100">
+        <div className="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl max-w-lg w-full p-4 sm:p-6 border border-slate-200 dark:border-slate-800 animate-scale-up max-h-[85vh] flex flex-col">
+            <div className="flex items-start justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-3">
                 {viewingStudent.photoUrl ? (
                   <img
                     src={viewingStudent.photoUrl}
                     alt={viewingStudent.firstName}
-                    className="w-12 h-12 rounded-lg object-cover border"
+                    className="w-12 h-12 rounded-lg object-cover border border-slate-200 dark:border-slate-700"
                   />
                 ) : (
-                  <div className="w-12 h-12 rounded-lg bg-slate-100 border flex items-center justify-center text-slate-400">
+                  <div className="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400">
                     <Camera className="w-6 h-6" />
                   </div>
                 )}
                 <div>
-                  <h3 className="text-base font-bold text-slate-900">
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white">
                     {viewingStudent.firstName} {viewingStudent.lastName}
                   </h3>
-                  <p className="text-xs text-blue-700 font-mono">{viewingStudent.studentCode}</p>
+                  <p className="text-xs text-blue-700 dark:text-blue-400 font-mono">{viewingStudent.studentCode}</p>
                 </div>
               </div>
               <button
                 onClick={() => setViewingStudent(null)}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100"
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <div className="my-4">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+            <div className="my-4 flex-1 overflow-hidden flex flex-col">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
                 {language === 'uz' ? 'Davomat jurnali' : 'Журнал посещаемости'}
               </h4>
               <div className="space-y-2 overflow-y-auto max-h-64 pr-1">
@@ -1364,17 +1362,17 @@ export default function StudentsPage() {
                   viewingStudent.attendances.map((rec: any) => (
                     <div
                       key={rec.id}
-                      className="p-3 rounded-lg bg-slate-50 border border-slate-150 flex items-center justify-between text-xs"
+                      className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/70 border border-slate-150 dark:border-slate-700 flex items-center justify-between text-xs"
                     >
                       <div className="space-y-0.5">
-                        <span className="font-semibold text-slate-800">{rec.date}</span>
-                        <div className="flex items-center gap-2 text-[11px] text-slate-500">
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">{rec.date}</span>
+                        <div className="flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400">
                           <span>
                             {language === 'uz' ? 'Kirish: ' : 'Вход: '}
                             {rec.checkInTime ? new Date(rec.checkInTime).toLocaleTimeString(language === 'uz' ? 'uz-UZ' : 'ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : '--:--'}
                           </span>
                           <span>•</span>
-                          <span className="font-semibold text-indigo-700">
+                          <span className="font-semibold text-indigo-700 dark:text-indigo-400">
                             {language === 'uz' ? 'Chiqish: ' : 'Выход: '}
                             {rec.checkOutTime ? new Date(rec.checkOutTime).toLocaleTimeString(language === 'uz' ? 'uz-UZ' : 'ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : (language === 'uz' ? 'Qayd etilmagan' : 'Не зафиксирован')}
                           </span>
@@ -1383,10 +1381,10 @@ export default function StudentsPage() {
                       <span
                         className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
                           rec.status === 'PRESENT'
-                            ? 'bg-green-100 text-green-800'
+                            ? 'bg-green-100 dark:bg-emerald-950/60 text-green-800 dark:text-emerald-300 border border-green-200 dark:border-emerald-800'
                             : rec.status === 'LATE'
-                            ? 'bg-amber-100 text-amber-800'
-                            : 'bg-rose-100 text-rose-800'
+                            ? 'bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800'
+                            : 'bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800'
                         }`}
                       >
                         {rec.status === 'PRESENT'
@@ -1398,7 +1396,7 @@ export default function StudentsPage() {
                     </div>
                   ))
                 ) : (
-                  <p className="text-xs text-slate-400 py-6 text-center">
+                  <p className="text-xs text-slate-400 dark:text-slate-500 py-6 text-center">
                     {language === 'uz'
                       ? 'Davomat yozuvlari mavjud emas. Qayd etish uchun kamerani yoqing.'
                       : 'Записей посещаемости пока нет. Включите камеру для фиксации.'}
@@ -1407,16 +1405,16 @@ export default function StudentsPage() {
               </div>
             </div>
 
-            <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+            <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
               <Link
                 href={`/reports?search=${encodeURIComponent(viewingStudent.studentCode)}`}
-                className="text-xs font-semibold text-blue-900 hover:text-blue-800 hover:underline inline-flex items-center gap-1"
+                className="text-xs font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:underline inline-flex items-center gap-1"
               >
                 <span>{language === 'uz' ? 'Jurnalda to‘liq tarixni ko‘rish →' : 'Открыть всю историю в Журнале →'}</span>
               </Link>
               <button
                 onClick={() => setViewingStudent(null)}
-                className="px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition"
+                className="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-xs transition"
               >
                 {language === 'uz' ? 'Yopish' : 'Закрыть'}
               </button>

@@ -927,13 +927,13 @@ export default function CameraMonitoringPage() {
       )}
 
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 pb-2 border-b border-slate-200 flex-shrink-0">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 pb-2 border-b border-slate-200 dark:border-slate-800 flex-shrink-0">
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-blue-900" />
+          <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+            <ShieldCheck className="w-5 h-5 text-blue-900 dark:text-blue-400" />
             <span>{language === 'uz' ? 'Ta’lim muassasasi o‘tish joyi (SKUD)' : 'Проходная учебного заведения (СКУД)'}</span>
           </h1>
-          <p className="text-[11px] text-slate-500 mt-0.5">
+          <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
             {language === 'uz'
               ? 'Biometrik hisob va kirish-chiqish nazorati'
               : 'Биометрический учёт и контроль проходов'}
@@ -953,8 +953,8 @@ export default function CameraMonitoringPage() {
             }}
             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border shadow-xs transition ${
               isMirrored
-                ? 'bg-blue-50 text-blue-800 border-blue-200'
-                : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
+                ? 'bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-800'
+                : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700'
             }`}
             title={language === 'uz' ? 'Ko‘zgu tasviri' : 'Зеркальное отображение камеры'}
           >
@@ -966,7 +966,7 @@ export default function CameraMonitoringPage() {
           <button
             type="button"
             onClick={toggleFullscreen}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 shadow-xs transition"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 shadow-xs transition"
             title={language === 'uz' ? 'To‘liq ekran rejimi' : 'Режим поста охраны (на весь экран)'}
           >
             <Maximize2 className="w-3.5 h-3.5" />
@@ -979,9 +979,8 @@ export default function CameraMonitoringPage() {
               onClick={() => startWebcam()}
               disabled={isModelLoading}
               className={`inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-lg text-white text-xs font-semibold shadow-xs transition ${
-                isModelLoading ? 'bg-slate-400 cursor-not-allowed' : 'hover:brightness-110'
+                isModelLoading ? 'bg-slate-400 dark:bg-slate-700 cursor-not-allowed' : 'bg-blue-900 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500'
               }`}
-              style={!isModelLoading ? { background: '#1e3a5f' } : {}}
             >
               <Camera className="w-4 h-4 flex-shrink-0" />
               <span>{language === 'uz' ? 'Terminalni ishga tushirish' : 'Запустить терминал'}</span>
@@ -1005,11 +1004,11 @@ export default function CameraMonitoringPage() {
           {/* Turnstiles & Posts Switcher Tabs directly above camera */}
           <div className="flex flex-wrap items-center justify-between gap-2 pb-0.5 flex-shrink-0">
             <div className="flex items-center gap-2 overflow-x-auto max-w-full pb-1 sm:pb-0 no-scrollbar">
-              <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-500 flex-shrink-0">
-                <Video className="w-3.5 h-3.5 text-slate-400" />
+              <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400 flex-shrink-0">
+                <Video className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                 <span>{language === 'uz' ? 'Nazorat posti:' : 'Пост контроля:'}</span>
               </div>
-              <div className="inline-flex items-center p-1 rounded-xl bg-slate-100/90 border border-slate-200/80 gap-1 flex-nowrap">
+              <div className="inline-flex items-center p-1 rounded-xl bg-slate-100/90 dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700 gap-1 flex-nowrap">
                 {cameras.map((cam) => {
                   const isSelected = cam.id === selectedCameraId;
                   const isEntrance = cam.type === 'ENTRANCE';
@@ -1020,15 +1019,15 @@ export default function CameraMonitoringPage() {
                       onClick={() => handleSelectCamera(cam)}
                       className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 whitespace-nowrap flex-shrink-0 ${
                         isSelected
-                          ? 'bg-white text-slate-900 shadow-xs border border-slate-200/90'
-                          : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                          ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs border border-slate-200/90 dark:border-slate-600'
+                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-700/50'
                       }`}
                     >
                       <span className={`w-2 h-2 rounded-full flex-shrink-0 ${isEntrance ? 'bg-emerald-500' : 'bg-blue-500'}`} />
-                      <span className="font-medium text-slate-800">{cam.name}</span>
+                      <span className="font-medium text-slate-800 dark:text-slate-200">{cam.name}</span>
                       <span
                         className={`text-[9px] px-1.5 py-0.2 rounded font-mono font-bold ${
-                          isEntrance ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800'
+                          isEntrance ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300' : 'bg-blue-100 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300'
                         }`}
                       >
                         {isEntrance ? (language === 'uz' ? 'KIRISH' : 'ВХОД') : (language === 'uz' ? 'CHIQISH' : 'ВЫХОД')}
@@ -1041,7 +1040,7 @@ export default function CameraMonitoringPage() {
 
             {/* Quick Live Mode Indicator Pill */}
             <div className="hidden sm:flex items-center gap-2">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white border border-slate-200 text-slate-700 shadow-xs">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 shadow-xs">
                 <span className={`w-2 h-2 rounded-full ${isWebcamActive ? 'bg-emerald-500 animate-pulse' : 'bg-amber-400'}`} />
                 <span>{isWebcamActive ? (language === 'uz' ? 'Jonli efir (Real-time)' : 'Прямой эфир (Real-time)') : (language === 'uz' ? 'Kutish rejimi' : 'Режим ожидания')}</span>
               </div>
@@ -1139,27 +1138,27 @@ export default function CameraMonitoringPage() {
         </div>
 
         {/* Right Access Verification Feed & Live Stream (5 Cols) - UNIFIED CARD */}
-        <div className="lg:col-span-5 xl:col-span-4 bg-white rounded-2xl border border-slate-200 shadow-xs flex flex-col overflow-hidden h-full min-h-0 no-scrollbar">
+        <div className="lg:col-span-5 xl:col-span-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col overflow-hidden h-full min-h-0 no-scrollbar">
           {/* Unified Header */}
-          <div className="p-3 border-b border-slate-100 flex items-center justify-between bg-slate-50/50 flex-shrink-0">
+          <div className="p-3 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/40 flex-shrink-0">
             <div className="flex items-center gap-2 min-w-0">
-              <Scan className="w-4 h-4 text-blue-900 flex-shrink-0" />
-              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider truncate">
+              <Scan className="w-4 h-4 text-blue-900 dark:text-blue-400 flex-shrink-0" />
+              <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider truncate">
                 {language === 'uz' ? 'Xodimni aniqlash va o‘tishlar' : 'Идентификация и лента проходов'}
               </h3>
             </div>
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200 flex-shrink-0">
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800 flex-shrink-0">
               {activeCamObj?.name || (language === 'uz' ? 'SKUD TURNIKET' : 'СКУД ТУРНИКЕТ')}
             </span>
           </div>
 
           {/* Section 1: Current / Last Verified Person (Compact, Fixed-Flow) */}
-          <div className="p-3 border-b border-slate-100 bg-white flex-shrink-0">
+          <div className="p-3 border-b border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 flex-shrink-0">
             {lastVerified ? (
               <div className="space-y-2 animate-fade-in">
                 <div className="flex items-center gap-2.5">
                   {lastVerified.snapshotUrl || lastVerified.student?.photoUrl ? (
-                    <div className="relative w-11 h-11 rounded-lg overflow-hidden border border-emerald-500 shadow-xs flex-shrink-0 bg-slate-100">
+                    <div className="relative w-11 h-11 rounded-lg overflow-hidden border border-emerald-500 shadow-xs flex-shrink-0 bg-slate-100 dark:bg-slate-800">
                       <img
                         src={lastVerified.snapshotUrl || lastVerified.student.photoUrl}
                         alt=""
@@ -1172,23 +1171,23 @@ export default function CameraMonitoringPage() {
                       )}
                     </div>
                   ) : (
-                    <div className="w-11 h-11 rounded-lg bg-slate-100 border border-emerald-500 flex items-center justify-center text-slate-600 font-bold text-sm flex-shrink-0">
+                    <div className="w-11 h-11 rounded-lg bg-slate-100 dark:bg-slate-800 border border-emerald-500 flex items-center justify-center text-slate-600 dark:text-slate-300 font-bold text-sm flex-shrink-0">
                       {lastVerified.student?.firstName?.slice(0, 1)}
                     </div>
                   )}
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1.5">
-                      <span className="px-1.5 py-0.2 rounded bg-amber-100 text-amber-800 text-[9px] font-bold uppercase">
+                      <span className="px-1.5 py-0.2 rounded bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 text-[9px] font-bold uppercase">
                         {language === 'uz' ? 'O‘qituvchi' : 'Преподаватель'}
                       </span>
-                      <span className="text-[9px] font-mono text-slate-400">
+                      <span className="text-[9px] font-mono text-slate-400 dark:text-slate-500">
                         {language === 'uz' ? 'Tabel №' : 'Таб. №'} {lastVerified.student?.studentCode}
                       </span>
                     </div>
-                    <p className="text-xs font-bold text-slate-900 truncate mt-0.5">
+                    <p className="text-xs font-bold text-slate-900 dark:text-white truncate mt-0.5">
                       {lastVerified.student?.firstName} {lastVerified.student?.lastName}
                     </p>
-                    <p className="text-[10px] text-slate-500 truncate">
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400 truncate">
                       {lastVerified.student?.department || (language === 'uz' ? 'Axborot texnologiyalari kafedrasi' : 'Кафедра информационных технологий')}
                     </p>
                   </div>
@@ -1196,14 +1195,14 @@ export default function CameraMonitoringPage() {
 
                 <div className={`p-2 rounded-lg border space-y-0.5 ${
                   lastVerified.action === 'ARRIVAL'
-                    ? 'bg-emerald-50/80 border-emerald-200'
-                    : 'bg-blue-50/80 border-blue-200'
+                    ? 'bg-emerald-50/80 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800/60'
+                    : 'bg-blue-50/80 dark:bg-blue-950/40 border-blue-200 dark:border-blue-800/60'
                 }`}>
                   <div className={`flex items-center justify-between text-[11px] font-bold ${
-                    lastVerified.action === 'ARRIVAL' ? 'text-emerald-900' : 'text-blue-900'
+                    lastVerified.action === 'ARRIVAL' ? 'text-emerald-900 dark:text-emerald-300' : 'text-blue-900 dark:text-blue-300'
                   }`}>
                     <span className="flex items-center gap-1">
-                      <CheckCircle2 className={`w-3 h-3 ${lastVerified.action === 'ARRIVAL' ? 'text-emerald-600' : 'text-blue-600'}`} />
+                      <CheckCircle2 className={`w-3 h-3 ${lastVerified.action === 'ARRIVAL' ? 'text-emerald-600 dark:text-emerald-400' : 'text-blue-600 dark:text-blue-400'}`} />
                       {lastVerified.action === 'ARRIVAL'
                         ? (language === 'uz' ? 'Ish kuni boshlandi' : 'Рабочий день начат')
                         : (language === 'uz' ? 'Smena yakunlandi' : 'Смена окончена')}
@@ -1212,19 +1211,19 @@ export default function CameraMonitoringPage() {
                       {new Date(lastVerified.timestamp).toLocaleTimeString(language === 'uz' ? 'uz-UZ' : 'ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between text-[10px] text-slate-600">
+                  <div className="flex items-center justify-between text-[10px] text-slate-600 dark:text-slate-400">
                     <span>
                       {lastVerified.action === 'ARRIVAL'
                         ? (language === 'uz' ? 'Kelish intizomi:' : 'Дисциплина прихода:')
                         : (language === 'uz' ? 'Bugun ishlangan:' : 'Отработано за день:')}
                     </span>
-                    <strong className={lastVerified.scheduleStatus?.includes('Опоздание') || lastVerified.scheduleStatus?.includes('Kechikish') ? 'text-amber-700 font-bold' : 'text-emerald-700 font-bold'}>
+                    <strong className={lastVerified.scheduleStatus?.includes('Опоздание') || lastVerified.scheduleStatus?.includes('Kechikish') ? 'text-amber-700 dark:text-amber-400 font-bold' : 'text-emerald-700 dark:text-emerald-400 font-bold'}>
                       {lastVerified.action === 'ARRIVAL' ? (lastVerified.scheduleStatus || (language === 'uz' ? 'Grafik bo‘yicha' : 'В графике')) : (lastVerified.workedTimeStr || (language === 'uz' ? '6 soat 30 daqiqa' : '6 ч. 30 мин.'))}
                     </strong>
                   </div>
-                  <div className="flex items-center justify-between text-[9px] text-slate-500 pt-0.5 border-t border-slate-200/50">
+                  <div className="flex items-center justify-between text-[9px] text-slate-500 dark:text-slate-400 pt-0.5 border-t border-slate-200/50 dark:border-slate-800">
                     <span>{language === 'uz' ? 'Biometrik aniqlik:' : 'Биометрическое сходство:'}</span>
-                    <strong className="font-mono text-slate-700">
+                    <strong className="font-mono text-slate-700 dark:text-slate-300">
                       {Math.round((lastVerified.confidence || 0.98) * 100)}% ({language === 'uz' ? 'Biometriya' : 'Биометрия'})
                     </strong>
                   </div>
@@ -1232,14 +1231,14 @@ export default function CameraMonitoringPage() {
               </div>
             ) : (
               <div className="py-2 flex items-center gap-2.5 text-left">
-                <div className="w-9 h-9 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center flex-shrink-0">
+                <div className="w-9 h-9 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 flex items-center justify-center flex-shrink-0">
                   <Users className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-slate-800">
+                  <p className="text-xs font-bold text-slate-800 dark:text-slate-200">
                     {language === 'uz' ? 'Oxirgi o‘tish qaydi yo‘q' : 'Нет недавних проходов'}
                   </p>
-                  <p className="text-[10px] text-slate-400 mt-0.5">
+                  <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">
                     {language === 'uz'
                       ? 'Kirish yoki chiqishni qayd etish uchun kameraga qarang'
                       : 'Подойдите к камере для фиксации прихода или ухода'}
@@ -1250,14 +1249,14 @@ export default function CameraMonitoringPage() {
           </div>
 
           {/* Section 2: Live Activity Feed with Filter Chips */}
-          <div className="p-3 sm:p-3.5 flex-1 flex flex-col bg-white min-h-0 overflow-hidden no-scrollbar">
+          <div className="p-3 sm:p-3.5 flex-1 flex flex-col bg-white dark:bg-slate-900 min-h-0 overflow-hidden no-scrollbar">
             <div className="flex items-center gap-1 mb-2 overflow-x-auto pb-0.5 text-[11px] flex-shrink-0 no-scrollbar">
               <button
                 onClick={() => setFeedFilter('ALL')}
                 className={`px-2.5 py-1 rounded-md font-semibold transition ${
                   feedFilter === 'ALL'
-                    ? 'bg-slate-900 text-white shadow-xs'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                    ? 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 shadow-xs'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                 }`}
               >
                 {language === 'uz' ? 'Barchasi' : 'Все'} ({recentDetections.length})
@@ -1266,8 +1265,8 @@ export default function CameraMonitoringPage() {
                 onClick={() => setFeedFilter('ARRIVAL')}
                 className={`px-2.5 py-1 rounded-md font-semibold transition flex items-center gap-1.5 ${
                   feedFilter === 'ARRIVAL'
-                    ? 'bg-green-700 text-white shadow-xs'
-                    : 'bg-green-50 text-green-800 hover:bg-green-100 border border-green-200/60'
+                    ? 'bg-green-700 dark:bg-emerald-600 text-white shadow-xs'
+                    : 'bg-green-50 dark:bg-emerald-950/50 text-green-800 dark:text-emerald-300 hover:bg-green-100 dark:hover:bg-emerald-900/60 border border-green-200/60 dark:border-emerald-800/60'
                 }`}
               >
                 <LogIn className="w-3 h-3" />
@@ -1278,8 +1277,8 @@ export default function CameraMonitoringPage() {
                 onClick={() => setFeedFilter('DEPARTURE')}
                 className={`px-2.5 py-1 rounded-md font-semibold transition flex items-center gap-1.5 ${
                   feedFilter === 'DEPARTURE'
-                    ? 'bg-indigo-700 text-white shadow-xs'
-                    : 'bg-indigo-50 text-indigo-800 hover:bg-indigo-100 border border-indigo-200/60'
+                    ? 'bg-indigo-700 dark:bg-indigo-600 text-white shadow-xs'
+                    : 'bg-indigo-50 dark:bg-indigo-950/50 text-indigo-800 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 border border-indigo-200/60 dark:border-indigo-800/60'
                 }`}
               >
                 <LogOut className="w-3 h-3" />
@@ -1291,7 +1290,7 @@ export default function CameraMonitoringPage() {
             {/* Activity feed: displays latest 4 passes compactly with ZERO scrollbar */}
             <div className="space-y-1.5 flex-1 min-h-0 overflow-hidden no-scrollbar">
               {recentDetections.filter((d: any) => feedFilter === 'ALL' ? true : d.type === feedFilter).length === 0 ? (
-                <p className="text-xs text-slate-400 py-4 text-center">
+                <p className="text-xs text-slate-400 dark:text-slate-500 py-4 text-center">
                   {language === 'uz' ? 'Ushbu toifada qaydlar topilmadi.' : 'Пока нет зафиксированных проходов в этой категории.'}
                 </p>
               ) : (
@@ -1326,11 +1325,11 @@ export default function CameraMonitoringPage() {
                     return (
                       <div
                         key={det.id}
-                        className="p-1.5 px-2 rounded-lg bg-slate-50 border border-slate-200/80 hover:bg-slate-100/70 transition flex items-center justify-between gap-2.5 text-xs group"
+                        className="p-1.5 px-2 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/70 hover:bg-slate-100/70 dark:hover:bg-slate-800 transition flex items-center justify-between gap-2.5 text-xs group"
                       >
                         <div className="flex items-center gap-2 min-w-0">
                           {photoToDisplay ? (
-                            <div className="relative w-7 h-7 rounded-md overflow-hidden flex-shrink-0 border border-slate-200 bg-slate-100 shadow-xs">
+                            <div className="relative w-7 h-7 rounded-md overflow-hidden flex-shrink-0 border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 shadow-xs">
                               <img
                                 src={photoToDisplay}
                                 alt={displayName}
@@ -1348,20 +1347,20 @@ export default function CameraMonitoringPage() {
                             <div
                               className={`w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0 font-bold text-[10px] ${
                                 isArrival
-                                  ? 'bg-green-100 text-green-800'
+                                  ? 'bg-green-100 dark:bg-emerald-950/60 text-green-800 dark:text-emerald-300'
                                   : isDeparture
-                                  ? 'bg-indigo-100 text-indigo-800'
-                                  : 'bg-emerald-100 text-emerald-800'
+                                  ? 'bg-indigo-100 dark:bg-indigo-950/60 text-indigo-800 dark:text-indigo-300'
+                                  : 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300'
                               }`}
                             >
                               {isArrival ? <LogIn className="w-3 h-3" /> : isDeparture ? <LogOut className="w-3 h-3" /> : <CheckCircle2 className="w-3 h-3" />}
                             </div>
                           )}
                           <div className="min-w-0">
-                            <p className="font-bold text-slate-900 truncate text-xs">
+                            <p className="font-bold text-slate-900 dark:text-slate-100 truncate text-xs">
                               {displayName}
                             </p>
-                            <p className="text-[9px] text-slate-400 truncate">
+                            <p className="text-[9px] text-slate-400 dark:text-slate-500 truncate">
                               {new Date(det.timestamp).toLocaleTimeString('ru-RU', {
                                 hour: '2-digit',
                                 minute: '2-digit',
@@ -1377,15 +1376,15 @@ export default function CameraMonitoringPage() {
                           <span
                             className={`px-1.5 py-0.2 rounded text-[8px] font-bold uppercase ${
                               isArrival
-                                ? 'bg-green-100 text-green-800'
+                                ? 'bg-green-100 dark:bg-emerald-950/60 text-green-800 dark:text-emerald-300'
                                 : isDeparture
-                                ? 'bg-indigo-100 text-indigo-800'
-                                : 'bg-emerald-100 text-emerald-800'
+                                ? 'bg-indigo-100 dark:bg-indigo-950/60 text-indigo-800 dark:text-indigo-300'
+                                : 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300'
                             }`}
                           >
                             {passLabel}
                           </span>
-                          <span className="text-[8px] font-mono text-slate-400 mt-0.5">
+                          <span className="text-[8px] font-mono text-slate-400 dark:text-slate-500 mt-0.5">
                             {Math.round((det.confidence || 0.98) * 100)}%
                           </span>
                         </div>
@@ -1395,10 +1394,10 @@ export default function CameraMonitoringPage() {
               )}
             </div>
 
-            <div className="mt-auto pt-2 border-t border-slate-100 text-center flex-shrink-0">
+            <div className="mt-auto pt-2 border-t border-slate-100 dark:border-slate-800 text-center flex-shrink-0">
               <Link
                 href="/reports"
-                className="text-xs font-semibold text-blue-900 hover:text-blue-800 hover:underline inline-flex items-center gap-1"
+                className="text-xs font-semibold text-blue-900 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:underline inline-flex items-center gap-1"
               >
                 <span>{language === 'uz' ? `To‘liq davomat jurnaliga o‘tish (${recentDetections.length}) →` : `Перейти в полный журнал посещаемости (${recentDetections.length}) →`}</span>
               </Link>

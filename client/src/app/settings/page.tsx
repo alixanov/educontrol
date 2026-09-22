@@ -215,11 +215,11 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6 w-full">
       {/* Header */}
-      <div className="pb-2 border-b border-slate-200">
-        <h1 className="text-xl font-bold tracking-tight text-slate-900">
+      <div className="pb-2 border-b border-slate-200 dark:border-slate-800">
+        <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
           {isUz ? 'Tizim va uskuna sozlamalari' : 'Настройки системы и оборудования'}
         </h1>
-        <p className="text-xs text-slate-500 mt-0.5">
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
           {isUz
             ? 'Videokameralar tarmog‘i, biometriya sezgirligi va ish vaqti qoidalari'
             : 'Конфигурация видеокамер наблюдения, параметров биометрии и рабочего графика'}
@@ -227,8 +227,8 @@ export default function SettingsPage() {
       </div>
 
       {isSaved && (
-        <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2 animate-fade-in shadow-xs">
-          <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+        <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-semibold flex items-center gap-2 animate-fade-in shadow-xs">
+          <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
           <span>
             {isUz
               ? 'Sozlamalar muvaffaqiyatli saqlandi!'
@@ -240,14 +240,14 @@ export default function SettingsPage() {
       {/* Attendance & Biometric Policy Card */}
       <form
         onSubmit={handleSavePolicies}
-        className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-5 text-xs"
+        className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-5 text-xs"
       >
-        <div className="pb-3 border-b border-slate-100">
-          <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-            <Sliders className="w-4 h-4 text-blue-900" />
+        <div className="pb-3 border-b border-slate-100 dark:border-slate-800">
+          <h2 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <Sliders className="w-4 h-4 text-blue-900 dark:text-blue-400" />
             <span>{isUz ? 'Ish vaqti reglamenti va biometriya aniqligi' : 'Регламент рабочего времени и биометрия'}</span>
           </h2>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             {isUz
               ? 'Ish boshlanishi, tugashi va yuzni tanish sezgirligi'
               : 'Время начала и окончания рабочего дня, порог распознавания'}
@@ -256,14 +256,14 @@ export default function SettingsPage() {
 
         {/* Working Hours (Start & End) */}
         <div>
-          <h3 className="text-xs font-bold text-slate-800 mb-2.5 flex items-center gap-1.5 uppercase tracking-wider">
-            <Clock className="w-3.5 h-3.5 text-blue-900" />
+          <h3 className="text-xs font-bold text-slate-800 dark:text-slate-200 mb-2.5 flex items-center gap-1.5 uppercase tracking-wider">
+            <Clock className="w-3.5 h-3.5 text-blue-900 dark:text-blue-400" />
             <span>{isUz ? 'Rasmiy ish va dars jadvali' : 'Официальный график работы и занятий'}</span>
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200/80">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700">
             {/* Start Time */}
             <div className="space-y-1.5">
-              <label className="font-bold text-emerald-900 flex items-center gap-1.5">
+              <label className="font-bold text-emerald-900 dark:text-emerald-300 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-500" />
                 <span>{isUz ? 'Ish / 1-dars boshlanishi (Kechikish chegarasi)' : 'Начало работы / 1-й пары (Порог опоздания)'}</span>
               </label>
@@ -271,9 +271,9 @@ export default function SettingsPage() {
                 type="time"
                 value={workStartTime}
                 onChange={(e) => setWorkStartTime(e.target.value)}
-                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-slate-900 font-mono font-bold focus:outline-none focus:ring-1 focus:ring-blue-900"
+                className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white font-mono font-bold focus:outline-none focus:ring-1 focus:ring-blue-900"
               />
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">
                 {isUz
                   ? 'Ushbu vaqtdan keyin kirganlar avtomatik «Kechikkan» deb belgilanadi.'
                   : 'Приход после этого времени фиксируется как «Опоздание».'}
@@ -282,7 +282,7 @@ export default function SettingsPage() {
 
             {/* End Time */}
             <div className="space-y-1.5">
-              <label className="font-bold text-blue-900 flex items-center gap-1.5">
+              <label className="font-bold text-blue-900 dark:text-blue-300 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-blue-500" />
                 <span>{isUz ? 'Ish / dars yakunlanishi (Erta ketish chegarasi)' : 'Окончание работы / смены (Порог раннего ухода)'}</span>
               </label>
@@ -290,9 +290,9 @@ export default function SettingsPage() {
                 type="time"
                 value={workEndTime}
                 onChange={(e) => setWorkEndTime(e.target.value)}
-                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-slate-900 font-mono font-bold focus:outline-none focus:ring-1 focus:ring-blue-900"
+                className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white font-mono font-bold focus:outline-none focus:ring-1 focus:ring-blue-900"
               />
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">
                 {isUz
                   ? 'Ushbu vaqtdan oldin chiqqanlar avtomatik «Erta ketgan» deb belgilanadi.'
                   : 'Уход до этого времени фиксируется как «Ранний уход».'}
@@ -301,12 +301,10 @@ export default function SettingsPage() {
           </div>
         </div>
 
-
-
         {/* Biometrics & Cooldown */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-100">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-100 dark:border-slate-800">
           <div className="space-y-1.5">
-            <label className="font-bold text-slate-700">
+            <label className="font-bold text-slate-700 dark:text-slate-300">
               {isUz ? `Biometrik o‘xshashlik chegarasi (${confidenceThreshold}%)` : `Порог совпадения лица (${confidenceThreshold}%)`}
             </label>
             <input
@@ -315,9 +313,9 @@ export default function SettingsPage() {
               max={99}
               value={confidenceThreshold}
               onChange={(e) => setConfidenceThreshold(Number(e.target.value))}
-              className="w-full cursor-pointer accent-blue-900 mt-2"
+              className="w-full cursor-pointer accent-blue-900 dark:accent-blue-500 mt-2"
             />
-            <p className="text-[11px] text-slate-400">
+            <p className="text-[11px] text-slate-400 dark:text-slate-500">
               {isUz
                 ? 'Shaxsni tasdiqlash uchun talab etiladigan minimal yuzni tanish aniqligi.'
                 : 'Минимальный процент сходства для подтверждения личности преподавателя.'}
@@ -325,7 +323,7 @@ export default function SettingsPage() {
           </div>
 
           <div className="space-y-1.5">
-            <label className="font-bold text-slate-700">
+            <label className="font-bold text-slate-700 dark:text-slate-300">
               {isUz ? 'Qayta qayd etish tanaffusi (soniya)' : 'Интервал повторной фиксации (сек)'}
             </label>
             <input
@@ -334,9 +332,9 @@ export default function SettingsPage() {
               max={120}
               value={cooldownSeconds}
               onChange={(e) => setCooldownSeconds(Number(e.target.value))}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 font-mono font-bold focus:outline-none focus:ring-1 focus:ring-blue-900"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white font-mono font-bold focus:outline-none focus:ring-1 focus:ring-blue-900"
             />
-            <p className="text-[11px] text-slate-400">
+            <p className="text-[11px] text-slate-400 dark:text-slate-500">
               {isUz
                 ? 'Bitta xodimni qayta-qayta yozib yubormaslik uchun kutish vaqti.'
                 : 'Пауза перед повторной отметкой того же сотрудника (защита от дублей).'}
@@ -345,10 +343,10 @@ export default function SettingsPage() {
         </div>
 
         {/* Card 1 Save Button */}
-        <div className="flex justify-end pt-3 border-t border-slate-100">
+        <div className="flex justify-end pt-3 border-t border-slate-100 dark:border-slate-800">
           <button
             type="submit"
-            className="inline-flex items-center gap-2 px-5 py-2 bg-blue-950 hover:bg-blue-900 text-white font-bold rounded-xl shadow-xs transition text-xs cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2 bg-blue-950 hover:bg-blue-900 dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-bold rounded-xl shadow-xs transition text-xs cursor-pointer"
           >
             <Save className="w-4 h-4" />
             <span>{isUz ? 'Saqlash' : 'Сохранить'}</span>
@@ -357,14 +355,14 @@ export default function SettingsPage() {
       </form>
 
       {/* Surveillance Camera Setup Card */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4 text-xs">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+      <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-4 text-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
           <div>
-            <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-              <Camera className="w-4 h-4 text-blue-900" />
+            <h2 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <Camera className="w-4 h-4 text-blue-900 dark:text-blue-400" />
               <span>{isUz ? 'Nazorat kameralari va turniketlar' : 'Сеть камер наблюдения и турникетов'}</span>
             </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               {isUz
                 ? 'Noutbuk kamerasi yoki tashqi IP-kameralar (RTSP/ONVIF)'
                 : 'Подключённые устройства: веб-камера ноутбука, IP-камеры (RTSP)'}
@@ -372,7 +370,7 @@ export default function SettingsPage() {
           </div>
           <button
             onClick={() => setIsAddingCamera(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-blue-950 hover:bg-blue-900 text-white font-bold shadow-xs transition self-start sm:self-auto"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-blue-950 hover:bg-blue-900 dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-bold shadow-xs transition self-start sm:self-auto cursor-pointer"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>{isUz ? 'Kamera ulash' : 'Подключить камеру'}</span>
@@ -389,33 +387,33 @@ export default function SettingsPage() {
             return (
               <div
                 key={cam.id}
-                className="p-4 rounded-xl border border-slate-200 bg-slate-50/70 space-y-3 hover:bg-slate-50 transition"
+                className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/60 space-y-3 hover:bg-slate-50 dark:hover:bg-slate-800 transition"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="space-y-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="font-bold text-slate-900 text-sm">{cam.name}</span>
+                      <span className="font-bold text-slate-900 dark:text-white text-sm">{cam.name}</span>
                       <span
                         className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
                           isEntrance
-                            ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
-                            : 'bg-indigo-100 text-indigo-800 border border-indigo-300'
+                            ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800'
+                            : 'bg-indigo-100 dark:bg-indigo-950/60 text-indigo-800 dark:text-indigo-300 border border-indigo-300 dark:border-indigo-800'
                         }`}
                       >
                         {isEntrance ? (isUz ? 'Kirish turniketi' : 'Входной турникет') : (isUz ? 'Chiqish turniketi' : 'Выходной турникет')}
                       </span>
-                      <span className="flex items-center gap-1 text-[10px] text-emerald-700 font-semibold">
+                      <span className="flex items-center gap-1 text-[10px] text-emerald-700 dark:text-emerald-400 font-semibold">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                         {isUz ? 'FAOL' : 'АКТИВНА'}
                       </span>
                     </div>
-                    <p className="text-slate-500 text-[11px]">{isUz ? 'Joylashuvi:' : 'Локация:'} {cam.location}</p>
+                    <p className="text-slate-500 dark:text-slate-400 text-[11px]">{isUz ? 'Joylashuvi:' : 'Локация:'} {cam.location}</p>
                   </div>
 
                   <div className="flex items-center gap-2 self-end sm:self-auto">
                     <button
                       onClick={() => handleDeleteCamera(cam.id, cam.name)}
-                      className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
+                      className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition cursor-pointer"
                       title={isUz ? 'Kamerani o‘chirish' : 'Удалить камеру'}
                     >
                       <Trash2 className="w-4 h-4" />
@@ -424,16 +422,16 @@ export default function SettingsPage() {
                 </div>
 
                 {/* Direct Hardware Device Selector for this Camera/Turnstile */}
-                <div className="p-3 rounded-lg bg-white border border-slate-200/90 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                <div className="p-3 rounded-lg bg-white dark:bg-slate-800/90 border border-slate-200/90 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                   <div className="flex items-center gap-2">
-                    <Camera className="w-4 h-4 text-blue-900 flex-shrink-0" />
+                    <Camera className="w-4 h-4 text-blue-900 dark:text-blue-400 flex-shrink-0" />
                     <div>
-                      <p className="text-xs font-bold text-slate-800">
+                      <p className="text-xs font-bold text-slate-800 dark:text-slate-200">
                         {isEntrance
                           ? (isUz ? 'Fizik uskuna (1-kamera: Noutbuk kamerasi):' : 'Физическое устройство (Камера №1: Ноутбук):')
                           : (isUz ? 'Fizik uskuna (2-kamera: Telefon kamerasi):' : 'Физическое устройство (Камера №2: Телефон):')}
                       </p>
-                      <p className="text-[10px] text-slate-500">
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">
                         {isEntrance
                           ? (isUz ? 'Ushbu post uchun noutbuk veb-kamerasi biriktiriladi' : 'К этому турникету привязана веб-камера ноутбука')
                           : (isUz ? 'Ushbu post uchun ulangan telefon kamerasi biriktiriladi' : 'К этому турникету привязана камера телефона')}
@@ -472,7 +470,7 @@ export default function SettingsPage() {
                         setIsSaved(true);
                         setTimeout(() => setIsSaved(false), 2500);
                       }}
-                      className="px-3 py-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-300 rounded-lg text-slate-900 font-semibold focus:outline-none focus:ring-1 focus:ring-blue-900 text-xs cursor-pointer w-full sm:w-[280px]"
+                      className="px-3 py-1.5 bg-slate-50 dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white font-semibold focus:outline-none focus:ring-1 focus:ring-blue-900 text-xs cursor-pointer w-full sm:w-[280px]"
                     >
                       {videoDevices.length === 0 && (
                         <option value="">{isUz ? 'Kamera aniqlanmadi (Ruxsat bering)' : 'Камера не обнаружена'}</option>
@@ -486,7 +484,7 @@ export default function SettingsPage() {
                           ? (isUz ? ' (Noutbuk)' : ' (Ноутбук)')
                           : '';
                         return (
-                          <option key={dev.deviceId || idx} value={dev.deviceId}>
+                          <option key={dev.deviceId || idx} value={dev.deviceId} className="dark:bg-slate-900 dark:text-white">
                             {dev.label ? `${dev.label}${tag}` : `${isUz ? 'Kamera' : 'Камера'} #${idx + 1}${tag}`}
                           </option>
                         );
@@ -503,54 +501,54 @@ export default function SettingsPage() {
         {isAddingCamera && (
           <form
             onSubmit={handleCreateCamera}
-            className="p-4 rounded-xl border border-blue-200 bg-blue-50/40 space-y-3 animate-fade-in"
+            className="p-4 rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/40 dark:bg-blue-950/40 space-y-3 animate-fade-in"
           >
-            <h3 className="font-bold text-slate-900">{isUz ? 'Yangi videokamera parametrlari' : 'Параметры нового видеопотока'}</h3>
+            <h3 className="font-bold text-slate-900 dark:text-white">{isUz ? 'Yangi videokamera parametrlari' : 'Параметры нового видеопотока'}</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block font-medium text-slate-700 mb-1">{isUz ? 'Kamera nomi' : 'Название камеры'}</label>
+                <label className="block font-medium text-slate-700 dark:text-slate-300 mb-1">{isUz ? 'Kamera nomi' : 'Название камеры'}</label>
                 <input
                   type="text"
                   required
                   value={newCam.name}
                   onChange={(e) => setNewCam({ ...newCam, name: e.target.value })}
                   placeholder={isUz ? 'Masalan: Bosh korpus turniketi' : 'Например: Турникет Главный вход'}
-                  className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg focus:outline-none text-xs"
+                  className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-lg focus:outline-none text-xs"
                 />
               </div>
               <div>
-                <label className="block font-medium text-slate-700 mb-1">{isUz ? 'Bino / Hudud' : 'Зона / Локация'}</label>
+                <label className="block font-medium text-slate-700 dark:text-slate-300 mb-1">{isUz ? 'Bino / Hudud' : 'Зона / Локация'}</label>
                 <input
                   type="text"
                   required
                   value={newCam.location}
                   onChange={(e) => setNewCam({ ...newCam, location: e.target.value })}
                   placeholder={isUz ? 'Masalan: 1-bino, 1-qavat' : 'Например: Корпус А, Вестибюль'}
-                  className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg focus:outline-none text-xs"
+                  className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-lg focus:outline-none text-xs"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block font-medium text-slate-700 mb-1">{isUz ? 'Vazifasi' : 'Назначение'}</label>
+                <label className="block font-medium text-slate-700 dark:text-slate-300 mb-1">{isUz ? 'Vazifasi' : 'Назначение'}</label>
                 <select
                   value={newCam.type}
                   onChange={(e) => setNewCam({ ...newCam, type: e.target.value })}
-                  className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg focus:outline-none text-xs"
+                  className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-lg focus:outline-none text-xs"
                 >
                   <option value="ENTRANCE">{isUz ? 'KIRISH' : 'ВХОД'}</option>
                   <option value="EXIT">{isUz ? 'CHIQISH' : 'ВЫХОД'}</option>
                 </select>
               </div>
               <div>
-                <label className="block font-medium text-slate-700 mb-1">{isUz ? 'RTSP oqim manzili' : 'RTSP-ссылка'}</label>
+                <label className="block font-medium text-slate-700 dark:text-slate-300 mb-1">{isUz ? 'RTSP oqim manzili' : 'RTSP-ссылка'}</label>
                 <input
                   type="text"
                   value={newCam.streamUrl}
                   onChange={(e) => setNewCam({ ...newCam, streamUrl: e.target.value })}
                   placeholder="rtsp://admin:pass@192.168.1.100:554/live"
-                  className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg font-mono text-xs focus:outline-none"
+                  className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-lg font-mono text-xs focus:outline-none"
                 />
               </div>
             </div>
@@ -559,13 +557,13 @@ export default function SettingsPage() {
               <button
                 type="button"
                 onClick={() => setIsAddingCamera(false)}
-                className="px-3 py-1.5 rounded-lg bg-slate-200 text-slate-700 font-semibold"
+                className="px-3 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold"
               >
                 {isUz ? 'Bekor qilish' : 'Отмена'}
               </button>
               <button
                 type="submit"
-                className="px-3.5 py-1.5 rounded-lg bg-blue-950 text-white font-semibold shadow-xs"
+                className="px-3.5 py-1.5 rounded-lg bg-blue-950 hover:bg-blue-900 dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-semibold shadow-xs"
               >
                 {isUz ? 'Saqlash' : 'Сохранить'}
               </button>
@@ -574,11 +572,11 @@ export default function SettingsPage() {
         )}
 
         {/* Card 2 Save Button */}
-        <div className="flex justify-end pt-3 border-t border-slate-100">
+        <div className="flex justify-end pt-3 border-t border-slate-100 dark:border-slate-800">
           <button
             type="button"
             onClick={handleSavePolicies}
-            className="inline-flex items-center gap-2 px-5 py-2 bg-blue-950 hover:bg-blue-900 text-white font-bold rounded-xl shadow-xs transition text-xs cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2 bg-blue-950 hover:bg-blue-900 dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-bold rounded-xl shadow-xs transition text-xs cursor-pointer"
           >
             <Save className="w-4 h-4" />
             <span>{isUz ? 'Saqlash' : 'Сохранить'}</span>
@@ -587,17 +585,17 @@ export default function SettingsPage() {
       </div>
 
       {/* 3. Kafedralar va bo'limlar (Кафедры и подразделения) */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 space-y-5 shadow-xs">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 space-y-5 shadow-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-blue-50 text-blue-900 border border-blue-100">
+            <div className="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-900 dark:text-blue-400 border border-blue-100 dark:border-blue-900/60">
               <Building2 className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-slate-900">
+              <h2 className="text-base font-bold text-slate-900 dark:text-white">
                 {isUz ? 'Kafedralar va bo‘limlar ro‘yxati' : 'Кафедры и подразделения'}
               </h2>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 {isUz
                   ? 'O‘qituvchilarni biriktirish uchun kafedralarni boshqarish (qo‘shish va o‘chirish)'
                   : 'Управление перечнем кафедр для распределения преподавателей и штата'}
@@ -608,7 +606,7 @@ export default function SettingsPage() {
           <button
             type="button"
             onClick={handleResetDepartments}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50 text-xs font-semibold transition cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-semibold transition cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>{isUz ? 'Standart ro‘yxatni tiklash' : 'Сбросить к исходным'}</span>
@@ -623,12 +621,12 @@ export default function SettingsPage() {
               value={newDeptName}
               onChange={(e) => setNewDeptName(e.target.value)}
               placeholder={isUz ? 'Masalan: Kiberxavfsizlik va tarmoqlar kafedrasi' : 'Например: Кафедра кибербезопасности и сетей'}
-              className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-900 focus:bg-white transition"
+              className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-900 focus:bg-white dark:focus:bg-slate-900 transition"
             />
           </div>
           <button
             type="submit"
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-950 hover:bg-blue-900 text-white text-xs font-semibold rounded-xl shadow-xs transition cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-950 hover:bg-blue-900 dark:bg-blue-600 dark:hover:bg-blue-500 text-white text-xs font-semibold rounded-xl shadow-xs transition cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>{isUz ? 'Kafedra qo‘shish' : 'Добавить кафедру'}</span>
@@ -642,13 +640,13 @@ export default function SettingsPage() {
             return (
               <div
                 key={dept}
-                className="flex items-center justify-between p-3 rounded-xl border border-slate-200/90 bg-slate-50/50 hover:bg-white hover:border-slate-300 transition group shadow-2xs"
+                className="flex items-center justify-between p-3 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800/90 hover:border-slate-300 dark:hover:border-slate-700 transition group shadow-2xs"
               >
                 <div className="flex items-center gap-2.5 min-w-0 pr-2">
                   <div className="w-2 h-2 rounded-full bg-blue-600 flex-shrink-0" />
                   <div className="min-w-0">
-                    <p className="text-xs font-bold text-slate-900 truncate">{dept}</p>
-                    <p className="text-[10px] text-slate-400 mt-0.5 flex items-center gap-1">
+                    <p className="text-xs font-bold text-slate-900 dark:text-white truncate">{dept}</p>
+                    <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5 flex items-center gap-1">
                       <Users className="w-3 h-3" />
                       <span>{count > 0 ? (isUz ? `${count} nafar xodim` : `${count} сотр.`) : (isUz ? 'Xodimlar yo‘q' : 'Нет сотрудников')}</span>
                     </p>
@@ -658,7 +656,7 @@ export default function SettingsPage() {
                 <button
                   type="button"
                   onClick={() => handleDeleteDepartment(dept)}
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition cursor-pointer flex-shrink-0"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition cursor-pointer flex-shrink-0"
                   title={isUz ? 'Kafedrani o‘chirish' : 'Удалить кафедру'}
                 >
                   <Trash2 className="w-4 h-4" />
