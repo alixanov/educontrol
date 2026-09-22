@@ -23,22 +23,12 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     try {
       const savedTheme = localStorage.getItem('educontrol_theme') as Theme | null;
-      if (savedTheme === 'dark' || savedTheme === 'light') {
-        setThemeState(savedTheme);
-        if (savedTheme === 'dark') {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
+      if (savedTheme === 'dark') {
+        setThemeState('dark');
+        document.documentElement.classList.add('dark');
       } else {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const initial = prefersDark ? 'dark' : 'light';
-        setThemeState(initial);
-        if (prefersDark) {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
+        setThemeState('light');
+        document.documentElement.classList.remove('dark');
       }
     } catch (e) {
       // In case localStorage is blocked
