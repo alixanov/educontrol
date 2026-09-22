@@ -1,0 +1,26 @@
+{
+  "name": "EduControl",
+  "short_name": "EduControl",
+  "description": "Biometrik SKUD va xodimlar ish vaqti hisobi tizimi",
+  "start_url": "/cameras",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#152d4a",
+  "theme_color": "#152d4a",
+  "categories": ["education", "business", "productivity"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

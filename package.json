@@ -1,0 +1,24 @@
+{
+  "name": "educontrol-suite",
+  "version": "1.0.0",
+  "description": "Automatic Student Attendance Monitoring System via Video Surveillance Cameras",
+  "scripts": {
+    "dev:server": "npm --prefix server run dev",
+    "start:server": "npm --prefix server run start",
+    "dev:client": "npm --prefix client run dev",
+    "start:client": "npm --prefix client run start",
+    "seed": "npm --prefix server run seed",
+    "cv": "python cv_service/surveillance_agent.py"
+  },
+  "keywords": [
+    "surveillance",
+    "attendance",
+    "facial-recognition",
+    "cctv",
+    "opencv",
+    "nestjs",
+    "nextjs"
+  ],
+  "author": "EduControl Systems",
+  "license": "ISC"
+}

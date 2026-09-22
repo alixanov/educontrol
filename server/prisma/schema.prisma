@@ -1,0 +1,78 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Admin {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         String   @default("ADMIN")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Student {
+  id             String             @id @default(uuid())
+  studentCode    String             @unique
+  firstName      String
+  lastName       String
+  email          String             @unique
+  department     String
+  grade          String
+  photoUrl       String?
+  faceDescriptor String?            // JSON stringified 128-d or 512-d float array
+  status         String             @default("ACTIVE") // ACTIVE, INACTIVE
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  attendances    AttendanceRecord[]
+}
+
+model Camera {
+  id         String   @id @default(uuid())
+  name       String
+  location   String
+  type       String   @default("ENTRANCE") // ENTRANCE, EXIT, HALLWAY, CLASSROOM
+  streamUrl  String?
+  status     String   @default("ONLINE") // ONLINE, OFFLINE
+  resolution String   @default("1080p")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model AttendanceRecord {
+  id           String    @id @default(uuid())
+  studentId    String
+  student      Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  date         String    // Format: YYYY-MM-DD
+  checkInTime  DateTime?
+  checkOutTime DateTime?
+  status       String    @default("PRESENT") // PRESENT, LATE, ABSENT, LEFT_EARLY
+  confidence   Float?
+  cameraInId   String?
+  cameraOutId  String?
+  snapshotUrl  String?
+  notes        String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@unique([studentId, date])
+}
+
+model DetectionLog {
+  id          String   @id @default(uuid())
+  studentId   String?
+  studentName String?
+  cameraId    String
+  cameraName  String
+  type        String   // ARRIVAL, DEPARTURE, PASS_BY, UNKNOWN
+  confidence  Float
+  boundingBox String?  // JSON string: [x, y, width, height]
+  snapshotUrl String?
+  timestamp   DateTime @default(now())
+}
