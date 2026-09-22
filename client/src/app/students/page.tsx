@@ -1104,7 +1104,7 @@ export default function StudentsPage() {
                           <button
                             type="button"
                             onClick={handleStartWebcam}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white font-semibold text-xs shadow-sm transition bg-blue-900 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white font-semibold text-xs shadow-sm transition bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] border border-[#2d5584]"
                           >
                             <Video className="w-3.5 h-3.5" />
                             <span>{language === 'uz' ? 'Kamerani yoqish (3 rakurs)' : 'Включить камеру (3 ракурса)'}</span>
@@ -1307,7 +1307,7 @@ export default function StudentsPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-4 py-2 rounded-lg text-white font-semibold shadow-sm disabled:opacity-50 bg-blue-900 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500"
+                  className="px-4 py-2 rounded-lg text-white font-semibold shadow-sm disabled:opacity-50 bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] border border-[#2d5584]"
                 >
                   {submitting
                     ? (language === 'uz' ? 'Saqlanmoqda...' : 'Сохранение...')

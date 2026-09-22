@@ -56,13 +56,13 @@ export const BottomNav = () => {
             href={item.href}
             className={`flex flex-col items-center justify-center py-1 px-2 rounded-lg transition-all text-center flex-1 max-w-[72px] ${
               isActive
-                ? 'text-blue-900 dark:text-blue-400 font-bold'
+                ? 'text-[#1e3a5f] dark:text-blue-300 font-bold'
                 : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium'
             }`}
           >
             <div
               className={`p-1 rounded-lg transition ${
-                isActive ? 'bg-blue-100 dark:bg-blue-900/50 text-blue-900 dark:text-blue-300' : 'text-slate-500 dark:text-slate-400'
+                isActive ? 'bg-[#1e3a5f]/15 dark:bg-[#1e3a5f]/40 text-[#1e3a5f] dark:text-blue-300' : 'text-slate-500 dark:text-slate-400'
               }`}
             >
               <Icon className="w-4 h-4" />

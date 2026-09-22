@@ -979,7 +979,7 @@ export default function CameraMonitoringPage() {
               onClick={() => startWebcam()}
               disabled={isModelLoading}
               className={`inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-lg text-white text-xs font-semibold shadow-xs transition ${
-                isModelLoading ? 'bg-slate-400 dark:bg-slate-700 cursor-not-allowed' : 'bg-blue-900 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500'
+                isModelLoading ? 'bg-slate-400 dark:bg-slate-700 cursor-not-allowed' : 'bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] border border-[#2d5584]'
               }`}
             >
               <Camera className="w-4 h-4 flex-shrink-0" />
@@ -1122,7 +1122,7 @@ export default function CameraMonitoringPage() {
                   <button
                     onClick={() => startWebcam()}
                     disabled={isModelLoading}
-                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 active:scale-95 text-white text-xs font-bold shadow-lg shadow-blue-500/25 transition mx-auto disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#1e3a5f] hover:bg-[#284c7a] active:scale-95 text-white text-xs font-bold shadow-lg shadow-[#1e3a5f]/30 border border-[#2d5584] transition mx-auto disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                   >
                     <Camera className="w-4 h-4" />
                     <span>

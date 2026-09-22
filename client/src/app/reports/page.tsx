@@ -334,7 +334,7 @@ export default function AttendanceReportsPage() {
             onClick={() => setPeriodType('today')}
             className={`px-3 py-1.5 rounded-lg font-bold transition flex-1 md:flex-initial text-center ${
               periodType === 'today'
-                ? 'bg-blue-900 dark:bg-blue-600 text-white shadow-xs'
+                ? 'bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] text-white shadow-xs border border-[#2d5584]'
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
@@ -344,7 +344,7 @@ export default function AttendanceReportsPage() {
             onClick={() => setPeriodType('week')}
             className={`px-3 py-1.5 rounded-lg font-bold transition flex-1 md:flex-initial text-center ${
               periodType === 'week'
-                ? 'bg-blue-900 dark:bg-blue-600 text-white shadow-xs'
+                ? 'bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] text-white shadow-xs border border-[#2d5584]'
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
@@ -354,7 +354,7 @@ export default function AttendanceReportsPage() {
             onClick={() => setPeriodType('month')}
             className={`px-3 py-1.5 rounded-lg font-bold transition flex-1 md:flex-initial text-center ${
               periodType === 'month'
-                ? 'bg-blue-900 dark:bg-blue-600 text-white shadow-xs'
+                ? 'bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] text-white shadow-xs border border-[#2d5584]'
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
@@ -364,7 +364,7 @@ export default function AttendanceReportsPage() {
             onClick={() => setPeriodType('custom')}
             className={`px-3 py-1.5 rounded-lg font-bold transition flex-1 md:flex-initial text-center ${
               periodType === 'custom'
-                ? 'bg-blue-900 dark:bg-blue-600 text-white shadow-xs'
+                ? 'bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] text-white shadow-xs border border-[#2d5584]'
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
@@ -718,7 +718,7 @@ export default function AttendanceReportsPage() {
               </button>
               <button
                 onClick={handleSaveEdit}
-                className="px-4 py-1.5 text-xs bg-blue-900 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500 text-white rounded-lg font-bold shadow-xs transition cursor-pointer"
+                className="px-4 py-1.5 text-xs bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] text-white rounded-lg font-bold shadow-xs transition cursor-pointer border border-[#2d5584]"
               >
                 {t('saveChanges')}
               </button>

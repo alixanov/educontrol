@@ -31,7 +31,7 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-10 h-10 border-3 border-sky-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-10 h-10 border-3 border-[#1e3a5f] border-t-transparent rounded-full animate-spin" />
           <p className="text-sm text-slate-400 font-medium">
             {language === 'uz' ? 'EduControl tizimi yuklanmoqda...' : 'Загрузка системы EduControl...'}
           </p>
