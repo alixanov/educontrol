@@ -30,18 +30,18 @@ export const Sidebar = ({ isMobileOpen, onClose }: { isMobileOpen?: boolean; onC
   ];
 
   const renderContent = (isMobile = false) => (
-    <div className="h-full flex flex-col justify-between" style={{ background: '#1e3a5f' }}>
+    <div className="h-full flex flex-col justify-between bg-[#1e3a5f] dark:bg-[#070e18] transition-colors">
       {/* Brand Header */}
-      <div className="h-14 sm:h-16 flex items-center justify-between px-4 sm:px-5 border-b border-white/10" style={{ background: '#152d4a' }}>
+      <div className="h-14 sm:h-16 flex items-center justify-between px-4 sm:px-5 border-b border-white/10 dark:border-[#203d64] bg-[#152d4a] dark:bg-[#050b13] transition-colors">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-white/15 flex items-center justify-center">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-white/15 dark:bg-[#1e3a5f] dark:border dark:border-[#2a4e7e] flex items-center justify-center">
             <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
           </div>
           <div>
             <span className="font-bold text-sm tracking-tight text-white">
               EduControl
             </span>
-            <p className="text-[10px] sm:text-[11px] text-blue-200/70">
+            <p className="text-[10px] sm:text-[11px] text-blue-200/70 dark:text-slate-400">
               {language === 'uz' ? 'Ish vaqti hisobi' : 'Учёт рабочего времени'}
             </p>
           </div>
@@ -58,7 +58,7 @@ export const Sidebar = ({ isMobileOpen, onClose }: { isMobileOpen?: boolean; onC
 
       {/* Navigation Links */}
       <div className="flex-1 py-3 sm:py-4 px-3 space-y-0.5 overflow-y-auto no-scrollbar">
-        <div className="px-3 pb-2 text-[10px] font-semibold text-blue-200/50 uppercase tracking-widest">
+        <div className="px-3 pb-2 text-[10px] font-semibold text-blue-200/50 dark:text-slate-500 uppercase tracking-widest">
           {language === 'uz' ? 'Asosiy menyu' : 'Главное меню'}
         </div>
         {navigation.map((item) => {
@@ -73,12 +73,12 @@ export const Sidebar = ({ isMobileOpen, onClose }: { isMobileOpen?: boolean; onC
               }}
               className={`flex items-center justify-between px-3 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all ${
                 isActive
-                  ? 'bg-white/15 text-white shadow-xs font-semibold'
-                  : 'text-blue-100/70 hover:bg-white/8 hover:text-white'
+                  ? 'bg-white/15 dark:bg-[#1e3a5f] text-white shadow-xs font-semibold dark:border dark:border-[#2a4e7e]'
+                  : 'text-blue-100/70 dark:text-slate-400 hover:bg-white/8 dark:hover:bg-slate-800/60 hover:text-white'
               }`}
             >
               <div className="flex items-center gap-3">
-                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-blue-200/60'}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-blue-200/60 dark:text-slate-400'}`} />
                 <span>{item.name}</span>
               </div>
             </Link>
@@ -87,20 +87,20 @@ export const Sidebar = ({ isMobileOpen, onClose }: { isMobileOpen?: boolean; onC
       </div>
 
       {/* User Footer */}
-      <div className="p-3 sm:p-3.5 border-t border-white/10 flex items-center justify-between shrink-0" style={{ background: '#152d4a' }}>
+      <div className="p-3 sm:p-3.5 border-t border-white/10 dark:border-[#203d64] flex items-center justify-between shrink-0 bg-[#152d4a] dark:bg-[#050b13] transition-colors">
         <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/15 flex items-center justify-center text-xs font-bold text-white uppercase flex-shrink-0">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/15 dark:bg-slate-800 flex items-center justify-center text-xs font-bold text-white uppercase flex-shrink-0">
             {user?.name ? user.name.slice(0, 2) : 'АД'}
           </div>
           <div className="min-w-0">
             <p className="text-xs font-semibold text-white truncate">{user?.name || 'Администратор'}</p>
-            <p className="text-[10px] sm:text-[11px] text-blue-200/50 truncate">{user?.email || 'admin@educontrol.com'}</p>
+            <p className="text-[10px] sm:text-[11px] text-blue-200/50 dark:text-slate-400 truncate">{user?.email || 'admin@educontrol.com'}</p>
           </div>
         </div>
         <button
           onClick={logout}
           title={language === 'uz' ? 'Chiqish' : 'Выйти'}
-          className="p-1.5 rounded-md hover:bg-white/10 text-blue-200/50 hover:text-red-300 transition flex-shrink-0"
+          className="p-1.5 rounded-md hover:bg-white/10 dark:hover:bg-slate-800 text-blue-200/50 dark:text-slate-400 hover:text-red-300 dark:hover:text-red-400 transition flex-shrink-0"
         >
           <LogOut className="w-4 h-4" />
         </button>
@@ -111,7 +111,7 @@ export const Sidebar = ({ isMobileOpen, onClose }: { isMobileOpen?: boolean; onC
   return (
     <>
       {/* Desktop Persistent Sidebar */}
-      <aside className="hidden lg:flex w-64 flex-col flex-shrink-0 select-none h-full border-r border-slate-200/20 dark:border-[#203d64]">
+      <aside className="hidden lg:flex w-64 flex-col flex-shrink-0 select-none h-full border-r border-slate-200/20 dark:border-[#203d64] bg-[#1e3a5f] dark:bg-[#070e18] transition-colors">
         {renderContent(false)}
       </aside>
 
@@ -125,7 +125,7 @@ export const Sidebar = ({ isMobileOpen, onClose }: { isMobileOpen?: boolean; onC
           />
 
           {/* Drawer Body */}
-          <div className="relative w-72 max-w-[85vw] h-full shadow-2xl z-10 animate-slide-right flex flex-col select-none">
+          <div className="relative w-72 max-w-[85vw] h-full shadow-2xl z-10 animate-slide-right flex flex-col select-none border-r border-transparent dark:border-[#203d64]">
             {renderContent(true)}
           </div>
         </div>

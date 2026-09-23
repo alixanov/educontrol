@@ -59,7 +59,7 @@ export const Navbar = ({ onToggleMenu }: { onToggleMenu?: () => void }) => {
   }, []);
 
   return (
-    <header className="h-14 sm:h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-3 sm:px-6 flex items-center justify-between z-10 select-none transition-colors">
+    <header className="h-14 sm:h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-[#203d64] px-3 sm:px-6 flex items-center justify-between z-10 select-none transition-colors">
       {/* Left: Mobile Menu Toggle & Date / Live Clock */}
       <div className="flex items-center gap-2 sm:gap-3 text-xs text-slate-500 dark:text-slate-400">
         {onToggleMenu && (
