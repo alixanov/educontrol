@@ -346,7 +346,7 @@ export default function SettingsPage() {
         <div className="flex justify-end pt-3 border-t border-slate-100 dark:border-slate-800">
           <button
             type="submit"
-            className="inline-flex items-center gap-2 px-5 py-2 bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] text-white font-bold rounded-xl shadow-xs transition text-xs cursor-pointer border border-[#2d5584]"
+            className="inline-flex items-center gap-2 px-5 py-2 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold rounded-xl shadow-md shadow-blue-500/20 transition text-xs cursor-pointer"
           >
             <Save className="w-4 h-4" />
             <span>{isUz ? 'Saqlash' : 'Сохранить'}</span>
@@ -370,7 +370,7 @@ export default function SettingsPage() {
           </div>
           <button
             onClick={() => setIsAddingCamera(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] text-white font-bold shadow-xs transition self-start sm:self-auto cursor-pointer border border-[#2d5584]"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold shadow-md shadow-blue-500/20 transition self-start sm:self-auto cursor-pointer"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>{isUz ? 'Kamera ulash' : 'Подключить камеру'}</span>
@@ -563,7 +563,7 @@ export default function SettingsPage() {
               </button>
               <button
                 type="submit"
-                className="px-3.5 py-1.5 rounded-lg bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] text-white font-semibold shadow-xs border border-[#2d5584]"
+                className="px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-semibold shadow-md shadow-blue-500/20 transition"
               >
                 {isUz ? 'Saqlash' : 'Сохранить'}
               </button>
@@ -576,7 +576,7 @@ export default function SettingsPage() {
           <button
             type="button"
             onClick={handleSavePolicies}
-            className="inline-flex items-center gap-2 px-5 py-2 bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] text-white font-bold rounded-xl shadow-xs transition text-xs cursor-pointer border border-[#2d5584]"
+            className="inline-flex items-center gap-2 px-5 py-2 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold rounded-xl shadow-md shadow-blue-500/20 transition text-xs cursor-pointer"
           >
             <Save className="w-4 h-4" />
             <span>{isUz ? 'Saqlash' : 'Сохранить'}</span>
@@ -626,7 +626,7 @@ export default function SettingsPage() {
           </div>
           <button
             type="submit"
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] text-white text-xs font-semibold rounded-xl shadow-xs transition cursor-pointer border border-[#2d5584]"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs font-semibold rounded-xl shadow-md shadow-blue-500/20 transition cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>{isUz ? 'Kafedra qo‘shish' : 'Добавить кафедру'}</span>

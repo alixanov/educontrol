@@ -40,36 +40,29 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-slate-50 dark:bg-[#0c1829] text-slate-900 dark:text-slate-100 relative overflow-hidden flex flex-col lg:grid lg:grid-cols-12 transition-colors duration-200">
-      {/* Background Decorative Ambient Glows & Seamless Grid Pattern */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#1e3a5f]/10 dark:bg-[#1e3a5f]/25 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#152d4a]/15 dark:bg-[#152d4a]/30 rounded-full blur-3xl pointer-events-none" />
-      <div
-        className="absolute inset-0 opacity-[0.03] dark:opacity-[0.04] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
-        }}
-      />
+    <div className="min-h-screen w-full bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 relative overflow-hidden flex flex-col lg:grid lg:grid-cols-12 transition-colors duration-200">
+      {/* Background Decorative Ambient Glows */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/10 dark:bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-700/10 dark:bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
 
-      {/* LEFT COLUMN: CCTV & AI Biometric Surveillance Showcase (Full Height, Edge-to-Edge) */}
-      <div className="lg:col-span-7 xl:col-span-7 p-6 sm:p-10 lg:p-12 xl:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-[#254773] relative z-10 bg-slate-100/70 dark:bg-[#102036]/80 transition-colors duration-200">
+      {/* LEFT COLUMN: CCTV & AI Biometric Surveillance Showcase */}
+      <div className="lg:col-span-7 xl:col-span-7 p-6 sm:p-10 lg:p-12 xl:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800 relative z-10 bg-slate-100/50 dark:bg-slate-900/40 transition-colors duration-200">
         {/* Top Brand Header */}
         <div className="space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-[#1e3a5f]/40 border border-blue-200 dark:border-[#2f588f] text-[#1e3a5f] dark:text-blue-200 text-xs font-semibold">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-900 text-blue-700 dark:text-blue-300 text-xs font-semibold">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span>{language === 'uz' ? 'AI Biometrik SKUD Tizimi' : 'Биометрическая СКУД на базе ИИ'}</span>
           </div>
 
           <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-xl bg-[#1e3a5f] border border-[#2f588f] flex items-center justify-center text-white shadow-lg shadow-[#1e3a5f]/40 flex-shrink-0">
-              <ShieldCheck className="w-6 h-6 text-white" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-md shadow-blue-500/20 flex-shrink-0">
+              <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-none">
                 EduControl
               </h1>
-              <p className="text-xs font-medium text-slate-500 dark:text-blue-200/70">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                 {language === 'uz' ? 'Intellektual davomat va ish vaqti nazorati' : 'Интеллектуальный контроль доступа и учёта рабочего времени'}
               </p>
             </div>
@@ -82,15 +75,15 @@ export default function LoginPage() {
           </h2>
         </div>
 
-        {/* Center CCTV Terminal Mockup with Face Detection HUD (Always High-Tech Dark Style) */}
-        <div className="my-8 rounded-2xl bg-[#0c1829] border border-slate-300 dark:border-[#254773] p-4 sm:p-5 shadow-2xl relative overflow-hidden group max-w-2xl text-slate-100">
+        {/* Center CCTV Terminal Mockup with Face Detection HUD */}
+        <div className="my-8 rounded-2xl bg-slate-900 border border-slate-800 p-4 sm:p-5 shadow-2xl relative overflow-hidden group max-w-2xl text-slate-100">
           {/* Terminal Top Bar */}
-          <div className="flex items-center justify-between pb-3 border-b border-[#254773] text-[11px] font-mono">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-800 text-[11px] font-mono">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
               <span className="font-bold text-red-400 uppercase tracking-wider">● REC • LIVE</span>
-              <span className="text-slate-500">|</span>
-              <span className="text-blue-200 font-semibold">CAM-01 [TURNIKET-KIRISH]</span>
+              <span className="text-slate-600">|</span>
+              <span className="text-blue-300 font-semibold">CAM-01 [TURNIKET-KIRISH]</span>
             </div>
             <span className="text-emerald-400 font-bold bg-emerald-950/70 px-2.5 py-0.5 rounded border border-emerald-800 text-[10px]">
               60 FPS • 1080p
@@ -98,7 +91,7 @@ export default function LoginPage() {
           </div>
 
           {/* Simulated Camera Viewfinder with Face Target */}
-          <div className="relative h-48 sm:h-56 my-3 rounded-xl bg-gradient-to-b from-[#0e1d32] to-[#091322] border border-[#254773]/80 flex items-center justify-center overflow-hidden">
+          <div className="relative h-48 sm:h-56 my-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center overflow-hidden">
             {/* Scanlines / Grid effect */}
             <div
               className="absolute inset-0 opacity-10 pointer-events-none"
@@ -131,42 +124,42 @@ export default function LoginPage() {
               </div>
 
               {/* Floating Detection Badge */}
-              <div className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap bg-emerald-500 text-[#0c1829] font-bold text-[10px] sm:text-xs px-2.5 py-0.5 rounded-full shadow-md flex items-center gap-1">
+              <div className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap bg-emerald-500 text-slate-950 font-bold text-[10px] sm:text-xs px-2.5 py-0.5 rounded-full shadow-md flex items-center gap-1">
                 <span>✓</span>
                 <span>{language === 'uz' ? 'ANIQLANDI: O‘QITUVCHI' : 'ИДЕНТИФИЦИРОВАН'}</span>
               </div>
             </div>
 
             {/* Telemetry OSD Overlay */}
-            <div className="absolute top-2.5 left-2.5 text-[10px] font-mono text-blue-200/70 space-y-0.5">
+            <div className="absolute top-2.5 left-2.5 text-[10px] font-mono text-slate-400 space-y-0.5">
               <div>AI ENGINE: <span className="text-cyan-300 font-semibold">TinyFace-v2</span></div>
               <div>LATENCY: <span className="text-emerald-400 font-semibold">18ms</span></div>
             </div>
-            <div className="absolute bottom-2.5 right-2.5 text-[10px] font-mono text-blue-200/70">
+            <div className="absolute bottom-2.5 right-2.5 text-[10px] font-mono text-slate-400">
               STATUS: <span className="text-emerald-400 font-bold">TURNIKET OCHILDI</span>
             </div>
           </div>
 
           {/* Bottom 3 Feature Pills */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-2 border-t border-[#254773] text-center text-[10px] sm:text-[11px]">
-            <div className="p-2 rounded-xl bg-[#0c1829] border border-[#254773]">
-              <span className="font-bold text-blue-300 block">3D-Yuz</span>
+          <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-2 border-t border-slate-800 text-center text-[10px] sm:text-[11px]">
+            <div className="p-2 rounded-xl bg-slate-950 border border-slate-800">
+              <span className="font-bold text-blue-400 block">3D-Yuz</span>
               <span className="text-slate-400 text-[9px] sm:text-[10px]">{language === 'uz' ? '3 rakursli' : '3 ракурса'}</span>
             </div>
-            <div className="p-2 rounded-xl bg-[#0c1829] border border-[#254773]">
+            <div className="p-2 rounded-xl bg-slate-950 border border-slate-800">
               <span className="font-bold text-emerald-400 block">0.2 soniya</span>
               <span className="text-slate-400 text-[9px] sm:text-[10px]">{language === 'uz' ? 'Tezkor qayd' : 'Скорость'}</span>
             </div>
-            <div className="p-2 rounded-xl bg-[#0c1829] border border-[#254773]">
-              <span className="font-bold text-indigo-300 block">T-13 Excel</span>
+            <div className="p-2 rounded-xl bg-slate-950 border border-slate-800">
+              <span className="font-bold text-indigo-400 block">T-13 Excel</span>
               <span className="text-slate-400 text-[9px] sm:text-[10px]">{language === 'uz' ? 'Avto-tabel' : 'Табель'}</span>
             </div>
           </div>
         </div>
 
         {/* Bottom Security Assurance Note */}
-        <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-blue-200/70 pt-2">
-          <Video className="w-4 h-4 text-[#1e3a5f] dark:text-blue-300 flex-shrink-0" />
+        <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 pt-2">
+          <Video className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
           <span>
             {language === 'uz'
               ? 'Noutbuk veb-kamerasi va RTSP IP-kameralar bilan to‘liq mos keladi.'
@@ -175,70 +168,59 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* RIGHT COLUMN: Login Form (Full Height, Edge-to-Edge) */}
-      <div className="lg:col-span-5 xl:col-span-5 p-6 sm:p-10 lg:p-12 xl:p-16 flex flex-col justify-between bg-white dark:bg-[#12233a] relative z-10 transition-colors duration-200">
+      {/* RIGHT COLUMN: Login Form */}
+      <div className="lg:col-span-5 xl:col-span-5 p-6 sm:p-10 lg:p-12 xl:p-16 flex flex-col justify-between bg-white dark:bg-slate-900 relative z-10 transition-colors duration-200">
         {/* Top Bar: Dark/Light Mode & Language Selector */}
         <div className="flex items-center justify-end gap-2.5 mb-6">
           {/* Dark / Light Mode Toggle Button */}
           <button
             type="button"
             onClick={toggleTheme}
-            title={theme === 'dark' ? (language === 'uz' ? 'Kunduzgi rejim (Yorug‘)' : 'Светлая тема') : (language === 'uz' ? 'Tungi rejim (Qorong‘i)' : 'Тёмная тема')}
-            className="p-1.5 px-2.5 sm:px-3 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition-all bg-slate-100 dark:bg-[#0c1829] border-slate-200 dark:border-[#254773] text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-[#1b3455] cursor-pointer shadow-xs"
+            title={theme === 'dark' ? (language === 'uz' ? 'Kunduzgi rejim (Kun)' : 'Дневной режим (День)') : (language === 'uz' ? 'Tungi rejim (Tun)' : 'Ночной режим (Ночь)')}
+            className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/80 bg-white/90 text-slate-600 shadow-sm transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-300 dark:hover:bg-slate-700 active:scale-95 cursor-pointer"
             aria-label="Toggle dark/light theme"
           >
             {theme === 'dark' ? (
-              <>
-                <Sun className="w-3.5 h-3.5 text-amber-400" />
-                <span className="text-[11px] font-medium text-amber-400 dark:text-amber-300">
-                  {language === 'uz' ? 'Kunduzgi' : 'Светлая'}
-                </span>
-              </>
+              <Sun className="h-4 w-4 text-amber-400 transition-transform duration-200 rotate-0 hover:rotate-45" />
             ) : (
-              <>
-                <Moon className="w-3.5 h-3.5 text-slate-600 dark:text-slate-300" />
-                <span className="text-[11px] font-medium text-slate-700 dark:text-slate-300">
-                  {language === 'uz' ? 'Tungi' : 'Тёмная'}
-                </span>
-              </>
+              <Moon className="h-4 w-4 text-slate-600 transition-transform duration-200 -rotate-12 hover:rotate-0" />
             )}
           </button>
 
           {/* Language Selector */}
-          <div className="inline-flex items-center gap-1 p-1 rounded-xl bg-slate-100 dark:bg-[#0c1829] border border-slate-200 dark:border-[#254773] text-xs shadow-inner">
-            <Globe className="w-3.5 h-3.5 text-slate-400 ml-1.5 mr-0.5" />
+          <div className="inline-flex items-center gap-0.5 rounded-xl bg-slate-100/90 p-1 border border-slate-200/80 shadow-sm dark:bg-slate-800 dark:border-slate-700 text-xs">
             <button
               type="button"
               onClick={() => setLanguage('uz')}
-              className={`px-2.5 sm:px-3 py-1 rounded-lg font-medium transition cursor-pointer ${
+              className={`flex items-center justify-center rounded-lg px-2.5 py-1 text-xs font-bold transition cursor-pointer ${
                 language === 'uz'
-                  ? 'bg-[#1e3a5f] text-white shadow-xs border border-[#2f588f]'
-                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm'
+                  : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
               }`}
             >
-              O‘zbekcha
+              UZ
             </button>
             <button
               type="button"
               onClick={() => setLanguage('ru')}
-              className={`px-2.5 sm:px-3 py-1 rounded-lg font-medium transition cursor-pointer ${
+              className={`flex items-center justify-center rounded-lg px-2.5 py-1 text-xs font-bold transition cursor-pointer ${
                 language === 'ru'
-                  ? 'bg-[#1e3a5f] text-white shadow-xs border border-[#2f588f]'
-                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm'
+                  : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
               }`}
             >
-              Русский
+              RU
             </button>
           </div>
         </div>
 
-        {/* Main Login Form Area (Centered Vertically) */}
+        {/* Main Login Form Area */}
         <div className="my-auto max-w-md w-full mx-auto space-y-6">
           <div>
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
               {language === 'uz' ? 'Tizimga kirish' : 'Вход в систему'}
             </h2>
-            <p className="text-xs text-slate-500 dark:text-blue-200/70 mt-1">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
               {language === 'uz'
                 ? 'Boshqaruv paneli orqali xavfsiz avtorizatsiya'
                 : 'Авторизация в панели администратора'}
@@ -246,7 +228,7 @@ export default function LoginPage() {
           </div>
 
           {error && (
-            <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 flex items-start gap-2.5 text-red-500 dark:text-red-400 text-xs animate-shake">
+            <div className="p-3.5 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 flex items-start gap-2.5 text-red-600 dark:text-red-400 text-xs animate-shake">
               <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
@@ -265,7 +247,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@educontrol.com"
-                  className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-[#0c1829] border border-slate-200 dark:border-[#254773] rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-[#0c1829] focus:outline-none focus:ring-1 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] transition"
+                  className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
                 />
               </div>
             </div>
@@ -282,16 +264,16 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-[#0c1829] border border-slate-200 dark:border-[#254773] rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-[#0c1829] focus:outline-none focus:ring-1 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] transition"
+                  className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
                 />
               </div>
             </div>
 
-            {/* Official Brand #1e3a5f Primary Button */}
+            {/* Primary Submit Button */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 px-4 bg-[#1e3a5f] hover:bg-[#284e7e] active:bg-[#152d4a] text-white font-bold text-xs rounded-xl shadow-lg shadow-[#1e3a5f]/30 border border-[#2f588f] flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-3"
+              className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-bold text-xs rounded-xl shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-3"
             >
               {loading ? (
                 <>
@@ -312,9 +294,9 @@ export default function LoginPage() {
             <button
               type="button"
               onClick={handleQuickFill}
-              className="w-full py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-[#0c1829] hover:bg-slate-200 dark:hover:bg-[#1b3455] text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white text-xs font-semibold border border-slate-200 dark:border-[#254773] flex items-center justify-center gap-2 transition cursor-pointer"
+              className="w-full py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-200 dark:border-slate-700 flex items-center justify-center gap-2 transition cursor-pointer"
             >
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#1e3a5f] dark:text-blue-300" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
               <span>
                 {language === 'uz'
                   ? 'Demo ma’lumotlarni to‘ldirish (admin@educontrol.com)'
@@ -325,7 +307,7 @@ export default function LoginPage() {
         </div>
 
         {/* Bottom Security Tagline */}
-        <div className="pt-6 border-t border-slate-200 dark:border-[#254773] text-center text-[11px] text-slate-400 dark:text-blue-200/50">
+        <div className="pt-6 border-t border-slate-200 dark:border-slate-800 text-center text-[11px] text-slate-400 dark:text-slate-500">
           <span>
             {language === 'uz'
               ? 'EduControl • 256-bit shifrlangan xavfsiz tizim'

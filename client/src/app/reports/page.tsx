@@ -332,9 +332,9 @@ export default function AttendanceReportsPage() {
         <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700 text-xs w-full md:w-auto">
           <button
             onClick={() => setPeriodType('today')}
-            className={`px-3 py-1.5 rounded-lg font-bold transition flex-1 md:flex-initial text-center ${
+            className={`px-3 py-1.5 rounded-lg font-bold transition flex-1 md:flex-initial text-center cursor-pointer ${
               periodType === 'today'
-                ? 'bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] text-white shadow-xs border border-[#2d5584]'
+                ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm'
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
@@ -342,9 +342,9 @@ export default function AttendanceReportsPage() {
           </button>
           <button
             onClick={() => setPeriodType('week')}
-            className={`px-3 py-1.5 rounded-lg font-bold transition flex-1 md:flex-initial text-center ${
+            className={`px-3 py-1.5 rounded-lg font-bold transition flex-1 md:flex-initial text-center cursor-pointer ${
               periodType === 'week'
-                ? 'bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] text-white shadow-xs border border-[#2d5584]'
+                ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm'
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
@@ -352,9 +352,9 @@ export default function AttendanceReportsPage() {
           </button>
           <button
             onClick={() => setPeriodType('month')}
-            className={`px-3 py-1.5 rounded-lg font-bold transition flex-1 md:flex-initial text-center ${
+            className={`px-3 py-1.5 rounded-lg font-bold transition flex-1 md:flex-initial text-center cursor-pointer ${
               periodType === 'month'
-                ? 'bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] text-white shadow-xs border border-[#2d5584]'
+                ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm'
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
@@ -362,9 +362,9 @@ export default function AttendanceReportsPage() {
           </button>
           <button
             onClick={() => setPeriodType('custom')}
-            className={`px-3 py-1.5 rounded-lg font-bold transition flex-1 md:flex-initial text-center ${
+            className={`px-3 py-1.5 rounded-lg font-bold transition flex-1 md:flex-initial text-center cursor-pointer ${
               periodType === 'custom'
-                ? 'bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] text-white shadow-xs border border-[#2d5584]'
+                ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm'
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
@@ -718,7 +718,7 @@ export default function AttendanceReportsPage() {
               </button>
               <button
                 onClick={handleSaveEdit}
-                className="px-4 py-1.5 text-xs bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] text-white rounded-lg font-bold shadow-xs transition cursor-pointer border border-[#2d5584]"
+                className="px-4 py-1.5 text-xs bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold shadow-md shadow-blue-500/20 transition cursor-pointer active:scale-95"
               >
                 {t('saveChanges')}
               </button>

@@ -750,8 +750,7 @@ export default function StudentsPage() {
 
         <button
           onClick={handleOpenAdd}
-          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-white text-xs font-semibold shadow-sm transition hover:opacity-95 cursor-pointer"
-          style={{ background: '#1e3a5f' }}
+          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-white text-xs font-semibold bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-500/20 transition cursor-pointer active:scale-95"
         >
           <UserPlus className="w-4 h-4" />
           <span>{language === 'uz' ? 'Yangi o‘qituvchini ro‘yxatga olish' : 'Зарегистрировать преподавателя'}</span>
@@ -808,8 +807,7 @@ export default function StudentsPage() {
             </p>
             <button
               onClick={handleOpenAdd}
-              className="mt-3.5 inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white text-xs font-semibold shadow-sm transition hover:opacity-95 cursor-pointer"
-              style={{ background: '#1e3a5f' }}
+              className="mt-3.5 inline-flex items-center gap-2 px-4 py-2 rounded-xl text-white text-xs font-semibold bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-500/20 transition cursor-pointer active:scale-95"
             >
               <UserPlus className="w-4 h-4" />
               <span>{language === 'uz' ? 'Birinchi o‘qituvchini ro‘yxatga olish' : 'Зарегистрировать первого преподавателя'}</span>
@@ -1000,7 +998,7 @@ export default function StudentsPage() {
                               isDone
                                 ? 'bg-green-100 dark:bg-emerald-950/70 text-green-800 dark:text-emerald-300 border border-green-300 dark:border-emerald-700'
                                 : isCurrent
-                                ? 'bg-[#1e3a5f] text-white shadow-xs border border-[#2a4e7e]'
+                                ? 'bg-blue-600 text-white shadow-xs border border-blue-500'
                                 : 'bg-white dark:bg-slate-800 text-slate-400 dark:text-slate-500 border border-slate-200 dark:border-slate-700'
                             }`}
                           >
@@ -1104,7 +1102,7 @@ export default function StudentsPage() {
                           <button
                             type="button"
                             onClick={handleStartWebcam}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white font-semibold text-xs shadow-sm transition bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] border border-[#2d5584]"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white font-semibold text-xs shadow-sm transition bg-blue-600 hover:bg-blue-700 active:scale-95"
                           >
                             <Video className="w-3.5 h-3.5" />
                             <span>{language === 'uz' ? 'Kamerani yoqish (3 rakurs)' : 'Включить камеру (3 ракурса)'}</span>
@@ -1307,7 +1305,7 @@ export default function StudentsPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-4 py-2 rounded-lg text-white font-semibold shadow-sm disabled:opacity-50 bg-[#1e3a5f] hover:bg-[#284c7a] dark:bg-[#1e3a5f] dark:hover:bg-[#284c7a] border border-[#2d5584]"
+                  className="px-4 py-2 rounded-xl text-white font-semibold shadow-md shadow-blue-500/20 disabled:opacity-50 bg-blue-600 hover:bg-blue-700 active:scale-95 transition"
                 >
                   {submitting
                     ? (language === 'uz' ? 'Saqlanmoqda...' : 'Сохранение...')

@@ -59,14 +59,14 @@ export const Navbar = ({ onToggleMenu }: { onToggleMenu?: () => void }) => {
   }, []);
 
   return (
-    <header className="h-14 sm:h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-[#203d64] px-3 sm:px-6 flex items-center justify-between z-10 select-none transition-colors">
+    <header className="sticky top-0 z-20 flex h-16 w-full items-center justify-between border-b border-slate-200 bg-white/80 dark:bg-slate-900/80 dark:border-slate-800 px-4 sm:px-6 backdrop-blur-md transition-colors duration-200 select-none">
       {/* Left: Mobile Menu Toggle & Date / Live Clock */}
       <div className="flex items-center gap-2 sm:gap-3 text-xs text-slate-500 dark:text-slate-400">
         {onToggleMenu && (
           <button
             onClick={onToggleMenu}
             aria-label="Toggle navigation menu"
-            className="p-1.5 -ml-1 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg lg:hidden transition"
+            className="p-1.5 -ml-1 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl lg:hidden transition"
           >
             <Menu className="w-5 h-5" />
           </button>
@@ -74,7 +74,7 @@ export const Navbar = ({ onToggleMenu }: { onToggleMenu?: () => void }) => {
         <div className="flex items-center gap-1.5 sm:gap-2">
           <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-400 dark:text-slate-500 flex-shrink-0" />
           <span className="font-medium text-slate-700 dark:text-slate-300 hidden md:inline text-xs">{date}</span>
-          <span className="font-mono font-bold text-slate-800 dark:text-slate-100 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md border border-slate-200 dark:border-slate-700 text-[11px] sm:text-xs">
+          <span className="font-mono font-bold text-slate-800 dark:text-slate-100 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg border border-slate-200 dark:border-slate-700 text-[11px] sm:text-xs">
             {time}
           </span>
         </div>
@@ -82,62 +82,52 @@ export const Navbar = ({ onToggleMenu }: { onToggleMenu?: () => void }) => {
 
       {/* Right side: Dark/Light Mode, Language Switcher & Server Status */}
       <div className="flex items-center gap-2 sm:gap-3 text-xs">
-        {/* Dark / Light Theme Toggle */}
+        {/* Dark / Light Theme Toggle Button */}
         <button
+          type="button"
           onClick={toggleTheme}
-          title={theme === 'dark' ? (language === 'uz' ? 'Kunduzgi rejim (Yorug‘)' : 'Светлая тема') : (language === 'uz' ? 'Tungi rejim (Qorong‘i)' : 'Тёмная тема')}
-          className="p-1.5 sm:px-2.5 sm:py-1 rounded-lg border text-xs font-semibold flex items-center gap-1.5 transition-all bg-slate-100 dark:bg-slate-800/90 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700/80 dark:hover:border-slate-600 cursor-pointer shadow-2xs"
+          title={theme === 'dark' ? (language === 'uz' ? 'Kunduzgi rejim (Kun)' : 'Дневной режим (День)') : (language === 'uz' ? 'Tungi rejim (Tun)' : 'Ночной режим (Ночь)')}
+          className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/80 bg-white/90 text-slate-600 shadow-sm transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-300 dark:hover:bg-slate-700 active:scale-95 cursor-pointer"
           aria-label="Toggle dark/light theme"
         >
           {theme === 'dark' ? (
-            <>
-              <Sun className="w-4 h-4 text-amber-400" />
-              <span className="hidden sm:inline text-[11px] font-medium text-amber-300">
-                {language === 'uz' ? 'Kunduzgi' : 'Светлая'}
-              </span>
-            </>
+            <Sun className="h-4 w-4 text-amber-400 transition-transform duration-200 rotate-0 hover:rotate-45" />
           ) : (
-            <>
-              <Moon className="w-4 h-4 text-slate-600" />
-              <span className="hidden sm:inline text-[11px] font-medium text-slate-600">
-                {language === 'uz' ? 'Tungi' : 'Тёмная'}
-              </span>
-            </>
+            <Moon className="h-4 w-4 text-slate-600 transition-transform duration-200 -rotate-12 hover:rotate-0" />
           )}
         </button>
 
         {/* Language Switcher (UZ default / RU) */}
-        <div className="flex items-center bg-slate-100 dark:bg-slate-800/90 p-0.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs shadow-inner">
+        <div className="inline-flex items-center gap-0.5 rounded-xl bg-slate-100/90 p-1 border border-slate-200/80 shadow-sm dark:bg-slate-800 dark:border-slate-700 text-xs">
           <button
+            type="button"
             onClick={() => setLanguage('uz')}
-            title="O'zbek tili (Lotin)"
-            className={`px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md text-[10px] sm:text-[11px] font-bold transition flex items-center gap-1 ${
+            title="O'zbek tili"
+            className={`flex items-center justify-center rounded-lg px-2.5 py-1 text-xs font-bold transition ${
               language === 'uz'
-                ? 'bg-white dark:bg-[#1e3a5f] text-blue-950 dark:text-white shadow-xs border border-slate-200/80 dark:border-[#2a4e7e]'
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm'
+                : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
             }`}
           >
-            <span>🇺🇿</span>
-            <span className="hidden sm:inline">O‘zbekcha</span>
-            <span className="sm:hidden">UZ</span>
+            UZ
           </button>
           <button
+            type="button"
             onClick={() => setLanguage('ru')}
             title="Русский язык"
-            className={`px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md text-[10px] sm:text-[11px] font-bold transition flex items-center gap-1 ${
+            className={`flex items-center justify-center rounded-lg px-2.5 py-1 text-xs font-bold transition ${
               language === 'ru'
-                ? 'bg-white dark:bg-[#1e3a5f] text-blue-950 dark:text-white shadow-xs border border-slate-200/80 dark:border-[#2a4e7e]'
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm'
+                : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
             }`}
           >
-            <span>🇷🇺</span>
-            <span className="hidden sm:inline">Русский</span>
-            <span className="sm:hidden">RU</span>
+            RU
           </button>
         </div>
 
+        {/* Server Status Indicator */}
         <div
-          className={`flex items-center gap-1.5 sm:gap-2 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-semibold border transition ${
+          className={`flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 rounded-xl text-[11px] sm:text-xs font-semibold border transition ${
             isServerOnline
               ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/80'
               : 'bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800/80 animate-pulse'
