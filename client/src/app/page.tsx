@@ -248,7 +248,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Clean Segmented Tabs */}
-          <div className="flex items-center bg-slate-200/70 dark:bg-slate-800 p-1 rounded-xl text-xs gap-1 overflow-x-auto border border-transparent dark:border-slate-700/60">
+          <div className="flex items-center bg-slate-200/70 dark:bg-slate-800/90 p-1 rounded-xl text-xs gap-1 overflow-x-auto border border-transparent dark:border-slate-700/60">
             <button
               onClick={() => setDisciplineTab('all')}
               className={`px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
@@ -267,14 +267,14 @@ export default function DashboardPage() {
               onClick={() => setDisciplineTab('onTime')}
               className={`px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
                 disciplineTab === 'onTime'
-                  ? 'bg-emerald-700 text-white shadow-xs'
+                  ? 'bg-emerald-600 dark:bg-emerald-600 text-white shadow-xs'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               <CheckCircle2 className="w-3.5 h-3.5" />
               <span>{isUz ? 'O‘z vaqtida' : 'Вовремя'}</span>
               <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
-                disciplineTab === 'onTime' ? 'bg-white/20 text-white' : 'bg-emerald-100 dark:bg-emerald-950 text-emerald-900 dark:text-emerald-300'
+                disciplineTab === 'onTime' ? 'bg-white/20 text-white' : 'bg-emerald-100 dark:bg-emerald-950/70 text-emerald-900 dark:text-emerald-300'
               }`}>
                 {onTimeTeachers.length}
               </span>
@@ -284,14 +284,14 @@ export default function DashboardPage() {
               onClick={() => setDisciplineTab('late')}
               className={`px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
                 disciplineTab === 'late'
-                  ? 'bg-amber-600 text-white shadow-xs'
+                  ? 'bg-amber-600 dark:bg-amber-600 text-white shadow-xs'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               <AlertTriangle className="w-3.5 h-3.5" />
               <span>{isUz ? 'Kechikkanlar' : 'Опоздавшие'}</span>
               <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
-                disciplineTab === 'late' ? 'bg-white/20 text-white' : 'bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-300'
+                disciplineTab === 'late' ? 'bg-white/20 text-white' : 'bg-amber-100 dark:bg-amber-950/70 text-amber-900 dark:text-amber-300'
               }`}>
                 {lateTeachers.length}
               </span>
@@ -301,14 +301,14 @@ export default function DashboardPage() {
               onClick={() => setDisciplineTab('absent')}
               className={`px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
                 disciplineTab === 'absent'
-                  ? 'bg-rose-700 text-white shadow-xs'
+                  ? 'bg-rose-600 dark:bg-rose-600 text-white shadow-xs'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               <UserX className="w-3.5 h-3.5" />
               <span>{isUz ? 'Kelmaganlar' : 'Не явились'}</span>
               <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
-                disciplineTab === 'absent' ? 'bg-white/20 text-white' : 'bg-rose-100 dark:bg-rose-950 text-rose-900 dark:text-rose-300'
+                disciplineTab === 'absent' ? 'bg-white/20 text-white' : 'bg-rose-100 dark:bg-rose-950/70 text-rose-900 dark:text-rose-300'
               }`}>
                 {absentTeachers.length}
               </span>
@@ -325,7 +325,7 @@ export default function DashboardPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={isUz ? 'F.I.O. yoki tabel raqami bo‘yicha qidirish...' : 'Поиск по ФИО или табельному номеру...'}
-              className="w-full pl-9 pr-3 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-900 dark:focus:ring-blue-500"
+              className="w-full pl-9 pr-3 py-1.5 bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-lg text-xs text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-900 dark:focus:ring-blue-500"
             />
           </div>
 
@@ -334,11 +334,11 @@ export default function DashboardPage() {
             <select
               value={selectedDept}
               onChange={(e) => setSelectedDept(e.target.value)}
-              className="w-full sm:w-auto px-3 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs text-slate-700 dark:text-slate-200 focus:outline-none font-medium"
+              className="w-full sm:w-auto px-3 py-1.5 bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-lg text-xs text-slate-700 dark:text-slate-200 focus:outline-none font-medium"
             >
-              <option value="ALL">{isUz ? 'Barcha kafedralar' : 'Все кафедры'}</option>
+              <option value="ALL" className="dark:bg-slate-900 dark:text-white">{isUz ? 'Barcha kafedralar' : 'Все кафедры'}</option>
               {departments.map((dept) => (
-                <option key={dept} value={dept}>{dept}</option>
+                <option key={dept} value={dept} className="dark:bg-slate-900 dark:text-white">{dept}</option>
               ))}
             </select>
           </div>
@@ -469,28 +469,29 @@ export default function DashboardPage() {
               <AreaChart data={hourlyData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>
                   <linearGradient id="attendanceGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#2563eb" stopOpacity={0.35} />
-                    <stop offset="95%" stopColor="#2563eb" stopOpacity={0} />
+                    <stop offset="5%" stopColor="#2563eb" stopOpacity={0.4} />
+                    <stop offset="95%" stopColor="#2563eb" stopOpacity={0.02} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#334155" opacity={0.2} />
-                <XAxis dataKey="hour" tick={{ fontSize: 11, fill: '#94a3b8' }} stroke="#64748b" />
-                <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: '#94a3b8' }} stroke="#64748b" />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#203d64" opacity={0.35} />
+                <XAxis dataKey="hour" tick={{ fontSize: 11, fill: '#94a3b8' }} stroke="#203d64" />
+                <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: '#94a3b8' }} stroke="#203d64" />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#0f172a',
-                    border: '1px solid #334155',
-                    borderRadius: '8px',
-                    color: '#fff',
+                    backgroundColor: '#0e1d32',
+                    border: '1px solid #203d64',
+                    borderRadius: '10px',
+                    color: '#f8fafc',
                     fontSize: '12px',
+                    boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.5)',
                   }}
                 />
                 <Area
                   type="monotone"
                   dataKey="count"
                   name={isUz ? 'Kelganlar soni' : 'Прибыло'}
-                  stroke="#3b82f6"
-                  strokeWidth={2}
+                  stroke="#38bdf8"
+                  strokeWidth={2.5}
                   fillOpacity={1}
                   fill="url(#attendanceGradient)"
                 />

@@ -13,11 +13,11 @@
 }
 
 .dark {
-  --background: #0c1829;
+  --background: #081220;
   --foreground: #f8fafc;
-  --card: #12233a;
-  --card-elevated: #172d4a;
-  --border: #254773;
+  --card: #0e1d32;
+  --card-elevated: #162b47;
+  --border: #203d64;
   --primary: #1e3a5f;
   --primary-light: #284e7e;
   --primary-dark: #152d4a;
@@ -65,12 +65,17 @@ body {
   background: #8b95a5;
 }
 
+.dark ::-webkit-scrollbar-track {
+  background: #081220;
+}
+
 .dark ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #203d64;
+  border-radius: 9999px;
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #2a4e7e;
 }
 
 @keyframes pulse-ring {

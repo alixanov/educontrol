@@ -901,22 +901,22 @@ export default function CameraMonitoringPage() {
 
       {/* Model Loading Banner */}
       {isModelLoading && (
-        <div className="p-3.5 rounded-lg bg-blue-50 border border-blue-200 text-blue-800 flex items-center gap-3">
-          <Loader2 className="w-4 h-4 animate-spin" />
+        <div className="p-3.5 rounded-lg bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/70 text-blue-800 dark:text-blue-300 flex items-center gap-3">
+          <Loader2 className="w-4 h-4 animate-spin text-blue-600 dark:text-blue-400" />
           <span className="text-xs font-semibold">
             {language === 'uz' ? 'Yuzni tanish neyrotarmog‘i yuklanmoqda...' : 'Загрузка моделей распознавания лиц...'}
           </span>
         </div>
       )}
       {modelError && (
-        <div className="p-3.5 rounded-lg bg-red-50 border border-red-200 text-red-800 flex items-center gap-3">
-          <AlertCircle className="w-4 h-4" />
+        <div className="p-3.5 rounded-lg bg-red-50 dark:bg-rose-950/60 border border-red-200 dark:border-rose-800/70 text-red-800 dark:text-rose-300 flex items-center gap-3">
+          <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400" />
           <span className="text-xs font-semibold">{modelError}</span>
         </div>
       )}
       {!isModelLoading && !modelError && !hasEnrolledDescriptors && (
-        <div className="p-3.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 flex items-center gap-3">
-          <AlertCircle className="w-4 h-4" />
+        <div className="p-3.5 rounded-lg bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800/70 text-amber-800 dark:text-amber-300 flex items-center gap-3">
+          <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400" />
           <span className="text-xs">
             <strong>{language === 'uz' ? 'Ro‘yxatdan o‘tgan biometriyalar yo‘q.' : 'Нет зарегистрированных биометрий.'}</strong>{' '}
             {language === 'uz'
@@ -1017,10 +1017,10 @@ export default function CameraMonitoringPage() {
                       key={cam.id}
                       type="button"
                       onClick={() => handleSelectCamera(cam)}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 whitespace-nowrap flex-shrink-0 ${
+                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 whitespace-nowrap flex-shrink-0 cursor-pointer ${
                         isSelected
-                          ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs border border-slate-200/90 dark:border-slate-600'
-                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-700/50'
+                          ? 'bg-white dark:bg-[#1e3a5f] text-slate-900 dark:text-white shadow-xs border border-slate-200/90 dark:border-[#2a4e7e]'
+                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-750'
                       }`}
                     >
                       <span className={`w-2 h-2 rounded-full flex-shrink-0 ${isEntrance ? 'bg-emerald-500' : 'bg-blue-500'}`} />
@@ -1253,9 +1253,9 @@ export default function CameraMonitoringPage() {
             <div className="flex items-center gap-1 mb-2 overflow-x-auto pb-0.5 text-[11px] flex-shrink-0 no-scrollbar">
               <button
                 onClick={() => setFeedFilter('ALL')}
-                className={`px-2.5 py-1 rounded-md font-semibold transition ${
+                className={`px-2.5 py-1 rounded-md font-semibold transition cursor-pointer ${
                   feedFilter === 'ALL'
-                    ? 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 shadow-xs'
+                    ? 'bg-slate-900 dark:bg-[#1e3a5f] text-white shadow-xs border border-slate-700 dark:border-[#2a4e7e]'
                     : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                 }`}
               >
@@ -1263,10 +1263,10 @@ export default function CameraMonitoringPage() {
               </button>
               <button
                 onClick={() => setFeedFilter('ARRIVAL')}
-                className={`px-2.5 py-1 rounded-md font-semibold transition flex items-center gap-1.5 ${
+                className={`px-2.5 py-1 rounded-md font-semibold transition flex items-center gap-1.5 cursor-pointer ${
                   feedFilter === 'ARRIVAL'
                     ? 'bg-green-700 dark:bg-emerald-600 text-white shadow-xs'
-                    : 'bg-green-50 dark:bg-emerald-950/50 text-green-800 dark:text-emerald-300 hover:bg-green-100 dark:hover:bg-emerald-900/60 border border-green-200/60 dark:border-emerald-800/60'
+                    : 'bg-green-50 dark:bg-emerald-950/60 text-green-800 dark:text-emerald-300 hover:bg-green-100 dark:hover:bg-emerald-900/60 border border-green-200/60 dark:border-emerald-800/60'
                 }`}
               >
                 <LogIn className="w-3 h-3" />
@@ -1275,10 +1275,10 @@ export default function CameraMonitoringPage() {
               </button>
               <button
                 onClick={() => setFeedFilter('DEPARTURE')}
-                className={`px-2.5 py-1 rounded-md font-semibold transition flex items-center gap-1.5 ${
+                className={`px-2.5 py-1 rounded-md font-semibold transition flex items-center gap-1.5 cursor-pointer ${
                   feedFilter === 'DEPARTURE'
                     ? 'bg-indigo-700 dark:bg-indigo-600 text-white shadow-xs'
-                    : 'bg-indigo-50 dark:bg-indigo-950/50 text-indigo-800 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 border border-indigo-200/60 dark:border-indigo-800/60'
+                    : 'bg-indigo-50 dark:bg-indigo-950/60 text-indigo-800 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 border border-indigo-200/60 dark:border-indigo-800/60'
                 }`}
               >
                 <LogOut className="w-3 h-3" />

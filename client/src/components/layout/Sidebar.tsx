@@ -111,7 +111,7 @@ export const Sidebar = ({ isMobileOpen, onClose }: { isMobileOpen?: boolean; onC
   return (
     <>
       {/* Desktop Persistent Sidebar */}
-      <aside className="hidden lg:flex w-64 flex-col flex-shrink-0 select-none h-full border-r border-slate-200/20">
+      <aside className="hidden lg:flex w-64 flex-col flex-shrink-0 select-none h-full border-r border-slate-200/20 dark:border-[#203d64]">
         {renderContent(false)}
       </aside>
 

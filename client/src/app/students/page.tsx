@@ -779,7 +779,7 @@ export default function StudentsPage() {
             className="text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-700 dark:text-slate-200 focus:outline-none font-medium w-full sm:w-auto"
           >
             {departmentOptions.map((d) => (
-              <option key={d} value={d === departmentOptions[0] ? '' : d}>
+              <option key={d} value={d === departmentOptions[0] ? '' : d} className="dark:bg-slate-900 dark:text-white">
                 {d}
               </option>
             ))}
@@ -1000,7 +1000,7 @@ export default function StudentsPage() {
                               isDone
                                 ? 'bg-green-100 dark:bg-emerald-950/70 text-green-800 dark:text-emerald-300 border border-green-300 dark:border-emerald-700'
                                 : isCurrent
-                                ? 'bg-blue-700 text-white shadow-sm'
+                                ? 'bg-[#1e3a5f] text-white shadow-xs border border-[#2a4e7e]'
                                 : 'bg-white dark:bg-slate-800 text-slate-400 dark:text-slate-500 border border-slate-200 dark:border-slate-700'
                             }`}
                           >

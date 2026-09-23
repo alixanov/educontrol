@@ -451,10 +451,10 @@ export default function AttendanceReportsPage() {
             onChange={(e) => setStatus(e.target.value)}
             className="text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-700 dark:text-slate-200 focus:outline-none font-medium w-full sm:w-auto"
           >
-            <option value="">{language === 'uz' ? 'Barcha holatlar' : 'Все статусы'}</option>
-            <option value="PRESENT">{language === 'uz' ? 'O‘z vaqtida' : 'Вовремя'}</option>
-            <option value="LATE">{language === 'uz' ? 'Kechikish bilan' : 'Опоздание'}</option>
-            <option value="ABSENT">{language === 'uz' ? 'Kelmagan' : 'Неявка'}</option>
+            <option value="" className="dark:bg-slate-900 dark:text-white">{language === 'uz' ? 'Barcha holatlar' : 'Все статусы'}</option>
+            <option value="PRESENT" className="dark:bg-slate-900 dark:text-white">{language === 'uz' ? 'O‘z vaqtida' : 'Вовремя'}</option>
+            <option value="LATE" className="dark:bg-slate-900 dark:text-white">{language === 'uz' ? 'Kechikish bilan' : 'Опоздание'}</option>
+            <option value="ABSENT" className="dark:bg-slate-900 dark:text-white">{language === 'uz' ? 'Kelmagan' : 'Неявка'}</option>
           </select>
         </div>
 
