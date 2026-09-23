@@ -40,24 +40,24 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#0c1829] text-slate-100 relative overflow-hidden flex flex-col lg:grid lg:grid-cols-12">
-      {/* Background Decorative Ambient Glows & Seamless Grid Pattern (NO BLUR OVERLAY BOX) */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#1e3a5f]/25 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#152d4a]/30 rounded-full blur-3xl pointer-events-none" />
+    <div className="min-h-screen w-full bg-slate-50 dark:bg-[#0c1829] text-slate-900 dark:text-slate-100 relative overflow-hidden flex flex-col lg:grid lg:grid-cols-12 transition-colors duration-200">
+      {/* Background Decorative Ambient Glows & Seamless Grid Pattern */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#1e3a5f]/10 dark:bg-[#1e3a5f]/25 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#152d4a]/15 dark:bg-[#152d4a]/30 rounded-full blur-3xl pointer-events-none" />
       <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        className="absolute inset-0 opacity-[0.03] dark:opacity-[0.04] pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)`,
           backgroundSize: '40px 40px',
         }}
       />
 
       {/* LEFT COLUMN: CCTV & AI Biometric Surveillance Showcase (Full Height, Edge-to-Edge) */}
-      <div className="lg:col-span-7 xl:col-span-7 p-6 sm:p-10 lg:p-12 xl:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-[#254773] relative z-10 bg-[#102036]/80">
+      <div className="lg:col-span-7 xl:col-span-7 p-6 sm:p-10 lg:p-12 xl:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-[#254773] relative z-10 bg-slate-100/70 dark:bg-[#102036]/80 transition-colors duration-200">
         {/* Top Brand Header */}
         <div className="space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1e3a5f]/40 border border-[#2f588f] text-blue-200 text-xs font-semibold">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-[#1e3a5f]/40 border border-blue-200 dark:border-[#2f588f] text-[#1e3a5f] dark:text-blue-200 text-xs font-semibold">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span>{language === 'uz' ? 'AI Biometrik SKUD Tizimi' : 'Биометрическая СКУД на базе ИИ'}</span>
           </div>
 
@@ -66,24 +66,24 @@ export default function LoginPage() {
               <ShieldCheck className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
+              <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">
                 EduControl
               </h1>
-              <p className="text-xs font-medium text-blue-200/70">
+              <p className="text-xs font-medium text-slate-500 dark:text-blue-200/70">
                 {language === 'uz' ? 'Intellektual davomat va ish vaqti nazorati' : 'Интеллектуальный контроль доступа и учёта рабочего времени'}
               </p>
             </div>
           </div>
 
-          <h2 className="text-base sm:text-lg font-bold text-slate-200 leading-snug pt-1 max-w-xl">
+          <h2 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-200 leading-snug pt-1 max-w-xl">
             {language === 'uz'
               ? 'O‘qituvchilar va xodimlar davomatini kameralar orqali avtomatik hisobga olish'
               : 'Автоматический учёт рабочего времени преподавателей через камеры наблюдения'}
           </h2>
         </div>
 
-        {/* Center CCTV Terminal Mockup with Face Detection HUD */}
-        <div className="my-8 rounded-2xl bg-[#0c1829] border border-[#254773] p-4 sm:p-5 shadow-2xl relative overflow-hidden group max-w-2xl">
+        {/* Center CCTV Terminal Mockup with Face Detection HUD (Always High-Tech Dark Style) */}
+        <div className="my-8 rounded-2xl bg-[#0c1829] border border-slate-300 dark:border-[#254773] p-4 sm:p-5 shadow-2xl relative overflow-hidden group max-w-2xl text-slate-100">
           {/* Terminal Top Bar */}
           <div className="flex items-center justify-between pb-3 border-b border-[#254773] text-[11px] font-mono">
             <div className="flex items-center gap-2">
@@ -165,8 +165,8 @@ export default function LoginPage() {
         </div>
 
         {/* Bottom Security Assurance Note */}
-        <div className="flex items-center gap-2 text-xs text-blue-200/70 pt-2">
-          <Video className="w-4 h-4 text-blue-300 flex-shrink-0" />
+        <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-blue-200/70 pt-2">
+          <Video className="w-4 h-4 text-[#1e3a5f] dark:text-blue-300 flex-shrink-0" />
           <span>
             {language === 'uz'
               ? 'Noutbuk veb-kamerasi va RTSP IP-kameralar bilan to‘liq mos keladi.'
@@ -176,7 +176,7 @@ export default function LoginPage() {
       </div>
 
       {/* RIGHT COLUMN: Login Form (Full Height, Edge-to-Edge) */}
-      <div className="lg:col-span-5 xl:col-span-5 p-6 sm:p-10 lg:p-12 xl:p-16 flex flex-col justify-between bg-[#12233a] relative z-10">
+      <div className="lg:col-span-5 xl:col-span-5 p-6 sm:p-10 lg:p-12 xl:p-16 flex flex-col justify-between bg-white dark:bg-[#12233a] relative z-10 transition-colors duration-200">
         {/* Top Bar: Dark/Light Mode & Language Selector */}
         <div className="flex items-center justify-end gap-2.5 mb-6">
           {/* Dark / Light Mode Toggle Button */}
@@ -184,20 +184,20 @@ export default function LoginPage() {
             type="button"
             onClick={toggleTheme}
             title={theme === 'dark' ? (language === 'uz' ? 'Kunduzgi rejim (Yorug‘)' : 'Светлая тема') : (language === 'uz' ? 'Tungi rejim (Qorong‘i)' : 'Тёмная тема')}
-            className="p-1.5 px-2.5 sm:px-3 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition-all bg-[#0c1829] border-[#254773] text-slate-200 hover:text-white hover:bg-[#1b3455] cursor-pointer shadow-xs"
+            className="p-1.5 px-2.5 sm:px-3 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition-all bg-slate-100 dark:bg-[#0c1829] border-slate-200 dark:border-[#254773] text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-[#1b3455] cursor-pointer shadow-xs"
             aria-label="Toggle dark/light theme"
           >
             {theme === 'dark' ? (
               <>
                 <Sun className="w-3.5 h-3.5 text-amber-400" />
-                <span className="text-[11px] font-medium text-amber-300">
+                <span className="text-[11px] font-medium text-amber-400 dark:text-amber-300">
                   {language === 'uz' ? 'Kunduzgi' : 'Светлая'}
                 </span>
               </>
             ) : (
               <>
-                <Moon className="w-3.5 h-3.5 text-slate-300" />
-                <span className="text-[11px] font-medium text-slate-300">
+                <Moon className="w-3.5 h-3.5 text-slate-600 dark:text-slate-300" />
+                <span className="text-[11px] font-medium text-slate-700 dark:text-slate-300">
                   {language === 'uz' ? 'Tungi' : 'Тёмная'}
                 </span>
               </>
@@ -205,7 +205,7 @@ export default function LoginPage() {
           </button>
 
           {/* Language Selector */}
-          <div className="inline-flex items-center gap-1 p-1 rounded-xl bg-[#0c1829] border border-[#254773] text-xs shadow-inner">
+          <div className="inline-flex items-center gap-1 p-1 rounded-xl bg-slate-100 dark:bg-[#0c1829] border border-slate-200 dark:border-[#254773] text-xs shadow-inner">
             <Globe className="w-3.5 h-3.5 text-slate-400 ml-1.5 mr-0.5" />
             <button
               type="button"
@@ -213,7 +213,7 @@ export default function LoginPage() {
               className={`px-2.5 sm:px-3 py-1 rounded-lg font-medium transition cursor-pointer ${
                 language === 'uz'
                   ? 'bg-[#1e3a5f] text-white shadow-xs border border-[#2f588f]'
-                  : 'text-slate-400 hover:text-white'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               O‘zbekcha
@@ -224,7 +224,7 @@ export default function LoginPage() {
               className={`px-2.5 sm:px-3 py-1 rounded-lg font-medium transition cursor-pointer ${
                 language === 'ru'
                   ? 'bg-[#1e3a5f] text-white shadow-xs border border-[#2f588f]'
-                  : 'text-slate-400 hover:text-white'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               Русский
@@ -235,10 +235,10 @@ export default function LoginPage() {
         {/* Main Login Form Area (Centered Vertically) */}
         <div className="my-auto max-w-md w-full mx-auto space-y-6">
           <div>
-            <h2 className="text-2xl font-bold text-white tracking-tight">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
               {language === 'uz' ? 'Tizimga kirish' : 'Вход в систему'}
             </h2>
-            <p className="text-xs text-blue-200/70 mt-1">
+            <p className="text-xs text-slate-500 dark:text-blue-200/70 mt-1">
               {language === 'uz'
                 ? 'Boshqaruv paneli orqali xavfsiz avtorizatsiya'
                 : 'Авторизация в панели администратора'}
@@ -246,7 +246,7 @@ export default function LoginPage() {
           </div>
 
           {error && (
-            <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 flex items-start gap-2.5 text-red-400 text-xs animate-shake">
+            <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 flex items-start gap-2.5 text-red-500 dark:text-red-400 text-xs animate-shake">
               <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
@@ -254,7 +254,7 @@ export default function LoginPage() {
 
           <form onSubmit={handleLogin} className="space-y-4 text-xs">
             <div>
-              <label className="block font-semibold text-slate-300 mb-1.5">
+              <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                 {language === 'uz' ? 'Administrator elektron pochtasi' : 'Email администратора'}
               </label>
               <div className="relative">
@@ -265,13 +265,13 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@educontrol.com"
-                  className="w-full pl-10 pr-4 py-3 bg-[#0c1829] border border-[#254773] rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-[#2f588f] focus:border-[#2f588f] transition"
+                  className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-[#0c1829] border border-slate-200 dark:border-[#254773] rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-[#0c1829] focus:outline-none focus:ring-1 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] transition"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block font-semibold text-slate-300 mb-1.5">
+              <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                 {language === 'uz' ? 'Maxfiy parol' : 'Пароль'}
               </label>
               <div className="relative">
@@ -282,7 +282,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-4 py-3 bg-[#0c1829] border border-[#254773] rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-[#2f588f] focus:border-[#2f588f] transition"
+                  className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-[#0c1829] border border-slate-200 dark:border-[#254773] rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-[#0c1829] focus:outline-none focus:ring-1 focus:ring-[#1e3a5f] focus:border-[#1e3a5f] transition"
                 />
               </div>
             </div>
@@ -291,7 +291,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 px-4 bg-[#1e3a5f] hover:bg-[#284e7e] active:bg-[#152d4a] text-white font-bold text-xs rounded-xl shadow-lg shadow-[#1e3a5f]/40 border border-[#2f588f] flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-3"
+              className="w-full py-3 px-4 bg-[#1e3a5f] hover:bg-[#284e7e] active:bg-[#152d4a] text-white font-bold text-xs rounded-xl shadow-lg shadow-[#1e3a5f]/30 border border-[#2f588f] flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-3"
             >
               {loading ? (
                 <>
@@ -312,9 +312,9 @@ export default function LoginPage() {
             <button
               type="button"
               onClick={handleQuickFill}
-              className="w-full py-2.5 px-3 rounded-xl bg-[#0c1829] hover:bg-[#1b3455] text-slate-300 hover:text-white text-xs font-semibold border border-[#254773] flex items-center justify-center gap-2 transition cursor-pointer"
+              className="w-full py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-[#0c1829] hover:bg-slate-200 dark:hover:bg-[#1b3455] text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white text-xs font-semibold border border-slate-200 dark:border-[#254773] flex items-center justify-center gap-2 transition cursor-pointer"
             >
-              <CheckCircle2 className="w-3.5 h-3.5 text-blue-300" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#1e3a5f] dark:text-blue-300" />
               <span>
                 {language === 'uz'
                   ? 'Demo ma’lumotlarni to‘ldirish (admin@educontrol.com)'
@@ -325,7 +325,7 @@ export default function LoginPage() {
         </div>
 
         {/* Bottom Security Tagline */}
-        <div className="pt-6 border-t border-[#254773] text-center text-[11px] text-blue-200/50">
+        <div className="pt-6 border-t border-slate-200 dark:border-[#254773] text-center text-[11px] text-slate-400 dark:text-blue-200/50">
           <span>
             {language === 'uz'
               ? 'EduControl • 256-bit shifrlangan xavfsiz tizim'
