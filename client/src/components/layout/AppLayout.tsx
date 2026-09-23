@@ -13,31 +13,10 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const { user, loading } = useAuth();
   const { language } = useLanguage();
-  const [forceReady, setForceReady] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-
-  React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setForceReady(true);
-    }, 600);
-    return () => clearTimeout(timer);
-  }, []);
 
   if (pathname === '/login') {
     return <>{children}</>;
-  }
-
-  if (loading && !forceReady && !user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-10 h-10 border-3 border-[#1e3a5f] border-t-transparent rounded-full animate-spin" />
-          <p className="text-sm text-slate-400 font-medium">
-            {language === 'uz' ? 'EduControl tizimi yuklanmoqda...' : 'Загрузка системы EduControl...'}
-          </p>
-        </div>
-      </div>
-    );
   }
 
   return (
