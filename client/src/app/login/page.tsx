@@ -1,19 +1,19 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ShieldCheck,
   Video,
   Lock,
   Mail,
   ArrowRight,
-  CheckCircle2,
   AlertCircle,
   KeyRound,
   Eye,
   EyeOff,
   Sun,
   Moon,
+  Delete,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
@@ -23,7 +23,7 @@ export default function LoginPage() {
   const [loginMode, setLoginMode] = useState<'password' | 'pin'>('password');
   const [email, setEmail] = useState('admin');
   const [password, setPassword] = useState('admin');
-  const [pin, setPin] = useState('1111');
+  const [pin, setPin] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -32,6 +32,7 @@ export default function LoginPage() {
   const { language, setLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
 
+  // Password submission (Tab 1)
   const handlePasswordLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -51,13 +52,13 @@ export default function LoginPage() {
     }
   };
 
-  const handlePinLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // PIN submission (Tab 2)
+  const submitPin = async (pinValue: string) => {
     setError(null);
     setLoading(true);
 
     try {
-      await login('admin', pin);
+      await login('admin', pinValue);
     } catch (err: any) {
       setError(
         err?.message ||
@@ -65,33 +66,61 @@ export default function LoginPage() {
             ? 'PIN-kod noto‘g‘ri kiritildi (Standart: 1111).'
             : 'Неверный PIN-код (По умолчанию: 1111).'),
       );
+      setPin('');
     } finally {
       setLoading(false);
     }
   };
 
-  const handlePinNumberClick = (num: string) => {
-    if (pin.length < 4) {
-      const nextPin = pin + num;
-      setPin(nextPin);
-      if (nextPin.length === 4) {
-        // Auto submit on 4th digit
-        login('admin', nextPin).catch(() => {});
+  const handleKeypadPress = (val: string) => {
+    if (loading) return;
+
+    if (val === 'C') {
+      setPin('');
+      setError(null);
+    } else if (val === 'backspace') {
+      setPin((prev) => prev.slice(0, -1));
+      setError(null);
+    } else {
+      if (pin.length < 4) {
+        const nextPin = pin + val;
+        setPin(nextPin);
+        setError(null);
+        if (nextPin.length === 4) {
+          submitPin(nextPin);
+        }
       }
     }
   };
 
+  // Physical keyboard listener for PIN mode
+  useEffect(() => {
+    if (loginMode !== 'pin') return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key >= '0' && e.key <= '9') {
+        handleKeypadPress(e.key);
+      } else if (e.key === 'Backspace') {
+        handleKeypadPress('backspace');
+      } else if (e.key === 'Escape' || e.key.toLowerCase() === 'c') {
+        handleKeypadPress('C');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [loginMode, pin, loading]);
+
   return (
-    <div className="min-h-screen w-full bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 relative overflow-hidden flex flex-col lg:grid lg:grid-cols-12 transition-colors duration-200">
+    <div className="min-h-screen w-full bg-slate-900 text-slate-100 relative overflow-hidden flex flex-col lg:grid lg:grid-cols-12">
       {/* Background Decorative Ambient Glows */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/10 dark:bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-700/10 dark:bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* LEFT COLUMN: CCTV & AI Biometric Surveillance Showcase */}
-      <div className="lg:col-span-7 xl:col-span-7 p-6 sm:p-10 lg:p-12 xl:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800 relative z-10 bg-slate-100/50 dark:bg-slate-900/40 transition-colors duration-200">
-        {/* Top Brand Header */}
+      <div className="lg:col-span-6 xl:col-span-6 p-6 sm:p-10 lg:p-12 xl:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-800/80 relative z-10 bg-slate-950/50">
         <div className="space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-900 text-blue-700 dark:text-blue-300 text-xs font-semibold">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/60 border border-blue-900 text-blue-300 text-xs font-semibold">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span>{language === 'uz' ? 'AI Biometrik SKUD Tizimi' : 'Биометрическая СКУД на базе ИИ'}</span>
           </div>
@@ -101,23 +130,23 @@ export default function LoginPage() {
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-none">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-none">
                 EduControl
               </h1>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              <p className="text-xs text-slate-400 mt-1">
                 {language === 'uz' ? 'Intellektual davomat va ish vaqti nazorati' : 'Интеллектуальный контроль доступа и учёта рабочего времени'}
               </p>
             </div>
           </div>
 
-          <h2 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-200 leading-snug pt-1 max-w-xl">
+          <h2 className="text-base sm:text-lg font-bold text-slate-200 leading-snug pt-1 max-w-xl">
             {language === 'uz'
               ? 'O‘qituvchilar va xodimlar davomatini kameralar orqali avtomatik hisobga olish'
               : 'Автоматический учёт рабочего времени преподавателей через камеры наблюдения'}
           </h2>
         </div>
 
-        {/* Center CCTV Terminal Mockup with Face Detection HUD */}
+        {/* Center CCTV Terminal Mockup */}
         <div className="my-8 rounded-2xl bg-slate-900 border border-slate-800 p-4 sm:p-5 shadow-2xl relative overflow-hidden group max-w-2xl text-slate-100">
           <div className="flex items-center justify-between pb-3 border-b border-slate-800 text-[11px] font-mono">
             <div className="flex items-center gap-2">
@@ -188,8 +217,8 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 pt-2">
-          <Video className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+        <div className="flex items-center gap-2 text-xs text-slate-400 pt-2">
+          <Video className="w-4 h-4 text-blue-400 flex-shrink-0" />
           <span>
             {language === 'uz'
               ? 'Noutbuk veb-kamerasi va RTSP IP-kameralar bilan to‘liq mos keladi.'
@@ -198,83 +227,88 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* RIGHT COLUMN: Modern Dual-Mode Login Form */}
-      <div className="lg:col-span-5 xl:col-span-5 p-6 sm:p-10 lg:p-12 xl:p-16 flex flex-col justify-between bg-white dark:bg-slate-900 relative z-10 transition-colors duration-200">
-        {/* Top Controls: Dark/Light Mode & Language Selector */}
-        <div className="flex items-center justify-end gap-2.5 mb-6">
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className="inline-flex items-center gap-1.5 h-9 px-3 rounded-xl border border-slate-200/80 bg-white/90 text-slate-700 shadow-sm transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-200 dark:hover:bg-slate-700 text-xs font-medium cursor-pointer"
-          >
-            {theme === 'dark' ? (
-              <>
-                <Sun className="h-4 w-4 text-amber-400" />
-                <span>{language === 'uz' ? 'Kunduzgi' : 'Дневной'}</span>
-              </>
-            ) : (
-              <>
-                <Moon className="h-4 w-4 text-slate-600" />
-                <span>{language === 'uz' ? 'Tungi rejim' : 'Ночной'}</span>
-              </>
-            )}
-          </button>
+      {/* RIGHT COLUMN: Matching User's Reference Screenshot 1 & 2 */}
+      <div className="lg:col-span-6 xl:col-span-6 p-4 sm:p-8 lg:p-12 flex items-center justify-center relative z-10">
+        {/* Floating Card exactly matching reference */}
+        <div className="w-full max-w-[430px] rounded-[28px] bg-[#111928]/95 border border-slate-800/80 p-6 sm:p-8 shadow-2xl backdrop-blur-xl relative">
+          
+          {/* Card Top: Title, Subtitle, Theme & Language Buttons */}
+          <div className="flex items-start justify-between gap-2 mb-6">
+            <div>
+              <h2 className="text-2xl font-bold text-white tracking-tight leading-snug">
+                {language === 'uz' ? 'Tizimga kirish' : 'Вход в систему'}
+              </h2>
+              <p className="text-xs text-slate-400 mt-1 max-w-[200px] sm:max-w-none leading-relaxed">
+                {language === 'uz'
+                  ? 'Lavozimingizga qarab kirish usulini tanlang'
+                  : 'Выберите способ входа в зависимости от должности'}
+              </p>
+            </div>
 
-          <div className="inline-flex items-center gap-0.5 rounded-xl bg-slate-100/90 p-1 border border-slate-200/80 shadow-sm dark:bg-slate-800 dark:border-slate-700 text-xs">
-            <button
-              type="button"
-              onClick={() => setLanguage('uz')}
-              className={`flex items-center justify-center rounded-lg px-2.5 py-1 text-xs font-bold transition cursor-pointer ${
-                language === 'uz'
-                  ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm'
-                  : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
-              }`}
-            >
-              UZ
-            </button>
-            <button
-              type="button"
-              onClick={() => setLanguage('ru')}
-              className={`flex items-center justify-center rounded-lg px-2.5 py-1 text-xs font-bold transition cursor-pointer ${
-                language === 'ru'
-                  ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm'
-                  : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
-              }`}
-            >
-              RU
-            </button>
+            <div className="flex items-center gap-2 flex-shrink-0">
+              {/* Theme toggle button styled exactly like reference */}
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="inline-flex items-center gap-1.5 h-9 px-3 rounded-xl border border-slate-700/60 bg-slate-800/70 text-slate-200 shadow-sm transition hover:bg-slate-700/80 text-xs font-medium cursor-pointer"
+              >
+                {theme === 'dark' ? (
+                  <>
+                    <Sun className="h-3.5 w-3.5 text-amber-400" />
+                    <span>{language === 'uz' ? 'Kunduzgi' : 'Дневной'}</span>
+                  </>
+                ) : (
+                  <>
+                    <Moon className="h-3.5 w-3.5 text-slate-300" />
+                    <span>{language === 'uz' ? 'Tungi rejim' : 'Ночной режим'}</span>
+                  </>
+                )}
+              </button>
+
+              {/* Language toggle: [UZ | RU] */}
+              <div className="inline-flex items-center rounded-xl bg-slate-800/70 p-0.5 border border-slate-700/60 text-xs">
+                <button
+                  type="button"
+                  onClick={() => setLanguage('uz')}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
+                    language === 'uz'
+                      ? 'bg-slate-700 text-white shadow-sm'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  UZ
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLanguage('ru')}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
+                    language === 'ru'
+                      ? 'bg-slate-700 text-white shadow-sm'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  RU
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
 
-        {/* Center Card Content */}
-        <div className="my-auto max-w-md w-full mx-auto space-y-5">
-          <div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
-              {language === 'uz' ? 'Tizimga kirish' : 'Вход в систему'}
-            </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-              {language === 'uz'
-                ? 'Lavozimingizga qarab kirish usulini tanlang'
-                : 'Выберите способ входа в зависимости от должности'}
-            </p>
-          </div>
-
-          {/* MODE TABS: [Email va parol] vs [Tezkor PIN] */}
-          <div className="grid grid-cols-2 gap-1.5 p-1 rounded-xl bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80">
+          {/* TWO TABS: [Email va parol] vs [Tezkor PIN] */}
+          <div className="grid grid-cols-2 gap-1.5 p-1 rounded-2xl bg-slate-800/60 border border-slate-700/50 mb-6">
             <button
               type="button"
               onClick={() => {
                 setLoginMode('password');
                 setError(null);
               }}
-              className={`flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold transition cursor-pointer ${
+              className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-semibold transition cursor-pointer ${
                 loginMode === 'password'
-                  ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  ? 'bg-[#29354d] text-white shadow-md border border-slate-600/40'
+                  : 'text-slate-400 hover:text-slate-200'
               }`}
             >
               <Mail className="w-3.5 h-3.5" />
-              <span>{language === 'uz' ? 'Login va parol' : 'Логин и пароль'}</span>
+              <span>{language === 'uz' ? 'Email va parol' : 'Email и пароль'}</span>
             </button>
 
             <button
@@ -283,37 +317,32 @@ export default function LoginPage() {
                 setLoginMode('pin');
                 setError(null);
               }}
-              className={`flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold transition cursor-pointer ${
+              className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-semibold transition cursor-pointer ${
                 loginMode === 'pin'
-                  ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  ? 'bg-[#1b253b] text-white shadow-md border-2 border-slate-300 dark:border-slate-300'
+                  : 'text-slate-400 hover:text-slate-200'
               }`}
             >
-              <KeyRound className="w-3.5 h-3.5" />
-              <span>{language === 'uz' ? 'Tezkor PIN' : 'Быстрый PIN'}</span>
+              <KeyRound className="w-3.5 h-3.5 text-slate-300" />
+              <span>{language === 'uz' ? 'Tezkor PIN (Kassir)' : 'Быстрый PIN (Кассир)'}</span>
             </button>
           </div>
 
-          {/* Error notification banner */}
+          {/* Error message notification */}
           {error && (
-            <div className="p-3.5 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 flex items-start gap-2.5 text-red-600 dark:text-red-400 text-xs animate-shake">
+            <div className="mb-4 p-3 rounded-xl bg-red-950/50 border border-red-800/80 flex items-start gap-2.5 text-red-400 text-xs animate-shake">
               <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
           )}
 
-          {/* TAB 1: PASSWORD FORM (Login: admin / Parol: admin) */}
+          {/* ===================== TAB 1: EMAIL VA PAROL ===================== */}
           {loginMode === 'password' && (
             <form onSubmit={handlePasswordLogin} className="space-y-4 text-xs">
               <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <label className="font-semibold text-slate-700 dark:text-slate-300">
-                    {language === 'uz' ? 'Elektron pochta yoki login' : 'Логин или email'}
-                  </label>
-                  <span className="text-[11px] font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-md border border-blue-200 dark:border-blue-900/60">
-                    Login: admin
-                  </span>
-                </div>
+                <label className="block font-medium text-slate-300 mb-1.5">
+                  {language === 'uz' ? 'Elektron pochta' : 'Электронная почта'}
+                </label>
                 <div className="relative">
                   <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                   <input
@@ -322,20 +351,15 @@ export default function LoginPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="admin"
-                    className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+                    className="w-full pl-10 pr-4 py-3 bg-slate-800/70 border border-slate-700/80 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
                   />
                 </div>
               </div>
 
               <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <label className="font-semibold text-slate-700 dark:text-slate-300">
-                    {language === 'uz' ? 'Parol' : 'Пароль'}
-                  </label>
-                  <span className="text-[11px] font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-md border border-blue-200 dark:border-blue-900/60">
-                    Parol: admin
-                  </span>
-                </div>
+                <label className="block font-medium text-slate-300 mb-1.5">
+                  {language === 'uz' ? 'Parol' : 'Пароль'}
+                </label>
                 <div className="relative">
                   <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                   <input
@@ -343,13 +367,13 @@ export default function LoginPage() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="admin"
-                    className="w-full pl-10 pr-10 py-3 bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+                    placeholder="••••••••"
+                    className="w-full pl-10 pr-10 py-3 bg-slate-800/70 border border-slate-700/80 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 cursor-pointer"
                   >
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
@@ -359,12 +383,12 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-bold text-xs rounded-xl shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-3"
+                className="w-full py-3.5 px-4 bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-bold text-xs rounded-xl shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-4"
               >
                 {loading ? (
                   <>
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    <span>{language === 'uz' ? 'Tekshirilmoqda...' : 'Проверка...'}</span>
+                    <span>{language === 'uz' ? 'Kirilmoqda...' : 'Вход...'}</span>
                   </>
                 ) : (
                   <>
@@ -376,97 +400,92 @@ export default function LoginPage() {
             </form>
           )}
 
-          {/* TAB 2: TEZKOR PIN FORM (1111) */}
+          {/* ===================== TAB 2: TEZKOR PIN (KASSIR) ===================== */}
           {loginMode === 'pin' && (
-            <form onSubmit={handlePinLogin} className="space-y-4 text-xs">
-              <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <label className="font-semibold text-slate-700 dark:text-slate-300">
-                    {language === 'uz' ? '4 xonali PIN-kod' : '4-значный PIN-код'}
-                  </label>
-                  <span className="text-[11px] font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-md border border-emerald-200 dark:border-emerald-900/60">
-                    {language === 'uz' ? 'Tezkor PIN: 1111' : 'Быстрый PIN: 1111'}
-                  </span>
-                </div>
-                <div className="relative">
-                  <KeyRound className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                  <input
-                    type="password"
-                    maxLength={4}
-                    required
-                    value={pin}
-                    onChange={(e) => setPin(e.target.value)}
-                    placeholder="1111"
-                    className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-xl text-center tracking-[0.5em] text-lg font-mono font-bold text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
-                  />
-                </div>
+            <div className="space-y-4">
+              <p className="text-center text-xs text-slate-400 font-medium">
+                {language === 'uz'
+                  ? '4 xonali shaxsiy PIN-kodingizni kiriting'
+                  : 'Введите 4-значный персональный PIN-код'}
+              </p>
+
+              {/* 4 Circles PIN Indicators */}
+              <div className="flex items-center justify-center gap-3.5 my-3">
+                {[0, 1, 2, 3].map((idx) => {
+                  const isFilled = pin.length > idx;
+                  return (
+                    <div
+                      key={idx}
+                      className={`w-3.5 h-3.5 rounded-full transition-all duration-200 ${
+                        isFilled
+                          ? 'bg-blue-500 ring-4 ring-blue-500/20 scale-110'
+                          : 'border-2 border-slate-700 bg-transparent'
+                      }`}
+                    />
+                  );
+                })}
               </div>
 
-              {/* Quick 1-click Fill for 1111 */}
-              <div className="flex gap-2">
+              {/* 3x4 Keypad matching Image 2 */}
+              <div className="grid grid-cols-3 gap-2.5 max-w-[320px] mx-auto pt-1">
+                {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((digit) => (
+                  <button
+                    key={digit}
+                    type="button"
+                    onClick={() => handleKeypadPress(digit)}
+                    disabled={loading}
+                    className="h-14 sm:h-15 rounded-2xl bg-slate-800/80 hover:bg-slate-700/90 active:scale-95 border border-slate-700/60 text-xl font-bold text-white shadow-sm flex items-center justify-center transition cursor-pointer select-none"
+                  >
+                    {digit}
+                  </button>
+                ))}
+
+                {/* 'C' Clear Button */}
                 <button
                   type="button"
-                  onClick={() => setPin('1111')}
-                  className="w-full py-2 px-3 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-200 dark:border-slate-700 flex items-center justify-center gap-1.5 transition cursor-pointer"
+                  onClick={() => handleKeypadPress('C')}
+                  disabled={loading}
+                  className="h-14 sm:h-15 rounded-2xl bg-slate-800/80 hover:bg-slate-700/90 active:scale-95 border border-slate-700/60 text-lg font-bold text-slate-300 shadow-sm flex items-center justify-center transition cursor-pointer select-none"
                 >
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                  <span>{language === 'uz' ? 'PIN 1111 ni to‘ldirish' : 'Заполнить PIN 1111'}</span>
+                  C
+                </button>
+
+                {/* '0' Button */}
+                <button
+                  type="button"
+                  onClick={() => handleKeypadPress('0')}
+                  disabled={loading}
+                  className="h-14 sm:h-15 rounded-2xl bg-slate-800/80 hover:bg-slate-700/90 active:scale-95 border border-slate-700/60 text-xl font-bold text-white shadow-sm flex items-center justify-center transition cursor-pointer select-none"
+                >
+                  0
+                </button>
+
+                {/* Backspace Button */}
+                <button
+                  type="button"
+                  onClick={() => handleKeypadPress('backspace')}
+                  disabled={loading}
+                  className="h-14 sm:h-15 rounded-2xl bg-slate-800/80 hover:bg-slate-700/90 active:scale-95 border border-slate-700/60 text-slate-300 shadow-sm flex items-center justify-center transition cursor-pointer select-none"
+                >
+                  <Delete className="w-5 h-5" />
                 </button>
               </div>
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-bold text-xs rounded-xl shadow-md shadow-emerald-500/20 flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-3"
-              >
-                {loading ? (
-                  <>
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    <span>{language === 'uz' ? 'PIN tekshirilmoqda...' : 'Проверка PIN...'}</span>
-                  </>
-                ) : (
-                  <>
-                    <span>{language === 'uz' ? 'PIN orqali kirish (1111)' : 'Войти по PIN (1111)'}</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </>
-                )}
-              </button>
-            </form>
+              {/* Quick auto-fill button for test (1111) */}
+              <div className="pt-2 text-center">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPin('1111');
+                    submitPin('1111');
+                  }}
+                  className="text-xs text-blue-400 hover:text-blue-300 font-semibold underline underline-offset-4 cursor-pointer transition"
+                >
+                  {language === 'uz' ? 'Tezkor PIN 1111 ni kiritish' : 'Быстрый ввод PIN 1111'}
+                </button>
+              </div>
+            </div>
           )}
-
-          {/* Quick 1-Click Fast Switch Demo Button */}
-          <div className="pt-1">
-            <button
-              type="button"
-              onClick={() => {
-                if (loginMode === 'password') {
-                  setEmail('admin');
-                  setPassword('admin');
-                  setError(null);
-                } else {
-                  setPin('1111');
-                  setError(null);
-                }
-              }}
-              className="w-full py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-200 dark:border-slate-700 flex items-center justify-center gap-2 transition cursor-pointer"
-            >
-              <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-              <span>
-                {loginMode === 'password'
-                  ? (language === 'uz' ? 'Avto-to‘ldirish: admin / admin' : 'Автозаполнение: admin / admin')
-                  : (language === 'uz' ? 'Avto-to‘ldirish: PIN 1111' : 'Автозаполнение: PIN 1111')}
-              </span>
-            </button>
-          </div>
-        </div>
-
-        {/* Bottom Security Tagline */}
-        <div className="pt-6 border-t border-slate-200 dark:border-slate-800 text-center text-[11px] text-slate-400 dark:text-slate-500">
-          <span>
-            {language === 'uz'
-              ? 'EduControl • 256-bit shifrlangan xavfsiz tizim'
-              : 'EduControl • Защищённая система с 256-битным шифрованием'}
-          </span>
         </div>
       </div>
     </div>
