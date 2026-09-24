@@ -112,15 +112,15 @@ export default function LoginPage() {
   }, [loginMode, pin, loading]);
 
   return (
-    <div className="min-h-screen lg:h-screen lg:max-h-screen w-full bg-slate-900 text-slate-100 relative overflow-y-auto lg:overflow-hidden flex flex-col lg:grid lg:grid-cols-12">
+    <div className="h-screen w-full bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 relative overflow-y-auto lg:overflow-hidden flex flex-col lg:grid lg:grid-cols-12 transition-colors duration-200">
       {/* Background Decorative Ambient Glows */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/10 dark:bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-400/10 dark:bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* LEFT COLUMN: CCTV & AI Biometric Surveillance Showcase */}
-      <div className="hidden lg:flex lg:col-span-6 xl:col-span-6 p-6 lg:p-8 xl:p-10 flex-col justify-between border-r border-slate-800/80 relative z-10 bg-slate-950/50 h-full overflow-hidden">
+      <div className="hidden lg:flex lg:col-span-6 xl:col-span-6 p-6 lg:p-8 xl:p-10 flex-col justify-between border-r border-slate-200 dark:border-slate-800/80 relative z-10 bg-slate-100/70 dark:bg-slate-950/60 h-full overflow-hidden transition-colors duration-200">
         <div className="space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/60 border border-blue-900 text-blue-300 text-xs font-semibold">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-900 text-blue-800 dark:text-blue-300 text-xs font-semibold">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span>{language === 'uz' ? 'AI Biometrik SKUD Tizimi' : 'Биометрическая СКУД на базе ИИ'}</span>
           </div>
@@ -130,16 +130,16 @@ export default function LoginPage() {
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-none">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-none">
                 EduControl
               </h1>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                 {language === 'uz' ? 'Intellektual davomat va ish vaqti nazorati' : 'Интеллектуальный контроль доступа и учёта рабочего времени'}
               </p>
             </div>
           </div>
 
-          <h2 className="text-sm sm:text-base font-bold text-slate-200 leading-snug max-w-xl">
+          <h2 className="text-sm sm:text-base font-bold text-slate-700 dark:text-slate-200 leading-snug max-w-xl">
             {language === 'uz'
               ? 'O‘qituvchilar va xodimlar davomatini kameralar orqali avtomatik hisobga olish'
               : 'Автоматический учёт рабочего времени преподавателей через камеры наблюдения'}
@@ -217,8 +217,8 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-xs text-slate-400 pt-1">
-          <Video className="w-4 h-4 text-blue-400 flex-shrink-0" />
+        <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 pt-1">
+          <Video className="w-4 h-4 text-blue-500 dark:text-blue-400 flex-shrink-0" />
           <span>
             {language === 'uz'
               ? 'Noutbuk veb-kamerasi va RTSP IP-kameralar bilan to‘liq mos keladi.'
@@ -236,25 +236,25 @@ export default function LoginPage() {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xl font-extrabold text-white tracking-tight leading-none">EduControl</span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-950/80 border border-blue-800 text-blue-300">AI</span>
+              <span className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-none">EduControl</span>
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-100 dark:bg-blue-950/80 border border-blue-300 dark:border-blue-800 text-blue-700 dark:text-blue-300">AI</span>
             </div>
-            <p className="text-[11px] text-slate-400 mt-1">
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
               {language === 'uz' ? 'Intellektual davomat va nazorat tizimi' : 'Интеллектуальная система контроля доступа'}
             </p>
           </div>
         </div>
 
-        {/* Floating Card exactly matching reference */}
-        <div className="w-full max-w-[420px] rounded-[24px] bg-[#111928]/95 border border-slate-800/80 p-4 sm:p-7 shadow-2xl backdrop-blur-xl relative my-auto">
+        {/* Floating Card with full Light and Dark mode */}
+        <div className="w-full max-w-[420px] rounded-[24px] bg-white dark:bg-[#111928]/95 border border-slate-200 dark:border-slate-800/80 p-5 sm:p-7 shadow-2xl backdrop-blur-xl relative my-auto transition-colors duration-200">
           
           {/* Card Top: Title, Subtitle, Theme & Language Buttons */}
           <div className="flex items-start justify-between gap-2 mb-4">
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">
                 {language === 'uz' ? 'Tizimga kirish' : 'Вход в систему'}
               </h2>
-              <p className="text-xs text-slate-400 mt-1 max-w-[200px] sm:max-w-none leading-relaxed">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-[200px] sm:max-w-none leading-relaxed">
                 {language === 'uz'
                   ? 'Lavozimingizga qarab kirish usulini tanlang'
                   : 'Выберите способ входа в зависимости от должности'}
@@ -262,34 +262,34 @@ export default function LoginPage() {
             </div>
 
             <div className="flex items-center gap-2 flex-shrink-0">
-              {/* Theme toggle button styled exactly like reference */}
+              {/* Theme toggle button */}
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="inline-flex items-center gap-1.5 h-9 px-3 rounded-xl border border-slate-700/60 bg-slate-800/70 text-slate-200 shadow-sm transition hover:bg-slate-700/80 text-xs font-medium cursor-pointer"
+                className="inline-flex items-center gap-1.5 h-9 px-3 rounded-xl border border-slate-200 dark:border-slate-700/60 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/70 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-200 shadow-xs transition text-xs font-semibold cursor-pointer active:scale-95"
               >
                 {theme === 'dark' ? (
                   <>
-                    <Sun className="h-3.5 w-3.5 text-amber-400" />
+                    <Sun className="h-3.5 w-3.5 text-amber-500 dark:text-amber-400" />
                     <span>{language === 'uz' ? 'Kunduzgi' : 'Дневной'}</span>
                   </>
                 ) : (
                   <>
-                    <Moon className="h-3.5 w-3.5 text-slate-300" />
+                    <Moon className="h-3.5 w-3.5 text-slate-600 dark:text-slate-300" />
                     <span>{language === 'uz' ? 'Tungi rejim' : 'Ночной режим'}</span>
                   </>
                 )}
               </button>
 
               {/* Language toggle: [UZ | RU] */}
-              <div className="inline-flex items-center rounded-xl bg-slate-800/70 p-0.5 border border-slate-700/60 text-xs">
+              <div className="inline-flex items-center rounded-xl bg-slate-100 dark:bg-slate-800/70 p-0.5 border border-slate-200 dark:border-slate-700/60 text-xs">
                 <button
                   type="button"
                   onClick={() => setLanguage('uz')}
                   className={`px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
                     language === 'uz'
-                      ? 'bg-slate-700 text-white shadow-sm'
-                      : 'text-slate-400 hover:text-white'
+                      ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-white shadow-xs'
+                      : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   UZ
@@ -299,8 +299,8 @@ export default function LoginPage() {
                   onClick={() => setLanguage('ru')}
                   className={`px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
                     language === 'ru'
-                      ? 'bg-slate-700 text-white shadow-sm'
-                      : 'text-slate-400 hover:text-white'
+                      ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-white shadow-xs'
+                      : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   RU
@@ -310,7 +310,7 @@ export default function LoginPage() {
           </div>
 
           {/* TWO TABS: [Email va parol] vs [Tezkor PIN] */}
-          <div className="grid grid-cols-2 gap-1.5 p-1 rounded-2xl bg-slate-800/60 border border-slate-700/50 mb-4">
+          <div className="grid grid-cols-2 gap-1.5 p-1 rounded-2xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50 mb-4 transition-colors">
             <button
               type="button"
               onClick={() => {
@@ -319,8 +319,8 @@ export default function LoginPage() {
               }}
               className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-semibold transition cursor-pointer ${
                 loginMode === 'password'
-                  ? 'bg-[#29354d] text-white shadow-md border border-slate-600/40'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-white dark:bg-[#29354d] text-slate-900 dark:text-white shadow-sm border border-slate-200/80 dark:border-slate-600/40'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
               }`}
             >
               <Mail className="w-3.5 h-3.5" />
@@ -335,18 +335,18 @@ export default function LoginPage() {
               }}
               className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-semibold transition cursor-pointer ${
                 loginMode === 'pin'
-                  ? 'bg-[#1b253b] text-white shadow-md border-2 border-slate-300 dark:border-slate-300'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-white dark:bg-[#1b253b] text-slate-900 dark:text-white shadow-sm border-2 border-blue-500 dark:border-slate-300'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
               }`}
             >
-              <KeyRound className="w-3.5 h-3.5 text-slate-300" />
+              <KeyRound className="w-3.5 h-3.5 text-blue-600 dark:text-slate-300" />
               <span>{language === 'uz' ? 'Tezkor PIN (Kassir)' : 'Быстрый PIN (Кассир)'}</span>
             </button>
           </div>
 
           {/* Error message notification */}
           {error && (
-            <div className="mb-4 p-3 rounded-xl bg-red-950/50 border border-red-800/80 flex items-start gap-2.5 text-red-400 text-xs animate-shake">
+            <div className="mb-4 p-3 rounded-xl bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800/80 flex items-start gap-2.5 text-red-600 dark:text-red-400 text-xs animate-shake">
               <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
@@ -354,9 +354,9 @@ export default function LoginPage() {
 
           {/* ===================== TAB 1: EMAIL VA PAROL ===================== */}
           {loginMode === 'password' && (
-            <form onSubmit={handlePasswordLogin} className="space-y-4 text-xs">
+            <form onSubmit={handlePasswordLogin} className="space-y-3.5 text-xs">
               <div>
-                <label className="block font-medium text-slate-300 mb-1.5">
+                <label className="block font-medium text-slate-700 dark:text-slate-300 mb-1.5">
                   {language === 'uz' ? 'Elektron pochta' : 'Электронная почта'}
                 </label>
                 <div className="relative">
@@ -367,13 +367,13 @@ export default function LoginPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="admin"
-                    className="w-full pl-10 pr-4 py-3 bg-slate-800/70 border border-slate-700/80 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+                    className="w-full pl-10 pr-4 py-2.5 sm:py-3 bg-slate-50 dark:bg-slate-800/70 border border-slate-300 dark:border-slate-700/80 rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:bg-white dark:focus:bg-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block font-medium text-slate-300 mb-1.5">
+                <label className="block font-medium text-slate-700 dark:text-slate-300 mb-1.5">
                   {language === 'uz' ? 'Parol' : 'Пароль'}
                 </label>
                 <div className="relative">
@@ -384,12 +384,12 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full pl-10 pr-10 py-3 bg-slate-800/70 border border-slate-700/80 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+                    className="w-full pl-10 pr-10 py-2.5 sm:py-3 bg-slate-50 dark:bg-slate-800/70 border border-slate-300 dark:border-slate-700/80 rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:bg-white dark:focus:bg-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 cursor-pointer"
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
                   >
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
@@ -399,7 +399,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 px-4 bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-bold text-xs rounded-xl shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-4"
+                className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-bold text-xs rounded-xl shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-3"
               >
                 {loading ? (
                   <>
@@ -418,15 +418,15 @@ export default function LoginPage() {
 
           {/* ===================== TAB 2: TEZKOR PIN (KASSIR) ===================== */}
           {loginMode === 'pin' && (
-            <div className="space-y-4">
-              <p className="text-center text-xs text-slate-400 font-medium">
+            <div className="space-y-3">
+              <p className="text-center text-xs text-slate-500 dark:text-slate-400 font-medium">
                 {language === 'uz'
                   ? '4 xonali shaxsiy PIN-kodingizni kiriting'
                   : 'Введите 4-значный персональный PIN-код'}
               </p>
 
               {/* 4 Circles PIN Indicators */}
-              <div className="flex items-center justify-center gap-3.5 my-3">
+              <div className="flex items-center justify-center gap-3.5 my-2">
                 {[0, 1, 2, 3].map((idx) => {
                   const isFilled = pin.length > idx;
                   return (
@@ -434,15 +434,15 @@ export default function LoginPage() {
                       key={idx}
                       className={`w-3.5 h-3.5 rounded-full transition-all duration-200 ${
                         isFilled
-                          ? 'bg-blue-500 ring-4 ring-blue-500/20 scale-110'
-                          : 'border-2 border-slate-700 bg-transparent'
+                          ? 'bg-blue-600 ring-4 ring-blue-500/20 scale-110'
+                          : 'border-2 border-slate-300 dark:border-slate-700 bg-transparent'
                       }`}
                     />
                   );
                 })}
               </div>
 
-              {/* 3x4 Keypad matching Image 2 */}
+              {/* 3x4 Keypad with proper Light/Dark colors */}
               <div className="grid grid-cols-3 gap-2 max-w-[300px] mx-auto pt-0.5">
                 {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((digit) => (
                   <button
@@ -450,7 +450,7 @@ export default function LoginPage() {
                     type="button"
                     onClick={() => handleKeypadPress(digit)}
                     disabled={loading}
-                    className="h-12 sm:h-13 rounded-2xl bg-slate-800/80 hover:bg-slate-700/90 active:scale-95 border border-slate-700/60 text-lg font-bold text-white shadow-sm flex items-center justify-center transition cursor-pointer select-none"
+                    className="h-12 sm:h-13 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-700/90 active:scale-95 border border-slate-200 dark:border-slate-700/60 text-lg font-bold text-slate-800 dark:text-white shadow-xs flex items-center justify-center transition cursor-pointer select-none"
                   >
                     {digit}
                   </button>
@@ -461,7 +461,7 @@ export default function LoginPage() {
                   type="button"
                   onClick={() => handleKeypadPress('C')}
                   disabled={loading}
-                  className="h-12 sm:h-13 rounded-2xl bg-slate-800/80 hover:bg-slate-700/90 active:scale-95 border border-slate-700/60 text-base font-bold text-slate-300 shadow-sm flex items-center justify-center transition cursor-pointer select-none"
+                  className="h-12 sm:h-13 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-700/90 active:scale-95 border border-slate-200 dark:border-slate-700/60 text-base font-bold text-slate-600 dark:text-slate-300 shadow-xs flex items-center justify-center transition cursor-pointer select-none"
                 >
                   C
                 </button>
@@ -471,7 +471,7 @@ export default function LoginPage() {
                   type="button"
                   onClick={() => handleKeypadPress('0')}
                   disabled={loading}
-                  className="h-12 sm:h-13 rounded-2xl bg-slate-800/80 hover:bg-slate-700/90 active:scale-95 border border-slate-700/60 text-lg font-bold text-white shadow-sm flex items-center justify-center transition cursor-pointer select-none"
+                  className="h-12 sm:h-13 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-700/90 active:scale-95 border border-slate-200 dark:border-slate-700/60 text-lg font-bold text-slate-800 dark:text-white shadow-xs flex items-center justify-center transition cursor-pointer select-none"
                 >
                   0
                 </button>
@@ -481,7 +481,7 @@ export default function LoginPage() {
                   type="button"
                   onClick={() => handleKeypadPress('backspace')}
                   disabled={loading}
-                  className="h-12 sm:h-13 rounded-2xl bg-slate-800/80 hover:bg-slate-700/90 active:scale-95 border border-slate-700/60 text-slate-300 shadow-sm flex items-center justify-center transition cursor-pointer select-none"
+                  className="h-12 sm:h-13 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-700/90 active:scale-95 border border-slate-200 dark:border-slate-700/60 text-slate-600 dark:text-slate-300 shadow-xs flex items-center justify-center transition cursor-pointer select-none"
                 >
                   <Delete className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
