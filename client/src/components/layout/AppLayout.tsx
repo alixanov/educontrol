@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 import { Sidebar } from './Sidebar';
 import { Navbar } from './Navbar';
 import { BottomNav } from './BottomNav';
-import { PwaInstallPrompt } from './PwaInstallPrompt';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
 
