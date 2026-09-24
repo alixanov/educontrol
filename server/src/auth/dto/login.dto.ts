@@ -7,6 +7,6 @@ export class LoginDto {
 
   @IsString({ message: "Parol matn bo'lishi kerak (Пароль должен быть строкой)" })
   @IsNotEmpty({ message: "Parol kiritilishi shart (Пароль обязателен)" })
-  @MinLength(6, { message: "Parol kamida 6 belgidan iborat bo'lishi kerak (Пароль должен содержать не менее 6 символов)" })
+  @MinLength(4, { message: "Parol kamida 4 belgidan iborat bo'lishi kerak (Пароль должен содержать не менее 4 символов)" })
   password: string;
 }
