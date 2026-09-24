@@ -10,6 +10,11 @@ import {
 } from '@nestjs/common';
 import { AttendanceService } from './attendance.service';
 import { AuthGuard } from '../auth/auth.guard';
+import {
+  DetectionDto,
+  UpdateAttendanceDto,
+  MarkAbsentDto,
+} from './dto/attendance.dto';
 
 @Controller('api/attendance')
 export class AttendanceController {
@@ -17,19 +22,7 @@ export class AttendanceController {
 
   // Ingestion endpoint used by Python OpenCV service and Camera UI
   @Post('detect')
-  async recordDetection(
-    @Body()
-    body: {
-      studentId?: string;
-      studentCode?: string;
-      cameraId: string;
-      confidence: number;
-      boundingBox?: number[];
-      snapshotUrl?: string;
-      actionType?: 'ARRIVAL' | 'DEPARTURE' | 'AUTO';
-      lateCutoff?: string;
-    },
-  ) {
+  async recordDetection(@Body() body: DetectionDto) {
     return this.attendanceService.processDetection(body);
   }
 
@@ -60,27 +53,23 @@ export class AttendanceController {
   @Get('recent-detections')
   @UseGuards(AuthGuard)
   async getRecentDetections(@Query('limit') limit?: string) {
-    return this.attendanceService.getRecentDetections(limit ? parseInt(limit, 10) : 20);
+    return this.attendanceService.getRecentDetections(
+      limit ? parseInt(limit, 10) : 20,
+    );
   }
 
   @Put(':id')
   @UseGuards(AuthGuard)
   async manualUpdate(
     @Param('id') id: string,
-    @Body()
-    body: {
-      status?: string;
-      checkInTime?: string;
-      checkOutTime?: string;
-      notes?: string;
-    },
+    @Body() body: UpdateAttendanceDto,
   ) {
     return this.attendanceService.manualUpdate(id, body);
   }
 
   @Post('mark-absent')
   @UseGuards(AuthGuard)
-  async markAbsent(@Body() body: { date?: string }) {
+  async markAbsent(@Body() body: MarkAbsentDto) {
     return this.attendanceService.markAbsentStudents(body?.date);
   }
 }

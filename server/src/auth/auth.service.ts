@@ -14,11 +14,11 @@ export class AuthService {
       where: { email: email.toLowerCase() },
     });
     if (!admin) {
-      throw new UnauthorizedException('Invalid email or password');
+      throw new UnauthorizedException("Email yoki parol noto'g'ri (Неверный email или пароль)");
     }
     const isMatch = await bcrypt.compare(pass, admin.passwordHash);
     if (!isMatch) {
-      throw new UnauthorizedException('Invalid email or password');
+      throw new UnauthorizedException("Email yoki parol noto'g'ri (Неверный email или пароль)");
     }
     return admin;
   }
@@ -59,12 +59,16 @@ export class AuthService {
     }
   }
 
+  async getAdminCount(): Promise<number> {
+    return this.prisma.admin.count();
+  }
+
   async registerAdmin(email: string, pass: string, name: string) {
     const existing = await this.prisma.admin.findUnique({
       where: { email: email.toLowerCase() },
     });
     if (existing) {
-      throw new ConflictException('Admin with this email already exists');
+      throw new ConflictException("Ushbu email bilan administrator allaqachon mavjud (Администратор с таким email уже существует)");
     }
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(pass, salt);

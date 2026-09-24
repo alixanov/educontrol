@@ -1,0 +1,16 @@
+import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+
+export class RegisterDto {
+  @IsEmail({}, { message: "Noto'g'ri elektron pochta formati (Неверный формат email)" })
+  @IsNotEmpty({ message: "Email kiritilishi shart (Email обязателен)" })
+  email: string;
+
+  @IsString({ message: "Parol matn bo'lishi kerak (Пароль должен быть строкой)" })
+  @IsNotEmpty({ message: "Parol kiritilishi shart (Пароль обязателен)" })
+  @MinLength(6, { message: "Parol kamida 6 belgidan iborat bo'lishi kerak (Пароль должен содержать не менее 6 символов)" })
+  password: string;
+
+  @IsString()
+  @IsNotEmpty({ message: "Ism kiritilishi shart (Имя обязательно)" })
+  name: string;
+}

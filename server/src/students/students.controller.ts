@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { StudentsService } from './students.service';
 import { AuthGuard } from '../auth/auth.guard';
+import { CreateStudentDto, UpdateStudentDto } from './dto/student.dto';
 
 @Controller('api/students')
 export class StudentsController {
@@ -27,8 +28,9 @@ export class StudentsController {
     return this.studentsService.findAll({ search, department, grade, status });
   }
 
-  // Public/Internal endpoint for Python CV / Face recognition service to sync embeddings
+  // Internal endpoint for face recognition service to sync embeddings
   @Get('descriptors')
+  @UseGuards(AuthGuard)
   async getFaceDescriptors() {
     return this.studentsService.getFaceDescriptors();
   }
@@ -41,40 +43,13 @@ export class StudentsController {
 
   @Post()
   @UseGuards(AuthGuard)
-  async create(
-    @Body()
-    body: {
-      studentCode: string;
-      firstName: string;
-      lastName: string;
-      email: string;
-      department: string;
-      grade: string;
-      photoUrl?: string;
-      faceDescriptor?: string;
-      status?: string;
-    },
-  ) {
+  async create(@Body() body: CreateStudentDto) {
     return this.studentsService.create(body);
   }
 
   @Put(':id')
   @UseGuards(AuthGuard)
-  async update(
-    @Param('id') id: string,
-    @Body()
-    body: {
-      studentCode?: string;
-      firstName?: string;
-      lastName?: string;
-      email?: string;
-      department?: string;
-      grade?: string;
-      photoUrl?: string;
-      faceDescriptor?: string;
-      status?: string;
-    },
-  ) {
+  async update(@Param('id') id: string, @Body() body: UpdateStudentDto) {
     return this.studentsService.update(id, body);
   }
 

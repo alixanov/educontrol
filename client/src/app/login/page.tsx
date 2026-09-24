@@ -24,9 +24,10 @@ export default function LoginPage() {
       await login(email, password);
     } catch (err: any) {
       setError(
-        language === 'uz'
-          ? 'Email yoki parol noto‘g‘ri kiritildi. Qaytadan urinib ko‘ring.'
-          : 'Неверный email или пароль. Пожалуйста, попробуйте снова.'
+        err?.message ||
+          (language === 'uz'
+            ? 'Email yoki parol noto‘g‘ri kiritildi. Qaytadan urinib ko‘ring.'
+            : 'Неверный email или пароль. Пожалуйста, попробуйте снова.')
       );
     } finally {
       setLoading(false);

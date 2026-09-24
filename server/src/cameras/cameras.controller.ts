@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards } from '@nestjs/common';
 import { CamerasService } from './cameras.service';
 import { AuthGuard } from '../auth/auth.guard';
+import { CreateCameraDto, UpdateCameraDto } from './dto/camera.dto';
 
 @Controller('api/cameras')
 export class CamerasController {
@@ -18,34 +19,13 @@ export class CamerasController {
 
   @Post()
   @UseGuards(AuthGuard)
-  async create(
-    @Body()
-    body: {
-      name: string;
-      location: string;
-      type: string;
-      streamUrl?: string;
-      status?: string;
-      resolution?: string;
-    },
-  ) {
+  async create(@Body() body: CreateCameraDto) {
     return this.camerasService.create(body);
   }
 
   @Put(':id')
   @UseGuards(AuthGuard)
-  async update(
-    @Param('id') id: string,
-    @Body()
-    body: {
-      name?: string;
-      location?: string;
-      type?: string;
-      streamUrl?: string;
-      status?: string;
-      resolution?: string;
-    },
-  ) {
+  async update(@Param('id') id: string, @Body() body: UpdateCameraDto) {
     return this.camerasService.update(id, body);
   }
 

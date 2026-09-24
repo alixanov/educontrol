@@ -35,30 +35,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       try {
         const savedToken = typeof window !== 'undefined' ? localStorage.getItem('educontrol_token') : null;
         const savedUser = typeof window !== 'undefined' ? localStorage.getItem('educontrol_user') : null;
-        const wasManualLogout = typeof window !== 'undefined' ? sessionStorage.getItem('educontrol_manual_logout') : null;
 
         if (savedToken && savedUser) {
           try {
+            const parsedUser = JSON.parse(savedUser);
             if (isMounted) {
               setToken(savedToken);
-              setUser(JSON.parse(savedUser));
+              setUser(parsedUser);
             }
           } catch (e) {
             localStorage.removeItem('educontrol_token');
             localStorage.removeItem('educontrol_user');
-          }
-        } else if (!wasManualLogout) {
-          // Auto-login default system admin for seamless offline/local experience
-          try {
-            const data = await api.login('admin@educontrol.com', 'admin123');
-            if (isMounted) {
-              localStorage.setItem('educontrol_token', data.accessToken);
-              localStorage.setItem('educontrol_user', JSON.stringify(data.user));
-              setToken(data.accessToken);
-              setUser(data.user);
-            }
-          } catch (loginErr) {
-            console.warn('[AuthContext] Auto-login fallback skipped:', loginErr);
           }
         }
       } catch (err) {
@@ -72,10 +59,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     initAuth();
 
-    // Failsafe timer: force dismiss loading spinner after max 1.2s
+    // Failsafe timer: force dismiss loading spinner after max 800ms
     const failsafe = setTimeout(() => {
       if (isMounted) setLoading(false);
-    }, 1200);
+    }, 800);
 
     return () => {
       isMounted = false;
