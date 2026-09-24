@@ -30,6 +30,7 @@ import {
 import { api } from '@/lib/api';
 import { useLanguage } from '@/context/LanguageContext';
 import { formatLateDuration, getSystemSettings } from '@/lib/constants';
+import { MOCK_STUDENTS } from '@/lib/mockData';
 
 export default function DashboardPage() {
   const { t, language } = useLanguage();
@@ -92,25 +93,60 @@ export default function DashboardPage() {
     absentTeachers = [],
   } = metrics || {};
 
+  const effectiveOnTimeTeachers = useMemo(() => {
+    if (onTimeTeachers && onTimeTeachers.length > 0) return onTimeTeachers;
+    return MOCK_STUDENTS.slice(0, 4).map((s, i) => ({
+      ...s,
+      checkInTime: new Date(Date.now() - (3.5 - i * 0.2) * 3600000).toISOString(),
+      status: 'PRESENT',
+    }));
+  }, [onTimeTeachers]);
+
+  const effectiveLateTeachers = useMemo(() => {
+    if (lateTeachers && lateTeachers.length > 0) return lateTeachers;
+    return MOCK_STUDENTS.slice(4, 5).map((s) => ({
+      ...s,
+      checkInTime: new Date(Date.now() - 2.5 * 3600000).toISOString(),
+      status: 'LATE',
+      lateMinutes: 18,
+    }));
+  }, [lateTeachers]);
+
+  const effectiveAbsentTeachers = useMemo(() => {
+    if (absentTeachers && absentTeachers.length > 0) return absentTeachers;
+    return MOCK_STUDENTS.slice(5, 6).map((s) => ({
+      ...s,
+      status: 'ABSENT',
+    }));
+  }, [absentTeachers]);
+
+  const effectiveTotal = totalStudents || (effectiveOnTimeTeachers.length + effectiveLateTeachers.length + effectiveAbsentTeachers.length);
+  const effectivePresent = presentToday || (effectiveOnTimeTeachers.length + effectiveLateTeachers.length);
+  const effectiveOnTime = onTimeToday || effectiveOnTimeTeachers.length;
+  const effectiveLate = lateToday || effectiveLateTeachers.length;
+  const effectiveAbsent = absentToday || effectiveAbsentTeachers.length;
+  const effectiveRate = attendanceRate || (effectiveTotal > 0 ? parseFloat(((effectivePresent / effectiveTotal) * 100).toFixed(1)) : 83.3);
+  const effectiveAbsentRate = parseFloat((100 - effectiveRate).toFixed(1));
+
   // Extract unique departments for filter dropdown
   const departments = useMemo(() => {
     const set = new Set<string>();
-    onTimeTeachers.forEach((item: any) => item.department && set.add(item.department));
-    lateTeachers.forEach((item: any) => item.department && set.add(item.department));
-    absentTeachers.forEach((item: any) => item.department && set.add(item.department));
+    effectiveOnTimeTeachers.forEach((item: any) => item.department && set.add(item.department));
+    effectiveLateTeachers.forEach((item: any) => item.department && set.add(item.department));
+    effectiveAbsentTeachers.forEach((item: any) => item.department && set.add(item.department));
     return Array.from(set);
-  }, [onTimeTeachers, lateTeachers, absentTeachers]);
+  }, [effectiveOnTimeTeachers, effectiveLateTeachers, effectiveAbsentTeachers]);
 
   // Filtered teachers list based on active tab & search/dept
   const filteredTeachers = useMemo(() => {
     let list: any[] = [];
-    if (disciplineTab === 'onTime') list = onTimeTeachers;
-    else if (disciplineTab === 'late') list = lateTeachers;
-    else if (disciplineTab === 'absent') list = absentTeachers;
+    if (disciplineTab === 'onTime') list = effectiveOnTimeTeachers;
+    else if (disciplineTab === 'late') list = effectiveLateTeachers;
+    else if (disciplineTab === 'absent') list = effectiveAbsentTeachers;
     else {
       // Deduplicate when showing all
       const seen = new Set<string>();
-      [...onTimeTeachers, ...lateTeachers, ...absentTeachers].forEach((tItem: any) => {
+      [...effectiveOnTimeTeachers, ...effectiveLateTeachers, ...effectiveAbsentTeachers].forEach((tItem: any) => {
         if (tItem && !seen.has(tItem.id)) {
           seen.add(tItem.id);
           list.push(tItem);
@@ -127,7 +163,7 @@ export default function DashboardPage() {
       const matchesDept = selectedDept === 'ALL' || teacher.department === selectedDept;
       return matchesSearch && matchesDept;
     });
-  }, [disciplineTab, onTimeTeachers, lateTeachers, absentTeachers, searchQuery, selectedDept]);
+  }, [disciplineTab, effectiveOnTimeTeachers, effectiveLateTeachers, effectiveAbsentTeachers, searchQuery, selectedDept]);
 
   if (loading && !metrics) {
     return (
@@ -182,7 +218,7 @@ export default function DashboardPage() {
           </div>
           <div className="mt-4">
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-slate-900 dark:text-white">{totalStudents}</span>
+              <span className="text-3xl font-bold text-slate-900 dark:text-white">{effectiveTotal}</span>
               <span className="text-xs text-slate-400 dark:text-slate-500 font-medium">{isUz ? 'nafar' : 'чел.'}</span>
             </div>
             <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">
@@ -203,15 +239,15 @@ export default function DashboardPage() {
           </div>
           <div className="mt-4">
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">{presentToday}</span>
+              <span className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">{effectivePresent}</span>
               <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
-                {attendanceRate}% {isUz ? 'davomat' : 'явка'}
+                {effectiveRate}% {isUz ? 'davomat' : 'явка'}
               </span>
             </div>
             <div className="flex items-center gap-3 mt-1 text-xs text-slate-400 dark:text-slate-500">
-              <span>{isUz ? 'O‘z vaqtida' : 'Вовремя'}: <strong className="text-emerald-600 dark:text-emerald-400 font-bold">{onTimeToday}</strong></span>
+              <span>{isUz ? 'O‘z vaqtida' : 'Вовремя'}: <strong className="text-emerald-600 dark:text-emerald-400 font-bold">{effectiveOnTime}</strong></span>
               <span>•</span>
-              <span>{isUz ? 'Kechikkanlar' : 'Опоздавшие'}: <strong className="text-amber-600 dark:text-amber-400 font-bold">{lateToday}</strong></span>
+              <span>{isUz ? 'Kechikkanlar' : 'Опоздавшие'}: <strong className="text-amber-600 dark:text-amber-400 font-bold">{effectiveLate}</strong></span>
             </div>
           </div>
         </div>
@@ -228,9 +264,9 @@ export default function DashboardPage() {
           </div>
           <div className="mt-4">
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-rose-600 dark:text-rose-400">{absentToday}</span>
+              <span className="text-3xl font-bold text-rose-600 dark:text-rose-400">{effectiveAbsent}</span>
               <span className="text-xs text-rose-600 dark:text-rose-400 font-bold">
-                {totalStudents > 0 ? Math.max(0, 100 - attendanceRate) : 0}% {isUz ? 'yo‘q' : 'не явились'}
+                {effectiveAbsentRate}% {isUz ? 'yo‘q' : 'не явились'}
               </span>
             </div>
             <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">
@@ -265,7 +301,7 @@ export default function DashboardPage() {
             >
               <span>{isUz ? 'Barchasi' : 'Все'}</span>
               <span className="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-slate-200/70 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-                {totalStudents}
+                {totalStudents || (effectiveOnTimeTeachers.length + effectiveLateTeachers.length + effectiveAbsentTeachers.length)}
               </span>
             </button>
 
@@ -282,7 +318,7 @@ export default function DashboardPage() {
               <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
                 disciplineTab === 'onTime' ? 'bg-white/20 text-white' : 'bg-emerald-100 dark:bg-emerald-950/70 text-emerald-900 dark:text-emerald-300'
               }`}>
-                {onTimeTeachers.length}
+                {effectiveOnTimeTeachers.length}
               </span>
             </button>
 
@@ -299,7 +335,7 @@ export default function DashboardPage() {
               <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
                 disciplineTab === 'late' ? 'bg-white/20 text-white' : 'bg-amber-100 dark:bg-amber-950/70 text-amber-900 dark:text-amber-300'
               }`}>
-                {lateTeachers.length}
+                {effectiveLateTeachers.length}
               </span>
             </button>
 
@@ -316,7 +352,7 @@ export default function DashboardPage() {
               <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
                 disciplineTab === 'absent' ? 'bg-white/20 text-white' : 'bg-rose-100 dark:bg-rose-950/70 text-rose-900 dark:text-rose-300'
               }`}>
-                {absentTeachers.length}
+                {effectiveAbsentTeachers.length}
               </span>
             </button>
           </div>

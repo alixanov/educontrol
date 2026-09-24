@@ -118,7 +118,7 @@ export default function LoginPage() {
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* LEFT COLUMN: CCTV & AI Biometric Surveillance Showcase */}
-      <div className="lg:col-span-6 xl:col-span-6 p-6 sm:p-10 lg:p-12 xl:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-800/80 relative z-10 bg-slate-950/50">
+      <div className="hidden lg:flex lg:col-span-6 xl:col-span-6 p-6 sm:p-10 lg:p-12 xl:p-16 flex-col justify-between border-r border-slate-800/80 relative z-10 bg-slate-950/50">
         <div className="space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/60 border border-blue-900 text-blue-300 text-xs font-semibold">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -227,8 +227,24 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* RIGHT COLUMN: Matching User's Reference Screenshot 1 & 2 */}
-      <div className="lg:col-span-6 xl:col-span-6 p-4 sm:p-8 lg:p-12 flex items-center justify-center relative z-10">
+      {/* RIGHT COLUMN: Login Card */}
+      <div className="col-span-12 lg:col-span-6 xl:col-span-6 min-h-screen p-4 sm:p-8 lg:p-12 flex flex-col items-center justify-center relative z-10">
+        {/* Mobile/Tablet brand logo & title */}
+        <div className="lg:hidden flex items-center justify-center gap-3 mb-6">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-500/25 flex-shrink-0">
+            <ShieldCheck className="w-6 h-6" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-xl font-extrabold text-white tracking-tight leading-none">EduControl</span>
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-950/80 border border-blue-800 text-blue-300">AI</span>
+            </div>
+            <p className="text-[11px] text-slate-400 mt-1">
+              {language === 'uz' ? 'Intellektual davomat va nazorat tizimi' : 'Интеллектуальная система контроля доступа'}
+            </p>
+          </div>
+        </div>
+
         {/* Floating Card exactly matching reference */}
         <div className="w-full max-w-[430px] rounded-[28px] bg-[#111928]/95 border border-slate-800/80 p-6 sm:p-8 shadow-2xl backdrop-blur-xl relative">
           
