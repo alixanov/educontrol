@@ -1,21 +1,38 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ShieldCheck, Video, Lock, Mail, ArrowRight, CheckCircle2, AlertCircle, Globe, Sun, Moon } from 'lucide-react';
+import {
+  ShieldCheck,
+  Video,
+  Lock,
+  Mail,
+  ArrowRight,
+  CheckCircle2,
+  AlertCircle,
+  KeyRound,
+  Eye,
+  EyeOff,
+  Sun,
+  Moon,
+} from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTheme } from '@/context/ThemeContext';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [loginMode, setLoginMode] = useState<'password' | 'pin'>('password');
+  const [email, setEmail] = useState('admin');
+  const [password, setPassword] = useState('admin');
+  const [pin, setPin] = useState('1111');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
   const { login } = useAuth();
   const { language, setLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handlePasswordLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setLoading(true);
@@ -26,18 +43,42 @@ export default function LoginPage() {
       setError(
         err?.message ||
           (language === 'uz'
-            ? 'Email yoki parol noto‘g‘ri kiritildi. Qaytadan urinib ko‘ring.'
-            : 'Неверный email или пароль. Пожалуйста, попробуйте снова.')
+            ? 'Login yoki parol noto‘g‘ri kiritildi.'
+            : 'Неверный логин или пароль.'),
       );
     } finally {
       setLoading(false);
     }
   };
 
-  const handleQuickFill = () => {
-    setEmail('admin');
-    setPassword('1111');
+  const handlePinLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
     setError(null);
+    setLoading(true);
+
+    try {
+      await login('admin', pin);
+    } catch (err: any) {
+      setError(
+        err?.message ||
+          (language === 'uz'
+            ? 'PIN-kod noto‘g‘ri kiritildi (Standart: 1111).'
+            : 'Неверный PIN-код (По умолчанию: 1111).'),
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePinNumberClick = (num: string) => {
+    if (pin.length < 4) {
+      const nextPin = pin + num;
+      setPin(nextPin);
+      if (nextPin.length === 4) {
+        // Auto submit on 4th digit
+        login('admin', nextPin).catch(() => {});
+      }
+    }
   };
 
   return (
@@ -78,7 +119,6 @@ export default function LoginPage() {
 
         {/* Center CCTV Terminal Mockup with Face Detection HUD */}
         <div className="my-8 rounded-2xl bg-slate-900 border border-slate-800 p-4 sm:p-5 shadow-2xl relative overflow-hidden group max-w-2xl text-slate-100">
-          {/* Terminal Top Bar */}
           <div className="flex items-center justify-between pb-3 border-b border-slate-800 text-[11px] font-mono">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
@@ -91,9 +131,7 @@ export default function LoginPage() {
             </span>
           </div>
 
-          {/* Simulated Camera Viewfinder with Face Target */}
           <div className="relative h-48 sm:h-56 my-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center overflow-hidden">
-            {/* Scanlines / Grid effect */}
             <div
               className="absolute inset-0 opacity-10 pointer-events-none"
               style={{
@@ -101,19 +139,14 @@ export default function LoginPage() {
                 backgroundSize: '20px 20px',
               }}
             />
-
-            {/* Scanning Laser Line */}
             <div className="absolute inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_#38bdf8] animate-pulse" />
 
-            {/* Face Target Bounding Box */}
             <div className="relative w-32 h-36 sm:w-36 sm:h-40 border-2 border-emerald-400/90 rounded-2xl flex flex-col justify-between p-2.5 shadow-[0_0_24px_rgba(52,211,153,0.3)]">
-              {/* HUD Corner Accents */}
               <div className="flex justify-between">
                 <span className="w-3 h-3 border-t-2 border-l-2 border-emerald-300" />
                 <span className="w-3 h-3 border-t-2 border-r-2 border-emerald-300" />
               </div>
 
-              {/* Center Reticle */}
               <div className="self-center flex flex-col items-center">
                 <div className="w-9 h-9 rounded-full border border-dashed border-emerald-400/70 animate-spin" />
                 <span className="text-[10px] font-mono font-bold text-emerald-300 mt-1">99.4% MATCH</span>
@@ -124,14 +157,12 @@ export default function LoginPage() {
                 <span className="w-3 h-3 border-b-2 border-r-2 border-emerald-300" />
               </div>
 
-              {/* Floating Detection Badge */}
               <div className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap bg-emerald-500 text-slate-950 font-bold text-[10px] sm:text-xs px-2.5 py-0.5 rounded-full shadow-md flex items-center gap-1">
                 <span>✓</span>
                 <span>{language === 'uz' ? 'ANIQLANDI: O‘QITUVCHI' : 'ИДЕНТИФИЦИРОВАН'}</span>
               </div>
             </div>
 
-            {/* Telemetry OSD Overlay */}
             <div className="absolute top-2.5 left-2.5 text-[10px] font-mono text-slate-400 space-y-0.5">
               <div>AI ENGINE: <span className="text-cyan-300 font-semibold">TinyFace-v2</span></div>
               <div>LATENCY: <span className="text-emerald-400 font-semibold">18ms</span></div>
@@ -141,7 +172,6 @@ export default function LoginPage() {
             </div>
           </div>
 
-          {/* Bottom 3 Feature Pills */}
           <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-2 border-t border-slate-800 text-center text-[10px] sm:text-[11px]">
             <div className="p-2 rounded-xl bg-slate-950 border border-slate-800">
               <span className="font-bold text-blue-400 block">3D-Yuz</span>
@@ -158,7 +188,6 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Bottom Security Assurance Note */}
         <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 pt-2">
           <Video className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
           <span>
@@ -169,26 +198,28 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* RIGHT COLUMN: Login Form */}
+      {/* RIGHT COLUMN: Modern Dual-Mode Login Form */}
       <div className="lg:col-span-5 xl:col-span-5 p-6 sm:p-10 lg:p-12 xl:p-16 flex flex-col justify-between bg-white dark:bg-slate-900 relative z-10 transition-colors duration-200">
-        {/* Top Bar: Dark/Light Mode & Language Selector */}
+        {/* Top Controls: Dark/Light Mode & Language Selector */}
         <div className="flex items-center justify-end gap-2.5 mb-6">
-          {/* Dark / Light Mode Toggle Button */}
           <button
             type="button"
             onClick={toggleTheme}
-            title={theme === 'dark' ? (language === 'uz' ? 'Kunduzgi rejim (Kun)' : 'Дневной режим (День)') : (language === 'uz' ? 'Tungi rejim (Tun)' : 'Ночной режим (Ночь)')}
-            className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/80 bg-white/90 text-slate-600 shadow-sm transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-300 dark:hover:bg-slate-700 active:scale-95 cursor-pointer"
-            aria-label="Toggle dark/light theme"
+            className="inline-flex items-center gap-1.5 h-9 px-3 rounded-xl border border-slate-200/80 bg-white/90 text-slate-700 shadow-sm transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-200 dark:hover:bg-slate-700 text-xs font-medium cursor-pointer"
           >
             {theme === 'dark' ? (
-              <Sun className="h-4 w-4 text-amber-400 transition-transform duration-200 rotate-0 hover:rotate-45" />
+              <>
+                <Sun className="h-4 w-4 text-amber-400" />
+                <span>{language === 'uz' ? 'Kunduzgi' : 'Дневной'}</span>
+              </>
             ) : (
-              <Moon className="h-4 w-4 text-slate-600 transition-transform duration-200 -rotate-12 hover:rotate-0" />
+              <>
+                <Moon className="h-4 w-4 text-slate-600" />
+                <span>{language === 'uz' ? 'Tungi rejim' : 'Ночной'}</span>
+              </>
             )}
           </button>
 
-          {/* Language Selector */}
           <div className="inline-flex items-center gap-0.5 rounded-xl bg-slate-100/90 p-1 border border-slate-200/80 shadow-sm dark:bg-slate-800 dark:border-slate-700 text-xs">
             <button
               type="button"
@@ -215,19 +246,55 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Main Login Form Area */}
-        <div className="my-auto max-w-md w-full mx-auto space-y-6">
+        {/* Center Card Content */}
+        <div className="my-auto max-w-md w-full mx-auto space-y-5">
           <div>
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
               {language === 'uz' ? 'Tizimga kirish' : 'Вход в систему'}
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
               {language === 'uz'
-                ? 'Boshqaruv paneli orqali xavfsiz avtorizatsiya'
-                : 'Авторизация в панели администратора'}
+                ? 'Lavozimingizga qarab kirish usulini tanlang'
+                : 'Выберите способ входа в зависимости от должности'}
             </p>
           </div>
 
+          {/* MODE TABS: [Email va parol] vs [Tezkor PIN] */}
+          <div className="grid grid-cols-2 gap-1.5 p-1 rounded-xl bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80">
+            <button
+              type="button"
+              onClick={() => {
+                setLoginMode('password');
+                setError(null);
+              }}
+              className={`flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                loginMode === 'password'
+                  ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
+            >
+              <Mail className="w-3.5 h-3.5" />
+              <span>{language === 'uz' ? 'Login va parol' : 'Логин и пароль'}</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                setLoginMode('pin');
+                setError(null);
+              }}
+              className={`flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                loginMode === 'pin'
+                  ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
+            >
+              <KeyRound className="w-3.5 h-3.5" />
+              <span>{language === 'uz' ? 'Tezkor PIN' : 'Быстрый PIN'}</span>
+            </button>
+          </div>
+
+          {/* Error notification banner */}
           {error && (
             <div className="p-3.5 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 flex items-start gap-2.5 text-red-600 dark:text-red-400 text-xs animate-shake">
               <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
@@ -235,83 +302,159 @@ export default function LoginPage() {
             </div>
           )}
 
-          <form onSubmit={handleLogin} className="space-y-4 text-xs">
-            <div>
-              <div className="flex items-center justify-between mb-1.5">
-                <label className="font-semibold text-slate-700 dark:text-slate-300">
-                  {language === 'uz' ? 'Administrator logini yoki email' : 'Логин или email администратора'}
-                </label>
-                <span className="text-[11px] font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-md border border-blue-200 dark:border-blue-900/60">
-                  {language === 'uz' ? 'Login: admin' : 'Логин: admin'}
-                </span>
+          {/* TAB 1: PASSWORD FORM (Login: admin / Parol: admin) */}
+          {loginMode === 'password' && (
+            <form onSubmit={handlePasswordLogin} className="space-y-4 text-xs">
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="font-semibold text-slate-700 dark:text-slate-300">
+                    {language === 'uz' ? 'Elektron pochta yoki login' : 'Логин или email'}
+                  </label>
+                  <span className="text-[11px] font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-md border border-blue-200 dark:border-blue-900/60">
+                    Login: admin
+                  </span>
+                </div>
+                <div className="relative">
+                  <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  <input
+                    type="text"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="admin"
+                    className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+                  />
+                </div>
               </div>
-              <div className="relative">
-                <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                <input
-                  type="text"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin yoki admin@educontrol.com"
-                  className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
-                />
-              </div>
-            </div>
 
-            <div>
-              <div className="flex items-center justify-between mb-1.5">
-                <label className="font-semibold text-slate-700 dark:text-slate-300">
-                  {language === 'uz' ? 'Maxfiy parol' : 'Пароль'}
-                </label>
-                <span className="text-[11px] font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-md border border-blue-200 dark:border-blue-900/60">
-                  {language === 'uz' ? 'Parol: 1111 yoki admin123' : 'Пароль: 1111 или admin123'}
-                </span>
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="font-semibold text-slate-700 dark:text-slate-300">
+                    {language === 'uz' ? 'Parol' : 'Пароль'}
+                  </label>
+                  <span className="text-[11px] font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-md border border-blue-200 dark:border-blue-900/60">
+                    Parol: admin
+                  </span>
+                </div>
+                <div className="relative">
+                  <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="admin"
+                    className="w-full pl-10 pr-10 py-3 bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
               </div>
-              <div className="relative">
-                <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                <input
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="1111"
-                  className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
-                />
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-bold text-xs rounded-xl shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-3"
+              >
+                {loading ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <span>{language === 'uz' ? 'Tekshirilmoqda...' : 'Проверка...'}</span>
+                  </>
+                ) : (
+                  <>
+                    <span>{language === 'uz' ? 'Panelga kirish' : 'Войти в панель'}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
+              </button>
+            </form>
+          )}
+
+          {/* TAB 2: TEZKOR PIN FORM (1111) */}
+          {loginMode === 'pin' && (
+            <form onSubmit={handlePinLogin} className="space-y-4 text-xs">
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="font-semibold text-slate-700 dark:text-slate-300">
+                    {language === 'uz' ? '4 xonali PIN-kod' : '4-значный PIN-код'}
+                  </label>
+                  <span className="text-[11px] font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-md border border-emerald-200 dark:border-emerald-900/60">
+                    {language === 'uz' ? 'Tezkor PIN: 1111' : 'Быстрый PIN: 1111'}
+                  </span>
+                </div>
+                <div className="relative">
+                  <KeyRound className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  <input
+                    type="password"
+                    maxLength={4}
+                    required
+                    value={pin}
+                    onChange={(e) => setPin(e.target.value)}
+                    placeholder="1111"
+                    className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-xl text-center tracking-[0.5em] text-lg font-mono font-bold text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+                  />
+                </div>
               </div>
-            </div>
 
-            {/* Primary Submit Button */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-bold text-xs rounded-xl shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-3"
-            >
-              {loading ? (
-                <>
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <span>{language === 'uz' ? 'Ma’lumotlar tekshirilmoqda...' : 'Проверка данных...'}</span>
-                </>
-              ) : (
-                <>
-                  <span>{language === 'uz' ? 'Boshqaruv paneliga kirish' : 'Войти в панель управления'}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </>
-              )}
-            </button>
-          </form>
+              {/* Quick 1-click Fill for 1111 */}
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setPin('1111')}
+                  className="w-full py-2 px-3 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-200 dark:border-slate-700 flex items-center justify-center gap-1.5 transition cursor-pointer"
+                >
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                  <span>{language === 'uz' ? 'PIN 1111 ni to‘ldirish' : 'Заполнить PIN 1111'}</span>
+                </button>
+              </div>
 
-          {/* Quick Demo Fill Button */}
-          <div className="pt-2">
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-bold text-xs rounded-xl shadow-md shadow-emerald-500/20 flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-3"
+              >
+                {loading ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <span>{language === 'uz' ? 'PIN tekshirilmoqda...' : 'Проверка PIN...'}</span>
+                  </>
+                ) : (
+                  <>
+                    <span>{language === 'uz' ? 'PIN orqali kirish (1111)' : 'Войти по PIN (1111)'}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
+              </button>
+            </form>
+          )}
+
+          {/* Quick 1-Click Fast Switch Demo Button */}
+          <div className="pt-1">
             <button
               type="button"
-              onClick={handleQuickFill}
+              onClick={() => {
+                if (loginMode === 'password') {
+                  setEmail('admin');
+                  setPassword('admin');
+                  setError(null);
+                } else {
+                  setPin('1111');
+                  setError(null);
+                }
+              }}
               className="w-full py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-200 dark:border-slate-700 flex items-center justify-center gap-2 transition cursor-pointer"
             >
               <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
               <span>
-                {language === 'uz'
-                  ? 'Demo kirish: admin • Parol: 1111'
-                  : 'Демо доступ: admin • Пароль: 1111'}
+                {loginMode === 'password'
+                  ? (language === 'uz' ? 'Avto-to‘ldirish: admin / admin' : 'Автозаполнение: admin / admin')
+                  : (language === 'uz' ? 'Avto-to‘ldirish: PIN 1111' : 'Автозаполнение: PIN 1111')}
               </span>
             </button>
           </div>
