@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2-Mavzu: Kompyuter Tarmoqlari Asoslari (Professional Taqdimot)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1120;
+      --card-bg: #131d31;
+      --card-border: #1e293b;
+      --primary: #38bdf8;
+      --primary-hover: #0284c7;
+      --secondary: #818cf8;
+      --accent: #34d399;
+      --warning: #fbbf24;
+      --danger: #f87171;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* Top bar */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+      background: rgba(19, 29, 49, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--primary);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      background: #1e293b;
+      color: #e2e8f0;
+      border: 1px solid #334155;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: #334155;
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #0369a1;
+    }
+
+    /* Presentation Stage */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+    }
+
+    .slide-viewport {
+      width: 100%;
+      max-width: 1220px;
+      aspect-ratio: 16 / 9;
+      background: radial-gradient(circle at top right, #172554, #0f172a 60%, #0b1120);
+      border: 1px solid #1e293b;
+      border-radius: 20px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 38px 48px;
+    }
+
+    .slide {
+      display: none;
+      height: 100%;
+      flex-direction: column;
+      animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .slide-category {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .slide-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+
+    .slide-divider {
+      width: 60px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+      margin-bottom: 18px;
+    }
+
+    .content-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Grids & Cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(19, 29, 49, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 20px;
+      backdrop-filter: blur(8px);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-desc {
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    .img-frame {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+      border: 1px solid #1e293b;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .highlight-box {
+      background: #131d31;
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #e2e8f0;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      color: #38bdf8;
+    }
+
+    .code-pill {
+      background: #0b1120;
+      border: 1px solid #334155;
+      color: #38bdf8;
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* Footer Navigation */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+      background: rgba(19, 29, 49, 0.95);
+      border-top: 1px solid var(--card-border);
+    }
+
+    .progress-bar-container {
+      flex: 1;
+      max-width: 400px;
+      height: 6px;
+      background: #1e293b;
+      border-radius: 3px;
+      margin: 0 20px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .slide-counter {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .kbd {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Command table */
+    .cmd-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+    }
+
+    .cmd-table th, .cmd-table td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid #1e293b;
+      font-size: 12.5px;
+    }
+
+    .cmd-table th {
+      color: var(--primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1px;
+      background: rgba(11, 17, 32, 0.6);
+    }
+
+    .cmd-table tr:hover {
+      background: rgba(30, 41, 59, 0.4);
+    }
+
+    /* Overview modal */
+    .overview-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .overview-item {
+      background: #131d31;
+      border: 2px solid #334155;
+      border-radius: 10px;
+      padding: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .overview-item:hover, .overview-item.active {
+      border-color: var(--primary);
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <span>🌐 KOMPYUTER TARMOQLARI ASOSLARI</span>
+      <span class="badge">Professional shakli</span>
+    </div>
+    <div class="header-controls">
+      <span class="kbd">← / →</span>
+      <span class="kbd">Space</span>
+      <button class="btn" onclick="toggleOverview()">📑 Mundarija (O)</button>
+      <button class="btn" onclick="toggleFullScreen()">⛶ To'liq ekran (F)</button>
+      <a href="Kompyuter_Tarmoqlari_Asoslari_Pro.pptx" download class="btn btn-primary">⬇ PPTX Yuklab Olish</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="slide-viewport" id="viewport">
+
+      <!-- SLIDE 1: COVER -->
+      <div class="slide active" id="slide-1">
+        <div style="display: flex; height: 100%; align-items: center; gap: 32px;">
+          <div style="flex: 1.1; display: flex; flex-direction: column; justify-content: center;">
+            <div style="margin-bottom: 14px;">
+              <span class="badge" style="font-size: 12px; padding: 5px 12px;">🎓 AXBOROT TEXNOLOGIYALARI DARSI</span>
+            </div>
+            <h1 style="font-size: 38px; font-weight: 800; line-height: 1.15; color: #fff; margin-bottom: 14px;">
+              2-MAVZU:<br>
+              <span style="background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                KOMPYUTER TARMOQLARI ASOSLARI
+              </span>
+            </h1>
+            <p style="font-size: 14.5px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6;">
+              Tarmoq turlari • Topologiyalar • Tarmoq apparat vositalari • IP va MAC identifikatorlar • DNS tizimi • TCP/UDP protokollari • Xavfsizlik va CMD buyruqlari.
+            </p>
+            <div style="display: flex; gap: 14px; align-items: center;">
+              <button class="btn btn-primary" style="padding: 10px 20px; font-size: 14px;" onclick="nextSlide()">
+                Taqdimotni boshlash ➔
+              </button>
+            </div>
+          </div>
+          <div style="flex: 1; height: 100%; display: flex; align-items: center; justify-content: center;">
+            <img src="./presentation_assets/banner.jpg" class="img-frame" alt="Computer Network 3D Visualization">
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: MUNDARIJA -->
+      <div class="slide" id="slide-2">
+        <div class="slide-category">DARS TARTIBI</div>
+        <div class="slide-title">Dars Rejasi (Mavzu Mundarijasi)</div>
+        <div class="slide-divider"></div>
+        <div class="content-area">
+          <div class="grid-3">
+            <div class="card" onclick="goToSlide(3)" style="cursor: pointer;">
+              <div class="card-title"><span class="code-pill">01</span> Tarmoq Nima?</div>
+              <div class="card-desc">Ta'rif, resurslar almashinuvi va asosiy afzalliklari.</div>
+            </div>
+            <div class="card" onclick="goToSlide(4)" style="cursor: pointer;">
+              <div class="card-title"><span class="code-pill">02</span> Tarmoq Turlari</div>
+              <div class="card-desc">PAN, LAN, MAN, WAN qamrov maydoni bo'yicha.</div>
+            </div>
+            <div class="card" onclick="goToSlide(5)" style="cursor: pointer;">
+              <div class="card-title"><span class="code-pill">03</span> Topologiyalar</div>
+              <div class="card-desc">Shina, Halqa, Yulduz va Daraxtsimon tuzilmalar.</div>
+            </div>
+            <div class="card" onclick="goToSlide(6)" style="cursor: pointer;">
+              <div class="card-title"><span class="code-pill">04</span> Tarmoq Qurilmalari</div>
+              <div class="card-desc">Switch, Router, Modem, Access Point vazifalari.</div>
+            </div>
+            <div class="card" onclick="goToSlide(7)" style="cursor: pointer;">
+              <div class="card-title"><span class="code-pill">05</span> IP va MAC Manzillar</div>
+              <div class="card-desc">Kompyuter pasporti: Jismoniy vs Mantiqiy manzillar.</div>
+            </div>
+            <div class="card" onclick="goToSlide(8)" style="cursor: pointer;">
+              <div class="card-title"><span class="code-pill">06</span> DNS Tizimi</div>
+              <div class="card-desc">Domen nomini IP ga tarjima qilish 4 bosqichi.</div>
+            </div>
+            <div class="card" onclick="goToSlide(9)" style="cursor: pointer;">
+              <div class="card-title"><span class="code-pill">07</span> TCP va UDP</div>
+              <div class="card-desc">Ishonchli usul (TCP) va Tezkor usul (UDP) farqi.</div>
+            </div>
+            <div class="card" onclick="goToSlide(10)" style="cursor: pointer;">
+              <div class="card-title"><span class="code-pill">08</span> Xavfsizlik & IQ Test</div>
+              <div class="card-desc">Firewall, VPN, DHCP va interaktiv savollar.</div>
+            </div>
+            <div class="card" onclick="goToSlide(13)" style="cursor: pointer;">
+              <div class="card-title"><span class="code-pill">09</span> CMD Amaliyoti</div>
+              <div class="card-desc">ipconfig, ping, nslookup, tracert, netstat.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: TARMOQ NIMA? -->
+      <div class="slide" id="slide-3">
+        <div class="slide-category">1. ASOSIY TUSHUNCHA</div>
+        <div class="slide-title">1. Kompyuter Tarmog'i Nima?</div>
+        <div class="slide-divider"></div>
+        <div class="content-area">
+          <div class="highlight-box">
+            <strong style="color: var(--primary); font-size: 16px;">💡 Rasmiy Ta'rif:</strong><br>
+            <strong>Kompyuter tarmog‘i</strong> — o‘zaro ma’lumot va umumiy resurslar (fayllar, dasturlar, internet, printerlar) almashish hamda hamkorlikda foydalanish uchun ulangan kompyuterlar va qurilmalar tizimidir.
+          </div>
+          <div class="grid-3" style="margin-top: 8px;">
+            <div class="card">
+              <div style="font-size: 30px; margin-bottom: 8px;">📁</div>
+              <div class="card-title">Resurslar Almashinuvi</div>
+              <div class="card-desc">Fayllar, korporativ hujjatlar va markaziy ma'lumotlar bazalarini birgalikda boshqarish.</div>
+            </div>
+            <div class="card">
+              <div style="font-size: 30px; margin-bottom: 8px;">🖨️</div>
+              <div class="card-title">Uskunalarni Bo'lishish</div>
+              <div class="card-desc">Bitta tarmoq printeri yoki qudratli serverni butun tashkilot xodimlari umumiy ishlatishi.</div>
+            </div>
+            <div class="card">
+              <div style="font-size: 30px; margin-bottom: 8px;">⚡</div>
+              <div class="card-title">Tezkor Muloqot</div>
+              <div class="card-desc">Elektron pochta, messenjerlar, IP-telefoniya va real vaqtda videokonferensiyalar.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: TARMOQ TURLARI (DIAGRAM) -->
+      <div class="slide" id="slide-4">
+        <div class="slide-category">TASNIF VA KO'LAM</div>
+        <div class="slide-title">Tarmoq Turlari (Hajmi va Qamroviga Ko‘ra)</div>
+        <div class="slide-divider"></div>
+        <div class="content-area" style="align-items: center;">
+          <img src="./presentation_assets/network_types_diagram.png" class="img-frame" style="max-height: 440px;" alt="Network Types PAN LAN MAN WAN">
+        </div>
+      </div>
+
+      <!-- SLIDE 5: TOPOLOGIYALAR (IMAGE + INFO) -->
+      <div class="slide" id="slide-5">
+        <div class="slide-category">2. TARMOQ ARXITEKTURASI</div>
+        <div class="slide-title">2. Tarmoq Topologiyalari (Ulanish Shakllari)</div>
+        <div class="slide-divider"></div>
+        <div class="content-area">
+          <div style="display: flex; gap: 24px; height: 100%; align-items: center;">
+            <div style="flex: 1.3; height: 100%; display: flex; align-items: center;">
+              <img src="./presentation_assets/topologies.jpg" class="img-frame" alt="Computer Network Topologies Diagram">
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
+              <div class="card" style="padding: 12px 16px;">
+                <div class="card-title" style="font-size: 14px;">🚌 Shina (Bus)</div>
+                <div class="card-desc">Barcha kompyuterlar bitta umumiy magistral kabelga ketma-ket ulanadi. Kabel uzilsa tarmoq to'xtaydi.</div>
+              </div>
+              <div class="card" style="padding: 12px 16px;">
+                <div class="card-title" style="font-size: 14px;">⭕ Halqa (Ring)</div>
+                <div class="card-desc">Kompyuterlar zanjir kabi bir-biriga yopiq doira bo'lib ulanadi. Ma'lumot bir yo'nalishda aylanadi.</div>
+              </div>
+              <div class="card" style="padding: 12px 16px; border: 2px solid var(--primary); background: rgba(56, 189, 248, 0.08);">
+                <div class="card-title" style="font-size: 14px; color: var(--primary);">⭐ Yulduz (Star) — Standart!</div>
+                <div class="card-desc">Barcha kompyuterlar markaziy Switch'ga ulanadi. Bitta kabel uzilsa boshqalariga ta'sir qilmaydi!</div>
+              </div>
+              <div class="card" style="padding: 12px 16px;">
+                <div class="card-title" style="font-size: 14px;">🌳 Daraxtsimon (Tree)</div>
+                <div class="card-desc">Bir nechta yulduzli tarmoqlarning ierarxik shoxlanishi. Ko'p qavatli binolar uchun ideal.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 6: ASOSIY QURILMALAR (IMAGE + INFO) -->
+      <div class="slide" id="slide-6">
+        <div class="slide-category">3. APPARAT VOSITALARI (HARDWARE)</div>
+        <div class="slide-title">3. Asosiy Tarmoq Qurilmalari</div>
+        <div class="slide-divider"></div>
+        <div class="content-area">
+          <div style="display: flex; gap: 24px; height: 100%; align-items: center;">
+            <div style="flex: 1.3; height: 100%; display: flex; align-items: center;">
+              <img src="./presentation_assets/hardware.jpg" class="img-frame" alt="Network Hardware Devices 3D">
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
+              <div class="card" style="padding: 12px 16px;">
+                <div class="card-title" style="font-size: 14px; color: var(--secondary);">🔀 Switch (Kommutator)</div>
+                <div style="font-size: 10px; color: var(--accent); font-weight: 700; margin-bottom: 4px;">L2 Daraja • MAC Manzil</div>
+                <div class="card-desc">LAN ichidagi kompyuterlarni bog'laydi va paketni faqat kerakli qabul qiluvchiga MAC manzil bo'yicha yuboradi.</div>
+              </div>
+              <div class="card" style="padding: 12px 16px;">
+                <div class="card-title" style="font-size: 14px; color: var(--primary);">🧭 Router (Yo'naltirgich)</div>
+                <div style="font-size: 10px; color: var(--accent); font-weight: 700; margin-bottom: 4px;">L3 Daraja • IP Manzil</div>
+                <div class="card-desc">Turli tarmoqlarni (LAN va WAN Internet) ulaydi. Paketlar uchun eng optimal marshrutni tanlaydi.</div>
+              </div>
+              <div class="card" style="padding: 12px 16px;">
+                <div class="card-title" style="font-size: 14px;">📡 Modem</div>
+                <div class="card-desc">Provayderdan keluvchi optik yoki analog signalni kompyuter tushunadigan raqamli signalga aylantiradi.</div>
+              </div>
+              <div class="card" style="padding: 12px 16px;">
+                <div class="card-title" style="font-size: 14px;">📶 Access Point (AP)</div>
+                <div class="card-desc">Kabel orqali kelgan tarmoqni simsiz Wi-Fi signallari orqali havo bo'ylab tarqatadi.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 7: IP VA MAC -->
+      <div class="slide" id="slide-7">
+        <div class="slide-category">4. IDENTIFIKATSIYA</div>
+        <div class="slide-title">4. IP Manzil va MAC Manzil (Kompyuter "Pasporti")</div>
+        <div class="slide-divider"></div>
+        <div class="content-area">
+          <div class="grid-2">
+            <div class="card" style="border-left: 4px solid var(--secondary);">
+              <div class="card-title" style="color: var(--secondary); font-size: 17px;">🔑 MAC MANZIL (Jismoniy Manzil)</div>
+              <div class="card-desc" style="margin-bottom: 12px;">
+                • Qurilmaning tarmoq kartasiga (NIC) zavodda berilgan o‘zgarmas unikal apparat kodi.<br>
+                • Dunyoda har bir qurilmada faqat bitta unikal MAC bo'ladi.<br>
+                • O‘lchami: 48-bit (12 ta o‘n oltilik belgi).
+              </div>
+              <div style="background: #0b1120; border: 1px solid #334155; padding: 10px; border-radius: 8px; text-align: center; margin-top: auto;">
+                <span style="font-size: 11px; color: var(--text-muted); display: block;">NAMUNA:</span>
+                <span style="font-family: 'JetBrains Mono'; color: var(--primary); font-size: 16px; font-weight: bold;">00:1A:2B:3C:4D:5E</span>
+              </div>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--primary);">
+              <div class="card-title" style="color: var(--primary); font-size: 17px;">🌐 IP MANZIL (Mantiqiy Manzil)</div>
+              <div class="card-desc" style="margin-bottom: 12px;">
+                • Tarmoqdagi joylashuvga qarab provayder yoki router tomonidan beriladigan o‘zgaruvchi manzil.<br>
+                • Global tarmoqda ma'lumotni to'g'ri manzilga yo'naltirish uchun zarur.
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px; margin-top: auto;">
+                <div style="background: #0b1120; border: 1px solid #334155; padding: 8px 12px; border-radius: 6px;">
+                  <span style="color: var(--accent); font-weight: 700; font-size: 12px;">IPv4: 192.168.1.15</span>
+                  <span style="color: var(--text-muted); font-size: 11px; display: block;">32-bit, 4 ta son (4.3 mlrd manzil)</span>
+                </div>
+                <div style="background: #0b1120; border: 1px solid #334155; padding: 8px 12px; border-radius: 6px;">
+                  <span style="color: var(--warning); font-weight: 700; font-size: 12px;">IPv6: 2001:0db8:85a3::0370:7334</span>
+                  <span style="color: var(--text-muted); font-size: 11px; display: block;">128-bit, cheksiz manzil zaxirasi</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 8: DNS TIZIMI (DIAGRAM) -->
+      <div class="slide" id="slide-8">
+        <div class="slide-category">5. NOMLAR TIZIMI</div>
+        <div class="slide-title">5. DNS Tizimi (Internetning "Telefon Daftari")</div>
+        <div class="slide-divider"></div>
+        <div class="content-area" style="align-items: center;">
+          <img src="./presentation_assets/dns_diagram.png" class="img-frame" style="max-height: 440px;" alt="DNS Flowchart Diagram">
+        </div>
+      </div>
+
+      <!-- SLIDE 9: TCP VS UDP (DIAGRAM) -->
+      <div class="slide" id="slide-9">
+        <div class="slide-category">6. TRANSPORT DARAJASI</div>
+        <div class="slide-title">6. TCP va UDP: Ishonchlilik vs Tezlik</div>
+        <div class="slide-divider"></div>
+        <div class="content-area" style="align-items: center;">
+          <img src="./presentation_assets/tcp_udp_diagram.png" class="img-frame" style="max-height: 440px;" alt="TCP vs UDP Comparison Diagram">
+        </div>
+      </div>
+
+      <!-- SLIDE 10: XAVFSIZLIK (PHOTO + CARDS) -->
+      <div class="slide" id="slide-10">
+        <div class="slide-category">7. HIMOYA VA BOSHQARUV</div>
+        <div class="slide-title">7. Tarmoq Xavfsizligi Asoslari va DHCP</div>
+        <div class="slide-divider"></div>
+        <div class="content-area">
+          <div style="display: flex; gap: 24px; height: 100%; align-items: center;">
+            <div style="flex: 1; height: 100%; display: flex; align-items: center;">
+              <img src="./presentation_assets/security.jpg" class="img-frame" alt="Cybersecurity Datacenter">
+            </div>
+            <div style="flex: 1.2; display: flex; flex-direction: column; gap: 12px;">
+              <div class="card" style="border-left: 4px solid var(--danger);">
+                <div class="card-title" style="color: var(--danger);">🧱 Firewall (Brandmauer)</div>
+                <div class="card-desc">Trafikni doimiy filtrlab, ruxsatsiz ulanishlarni, xakerlik hujumlarini va zararli paketlarni bloklaydi.</div>
+              </div>
+              <div class="card" style="border-left: 4px solid var(--primary);">
+                <div class="card-title" style="color: var(--primary);">🔒 VPN (Virtual Private Network)</div>
+                <div class="card-desc">Ochiq tarmoqlarda ma'lumotlarni shifrlaydi. Haqiqiy IP manzilni yashirib, maxfiy xavfsiz tunnel hosil qiladi.</div>
+              </div>
+              <div class="card" style="border-left: 4px solid var(--accent);">
+                <div class="card-title" style="color: var(--accent);">⚙️ DHCP Xizmati</div>
+                <div class="card-desc">Tarmoqqa yangi ulangan qurilmalarga avtomatik ravishda erkin IP manzil va shlyuz sozlamalarini taqsimlaydi.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 11: 1-MANTIQIY JUMBOQ (NO OVERFLOW BUG!) -->
+      <div class="slide" id="slide-11">
+        <div class="slide-category">INTERAKTIV BOSQICH • JUMBOQ 1</div>
+        <div class="slide-title">🧠 1-Mantiqiy Jumboq: Paketlar Yo'qolishi</div>
+        <div class="slide-divider"></div>
+        <div class="content-area">
+          <div class="highlight-box" style="border-left-color: var(--warning);">
+            <strong style="color: var(--warning); font-size: 16px;">❓ VAZIYAT:</strong><br>
+            Kompyuter <strong>100 MB</strong> hajmdagi faylni tarmoq orqali yubormoqchi. Tarmoq uni 1 MB dan qilib <strong>100 ta paketga</strong> bo‘lib yuboradi. Yo‘lda <strong>45-paket</strong> yo‘qolib qoldi. Nima sodir bo‘ladi?
+          </div>
+          <div class="grid-2" style="margin-top: 10px;">
+            <div class="card" style="border: 2px solid var(--danger);">
+              <div class="card-title" style="color: var(--danger);">🔴 Agar UDP bo‘lsa:</div>
+              <div class="card-desc" style="color: #cbd5e1; font-size: 13px;">
+                Yo‘qolgan paketga umuman e’tibor bermaydi, jo‘natishni davom ettiradi. Oqibatda fayl yoki rasm buzilib ochiladi yoki butunlay ochilmaydi.
+              </div>
+            </div>
+            <div class="card" style="border: 2px solid var(--accent);">
+              <div class="card-title" style="color: var(--accent);">🟢 Agar TCP bo‘lsa:</div>
+              <div class="card-desc" style="color: #cbd5e1; font-size: 13px;">
+                Qabul qiluvchi 45-paket yo‘qligini darhol sezadi (ACK yo'q), jo'natuvchidan faqat 45-paketni qayta so‘rab oladi va faylni 100% butun yig‘adi!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 12: 2-MANTIQIY JUMBOQ (NO OVERFLOW BUG!) -->
+      <div class="slide" id="slide-12">
+        <div class="slide-category">INTERAKTIV BOSQICH • JUMBOQ 2</div>
+        <div class="slide-title">🧠 2-Mantiqiy Jumboq: DNS va IP Manzil</div>
+        <div class="slide-divider"></div>
+        <div class="content-area">
+          <div class="highlight-box" style="border-left-color: var(--primary);">
+            <strong style="color: var(--primary); font-size: 16px;">❓ VAZIYAT:</strong><br>
+            Internet tarmog'i o'chmagan, simlar butun. Lekin brauzerga <code>google.com</code> deb yozsangiz sayt ochilmayapti. Biroq uning o'rniga <code>142.250.185.206</code> deb yozsangiz sayt darhol ochilyapti. Muammo qayerda?
+          </div>
+          <div class="card" style="border: 2px solid var(--accent); margin-top: 10px;">
+            <div class="card-title" style="color: var(--accent); font-size: 16px;">💡 TO‘G‘RI JAVOB VA TAHLIL:</div>
+            <div class="card-desc" style="color: #f1f5f9; font-size: 13.5px; line-height: 1.7;">
+              🔍 <strong>Muammo:</strong> Kompyuterda <strong>DNS server sozlamasi</strong> buzilgan yoki provayderning DNS serveri ishlamayapti.<br>
+              🌐 <strong>Tushuntirish:</strong> Kompyuter tarmoqqa to‘liq ulangan, biroq sayt nomini IP ga tarjima qilib beruvchi "telefon daftari" javob bermayapti.<br>
+              🛠️ <strong>Yechim:</strong> DNS manziliga universal serverlarni o‘rnatish: <code>8.8.8.8</code> (Google DNS) yoki <code>1.1.1.1</code> (Cloudflare).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 13: AMALIYOT CMD -->
+      <div class="slide" id="slide-13">
+        <div class="slide-category">AMALIYOT VA TERMINAL</div>
+        <div class="slide-title">💡 Amaliy Topshiriq (CMD / Terminal orqali)</div>
+        <div class="slide-divider"></div>
+        <div class="content-area">
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">
+            Klaviaturada <span class="kbd">Win + R</span> bosing, <code class="code-pill">cmd</code> deb yozing va quyidagi buyruqlarni kiritib sinab ko'ring:
+          </p>
+          <table class="cmd-table">
+            <thead>
+              <tr>
+                <th style="width: 220px;">Buyruq</th>
+                <th>Vazifasi va Natijasi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>ipconfig /all</code></td>
+                <td>Kompyuterning IP, MAC va DNS manzilini to‘liq ko‘rish.</td>
+              </tr>
+              <tr>
+                <td><code>ping google.com</code></td>
+                <td>Google serveri bilan aloqa va paket yetib borish tezligini (ms) tekshirish.</td>
+              </tr>
+              <tr>
+                <td><code>nslookup google.com</code></td>
+                <td>Sayt domeniga tegishli IP manzilni aniqlash (DNS qanday ishlayotganini ko'rish).</td>
+              </tr>
+              <tr>
+                <td><code>tracert google.com</code></td>
+                <td>Paket kompyuteringizdan Google serverigacha qaysi routerlar orqali o‘tayotganini kuzatish.</td>
+              </tr>
+              <tr>
+                <td><code>netstat -an</code></td>
+                <td>Hozirda kompyuterga ulangan barcha tarmoq ulanishlari va ochiq portlarni ko'rish.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SLIDE 14: XULOSA -->
+      <div class="slide" id="slide-14">
+        <div class="slide-category">DARSNI YAKUNLASH</div>
+        <div class="slide-title">Xulosa va Savol-Javob</div>
+        <div class="slide-divider"></div>
+        <div class="content-area">
+          <div class="grid-2">
+            <div class="card" style="border-left: 4px solid var(--primary);">
+              <div class="card-title">📌 Darsning Asosiy Xulosalari:</div>
+              <ul style="font-size: 13px; line-height: 1.8; color: var(--text); padding-left: 18px;">
+                <li>Tarmoqlar hajmiga ko'ra: PAN, LAN, MAN, WAN (Internet).</li>
+                <li>Zamonaviy tarmoqlar standarti — bu <strong>Yulduz (Star)</strong> topologiyasi.</li>
+                <li>Switch qurilmasi <strong>MAC</strong> bilan, Router esa <strong>IP</strong> bilan ishlaydi.</li>
+                <li><strong>DNS</strong> nomlarni IP ga aylantiruvchi global katalogdir.</li>
+                <li><strong>TCP</strong> — 100% aniqlik va butunlik, <strong>UDP</strong> — minimal kechikish va tezlik.</li>
+              </ul>
+            </div>
+            <div class="card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle, rgba(56, 189, 248, 0.15), transparent 70%);">
+              <div style="font-size: 48px; margin-bottom: 12px;">💬</div>
+              <div style="font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 8px;">
+                E'tiboringiz uchun rahmat!
+              </div>
+              <div style="font-size: 14px; color: var(--text-muted); margin-bottom: 20px;">
+                Mavzu yuzasidan savollaringiz bormi?
+              </div>
+              <button class="btn btn-primary" onclick="goToSlide(1)">
+                🔄 Boshiga qaytish
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="overview-modal" id="overviewModal" onclick="toggleOverview()">
+    <div class="overview-grid" onclick="event.stopPropagation()"></div>
+  </div>
+
+  <footer>
+    <div class="nav-buttons">
+      <button class="btn" onclick="prevSlide()">◀ Oldingi</button>
+      <button class="btn" onclick="nextSlide()">Keyingi ▶</button>
+    </div>
+
+    <div class="progress-bar-container">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="slide-counter" id="slideCounter">1 / 14</div>
+  </footer>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 14;
+
+    const slideTitles = [
+      "1. Kirish va Mavzu Nomi",
+      "2. Dars Rejasi (Mundarija)",
+      "3. Kompyuter Tarmog'i Nima?",
+      "4. Tarmoq Turlari (PAN, LAN, MAN, WAN)",
+      "5. Tarmoq Topologiyalari (Sxema)",
+      "6. Asosiy Tarmoq Qurilmalari (Hardware)",
+      "7. IP va MAC Manzillar (Pasport)",
+      "8. DNS Tizimi Ishlash Sxemasi",
+      "9. TCP va UDP Taqqoslanishi",
+      "10. Tarmoq Xavfsizligi va DHCP",
+      "11. 🧠 1-Mantiqiy Jumboq (Paketlar)",
+      "12. 🧠 2-Mantiqiy Jumboq (DNS & IP)",
+      "13. 💡 Amaliy Topshiriq (CMD)",
+      "14. Xulosa va Savol-Javob"
+    ];
+
+    function showSlide(index) {
+      if (index < 1) index = 1;
+      if (index > totalSlides) index = totalSlides;
+      currentSlide = index;
+
+      document.querySelectorAll('.slide').forEach((slide, idx) => {
+        slide.classList.toggle('active', idx + 1 === currentSlide);
+      });
+
+      document.getElementById('slideCounter').textContent = `${currentSlide} / ${totalSlides}`;
+      document.getElementById('progressFill').style.width = `${((currentSlide - 1) / (totalSlides - 1)) * 100}%`;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) showSlide(currentSlide - 1);
+    }
+
+    function goToSlide(num) {
+      showSlide(num);
+      closeOverview();
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    function toggleOverview() {
+      const modal = document.getElementById('overviewModal');
+      if (modal.style.display === 'block') {
+        closeOverview();
+      } else {
+        openOverview();
+      }
+    }
+
+    function openOverview() {
+      const modal = document.getElementById('overviewModal');
+      const grid = modal.querySelector('.overview-grid');
+      grid.innerHTML = '';
+
+      slideTitles.forEach((title, i) => {
+        const item = document.createElement('div');
+        item.className = `overview-item ${i + 1 === currentSlide ? 'active' : ''}`;
+        item.innerHTML = `
+          <div style="font-size: 11px; color: var(--primary); font-weight: 700; margin-bottom: 4px;">SLAYD ${i + 1}</div>
+          <div style="font-size: 13.5px; font-weight: 600; color: #fff;">${title}</div>
+        `;
+        item.onclick = () => goToSlide(i + 1);
+        grid.appendChild(item);
+      });
+
+      modal.style.display = 'block';
+    }
+
+    function closeOverview() {
+      document.getElementById('overviewModal').style.display = 'none';
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'Home') {
+        showSlide(1);
+      } else if (e.key === 'End') {
+        showSlide(totalSlides);
+      } else if (e.key.toLowerCase() === 'o') {
+        toggleOverview();
+      } else if (e.key.toLowerCase() === 'f') {
+        toggleFullScreen();
+      } else if (e.key === 'Escape') {
+        closeOverview();
+      }
+    });
+
+    showSlide(1);
+  </script>
+</body>
+</html>
