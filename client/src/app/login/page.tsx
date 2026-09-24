@@ -470,20 +470,6 @@ export default function LoginPage() {
                   <Delete className="w-5 h-5" />
                 </button>
               </div>
-
-              {/* Quick auto-fill button for test (1111) */}
-              <div className="pt-2 text-center">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setPin('1111');
-                    submitPin('1111');
-                  }}
-                  className="text-xs text-blue-400 hover:text-blue-300 font-semibold underline underline-offset-4 cursor-pointer transition"
-                >
-                  {language === 'uz' ? 'Tezkor PIN 1111 ni kiritish' : 'Быстрый ввод PIN 1111'}
-                </button>
-              </div>
             </div>
           )}
         </div>
