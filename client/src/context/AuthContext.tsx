@@ -64,9 +64,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (isMounted) setLoading(false);
     }, 800);
 
+    // Background heartbeat: keep backend awake while user is browsing
+    const heartbeatTimer = setInterval(() => {
+      fetch('/api/health', { cache: 'no-store' }).catch(() => {});
+    }, 4 * 60 * 1000);
+
     return () => {
       isMounted = false;
       clearTimeout(failsafe);
+      clearInterval(heartbeatTimer);
     };
   }, []);
 
