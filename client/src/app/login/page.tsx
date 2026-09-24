@@ -35,7 +35,7 @@ export default function LoginPage() {
   };
 
   const handleQuickFill = () => {
-    setEmail('admin@educontrol.com');
+    setEmail('admin');
     setPassword('1111');
     setError(null);
   };
@@ -237,17 +237,22 @@ export default function LoginPage() {
 
           <form onSubmit={handleLogin} className="space-y-4 text-xs">
             <div>
-              <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
-                {language === 'uz' ? 'Administrator elektron pochtasi' : 'Email администратора'}
-              </label>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="font-semibold text-slate-700 dark:text-slate-300">
+                  {language === 'uz' ? 'Administrator logini yoki email' : 'Логин или email администратора'}
+                </label>
+                <span className="text-[11px] font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-md border border-blue-200 dark:border-blue-900/60">
+                  {language === 'uz' ? 'Login: admin' : 'Логин: admin'}
+                </span>
+              </div>
               <div className="relative">
                 <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
-                  type="email"
+                  type="text"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@educontrol.com"
+                  placeholder="admin yoki admin@educontrol.com"
                   className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
                 />
               </div>
@@ -259,7 +264,7 @@ export default function LoginPage() {
                   {language === 'uz' ? 'Maxfiy parol' : 'Пароль'}
                 </label>
                 <span className="text-[11px] font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-md border border-blue-200 dark:border-blue-900/60">
-                  {language === 'uz' ? 'Parol: 1111' : 'Пароль: 1111'}
+                  {language === 'uz' ? 'Parol: 1111 yoki admin123' : 'Пароль: 1111 или admin123'}
                 </span>
               </div>
               <div className="relative">
@@ -305,8 +310,8 @@ export default function LoginPage() {
               <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
               <span>
                 {language === 'uz'
-                  ? 'Demo kirish: admin@educontrol.com • Parol: 1111'
-                  : 'Демо доступ: admin@educontrol.com • Пароль: 1111'}
+                  ? 'Demo kirish: admin • Parol: 1111'
+                  : 'Демо доступ: admin • Пароль: 1111'}
               </span>
             </button>
           </div>
