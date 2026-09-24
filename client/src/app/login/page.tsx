@@ -112,21 +112,21 @@ export default function LoginPage() {
   }, [loginMode, pin, loading]);
 
   return (
-    <div className="min-h-screen w-full bg-slate-900 text-slate-100 relative overflow-hidden flex flex-col lg:grid lg:grid-cols-12">
+    <div className="min-h-screen lg:h-screen lg:max-h-screen w-full bg-slate-900 text-slate-100 relative overflow-y-auto lg:overflow-hidden flex flex-col lg:grid lg:grid-cols-12">
       {/* Background Decorative Ambient Glows */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* LEFT COLUMN: CCTV & AI Biometric Surveillance Showcase */}
-      <div className="hidden lg:flex lg:col-span-6 xl:col-span-6 p-6 sm:p-10 lg:p-12 xl:p-16 flex-col justify-between border-r border-slate-800/80 relative z-10 bg-slate-950/50">
-        <div className="space-y-4">
+      <div className="hidden lg:flex lg:col-span-6 xl:col-span-6 p-6 lg:p-8 xl:p-10 flex-col justify-between border-r border-slate-800/80 relative z-10 bg-slate-950/50 h-full overflow-hidden">
+        <div className="space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/60 border border-blue-900 text-blue-300 text-xs font-semibold">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span>{language === 'uz' ? 'AI Biometrik SKUD Tizimi' : 'Биометрическая СКУД на базе ИИ'}</span>
           </div>
 
-          <div className="flex items-center gap-3.5">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-md shadow-blue-500/20 flex-shrink-0">
+          <div className="flex items-center gap-3">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-md shadow-blue-500/20 flex-shrink-0">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
@@ -139,7 +139,7 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <h2 className="text-base sm:text-lg font-bold text-slate-200 leading-snug pt-1 max-w-xl">
+          <h2 className="text-sm sm:text-base font-bold text-slate-200 leading-snug max-w-xl">
             {language === 'uz'
               ? 'O‘qituvchilar va xodimlar davomatini kameralar orqali avtomatik hisobga olish'
               : 'Автоматический учёт рабочего времени преподавателей через камеры наблюдения'}
@@ -147,8 +147,8 @@ export default function LoginPage() {
         </div>
 
         {/* Center CCTV Terminal Mockup */}
-        <div className="my-8 rounded-2xl bg-slate-900 border border-slate-800 p-4 sm:p-5 shadow-2xl relative overflow-hidden group max-w-2xl text-slate-100">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-800 text-[11px] font-mono">
+        <div className="my-auto rounded-2xl bg-slate-900 border border-slate-800 p-4 shadow-2xl relative overflow-hidden group max-w-xl text-slate-100">
+          <div className="flex items-center justify-between pb-2.5 border-b border-slate-800 text-[11px] font-mono">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
               <span className="font-bold text-red-400 uppercase tracking-wider">● REC • LIVE</span>
@@ -160,7 +160,7 @@ export default function LoginPage() {
             </span>
           </div>
 
-          <div className="relative h-48 sm:h-56 my-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center overflow-hidden">
+          <div className="relative h-40 sm:h-44 my-2.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center overflow-hidden">
             <div
               className="absolute inset-0 opacity-10 pointer-events-none"
               style={{
@@ -170,14 +170,14 @@ export default function LoginPage() {
             />
             <div className="absolute inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_#38bdf8] animate-pulse" />
 
-            <div className="relative w-32 h-36 sm:w-36 sm:h-40 border-2 border-emerald-400/90 rounded-2xl flex flex-col justify-between p-2.5 shadow-[0_0_24px_rgba(52,211,153,0.3)]">
+            <div className="relative w-28 h-32 sm:w-32 sm:h-36 border-2 border-emerald-400/90 rounded-2xl flex flex-col justify-between p-2 shadow-[0_0_24px_rgba(52,211,153,0.3)]">
               <div className="flex justify-between">
                 <span className="w-3 h-3 border-t-2 border-l-2 border-emerald-300" />
                 <span className="w-3 h-3 border-t-2 border-r-2 border-emerald-300" />
               </div>
 
               <div className="self-center flex flex-col items-center">
-                <div className="w-9 h-9 rounded-full border border-dashed border-emerald-400/70 animate-spin" />
+                <div className="w-8 h-8 rounded-full border border-dashed border-emerald-400/70 animate-spin" />
                 <span className="text-[10px] font-mono font-bold text-emerald-300 mt-1">99.4% MATCH</span>
               </div>
 
@@ -186,38 +186,38 @@ export default function LoginPage() {
                 <span className="w-3 h-3 border-b-2 border-r-2 border-emerald-300" />
               </div>
 
-              <div className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap bg-emerald-500 text-slate-950 font-bold text-[10px] sm:text-xs px-2.5 py-0.5 rounded-full shadow-md flex items-center gap-1">
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap bg-emerald-500 text-slate-950 font-bold text-[10px] px-2 py-0.5 rounded-full shadow-md flex items-center gap-1">
                 <span>✓</span>
                 <span>{language === 'uz' ? 'ANIQLANDI: O‘QITUVCHI' : 'ИДЕНТИФИЦИРОВАН'}</span>
               </div>
             </div>
 
-            <div className="absolute top-2.5 left-2.5 text-[10px] font-mono text-slate-400 space-y-0.5">
+            <div className="absolute top-2 left-2 text-[10px] font-mono text-slate-400 space-y-0.5">
               <div>AI ENGINE: <span className="text-cyan-300 font-semibold">TinyFace-v2</span></div>
               <div>LATENCY: <span className="text-emerald-400 font-semibold">18ms</span></div>
             </div>
-            <div className="absolute bottom-2.5 right-2.5 text-[10px] font-mono text-slate-400">
+            <div className="absolute bottom-2 right-2 text-[10px] font-mono text-slate-400">
               STATUS: <span className="text-emerald-400 font-bold">TURNIKET OCHILDI</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-2 border-t border-slate-800 text-center text-[10px] sm:text-[11px]">
-            <div className="p-2 rounded-xl bg-slate-950 border border-slate-800">
+          <div className="grid grid-cols-3 gap-2 pt-2 border-t border-slate-800 text-center text-[10px] sm:text-[11px]">
+            <div className="p-1.5 rounded-xl bg-slate-950 border border-slate-800">
               <span className="font-bold text-blue-400 block">3D-Yuz</span>
-              <span className="text-slate-400 text-[9px] sm:text-[10px]">{language === 'uz' ? '3 rakursli' : '3 ракурса'}</span>
+              <span className="text-slate-400 text-[9px]">{language === 'uz' ? '3 rakursli' : '3 ракурса'}</span>
             </div>
-            <div className="p-2 rounded-xl bg-slate-950 border border-slate-800">
+            <div className="p-1.5 rounded-xl bg-slate-950 border border-slate-800">
               <span className="font-bold text-emerald-400 block">0.2 soniya</span>
-              <span className="text-slate-400 text-[9px] sm:text-[10px]">{language === 'uz' ? 'Tezkor qayd' : 'Скорость'}</span>
+              <span className="text-slate-400 text-[9px]">{language === 'uz' ? 'Tezkor qayd' : 'Скорость'}</span>
             </div>
-            <div className="p-2 rounded-xl bg-slate-950 border border-slate-800">
+            <div className="p-1.5 rounded-xl bg-slate-950 border border-slate-800">
               <span className="font-bold text-indigo-400 block">T-13 Excel</span>
-              <span className="text-slate-400 text-[9px] sm:text-[10px]">{language === 'uz' ? 'Avto-tabel' : 'Табель'}</span>
+              <span className="text-slate-400 text-[9px]">{language === 'uz' ? 'Avto-tabel' : 'Табель'}</span>
             </div>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-xs text-slate-400 pt-2">
+        <div className="flex items-center gap-2 text-xs text-slate-400 pt-1">
           <Video className="w-4 h-4 text-blue-400 flex-shrink-0" />
           <span>
             {language === 'uz'
@@ -228,9 +228,9 @@ export default function LoginPage() {
       </div>
 
       {/* RIGHT COLUMN: Login Card */}
-      <div className="col-span-12 lg:col-span-6 xl:col-span-6 min-h-screen p-4 sm:p-8 lg:p-12 flex flex-col items-center justify-center relative z-10">
+      <div className="col-span-12 lg:col-span-6 xl:col-span-6 min-h-screen lg:min-h-0 lg:h-full p-3 sm:p-6 lg:p-8 flex flex-col items-center justify-center relative z-10 lg:overflow-hidden">
         {/* Mobile/Tablet brand logo & title */}
-        <div className="lg:hidden flex items-center justify-center gap-3 mb-6">
+        <div className="lg:hidden flex items-center justify-center gap-3 mb-4">
           <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-500/25 flex-shrink-0">
             <ShieldCheck className="w-6 h-6" />
           </div>
@@ -246,12 +246,12 @@ export default function LoginPage() {
         </div>
 
         {/* Floating Card exactly matching reference */}
-        <div className="w-full max-w-[430px] rounded-[28px] bg-[#111928]/95 border border-slate-800/80 p-6 sm:p-8 shadow-2xl backdrop-blur-xl relative">
+        <div className="w-full max-w-[420px] rounded-[24px] bg-[#111928]/95 border border-slate-800/80 p-4 sm:p-7 shadow-2xl backdrop-blur-xl relative my-auto">
           
           {/* Card Top: Title, Subtitle, Theme & Language Buttons */}
-          <div className="flex items-start justify-between gap-2 mb-6">
+          <div className="flex items-start justify-between gap-2 mb-4">
             <div>
-              <h2 className="text-2xl font-bold text-white tracking-tight leading-snug">
+              <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
                 {language === 'uz' ? 'Tizimga kirish' : 'Вход в систему'}
               </h2>
               <p className="text-xs text-slate-400 mt-1 max-w-[200px] sm:max-w-none leading-relaxed">
@@ -310,7 +310,7 @@ export default function LoginPage() {
           </div>
 
           {/* TWO TABS: [Email va parol] vs [Tezkor PIN] */}
-          <div className="grid grid-cols-2 gap-1.5 p-1 rounded-2xl bg-slate-800/60 border border-slate-700/50 mb-6">
+          <div className="grid grid-cols-2 gap-1.5 p-1 rounded-2xl bg-slate-800/60 border border-slate-700/50 mb-4">
             <button
               type="button"
               onClick={() => {
@@ -443,14 +443,14 @@ export default function LoginPage() {
               </div>
 
               {/* 3x4 Keypad matching Image 2 */}
-              <div className="grid grid-cols-3 gap-2.5 max-w-[320px] mx-auto pt-1">
+              <div className="grid grid-cols-3 gap-2 max-w-[300px] mx-auto pt-0.5">
                 {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((digit) => (
                   <button
                     key={digit}
                     type="button"
                     onClick={() => handleKeypadPress(digit)}
                     disabled={loading}
-                    className="h-14 sm:h-15 rounded-2xl bg-slate-800/80 hover:bg-slate-700/90 active:scale-95 border border-slate-700/60 text-xl font-bold text-white shadow-sm flex items-center justify-center transition cursor-pointer select-none"
+                    className="h-12 sm:h-13 rounded-2xl bg-slate-800/80 hover:bg-slate-700/90 active:scale-95 border border-slate-700/60 text-lg font-bold text-white shadow-sm flex items-center justify-center transition cursor-pointer select-none"
                   >
                     {digit}
                   </button>
@@ -461,7 +461,7 @@ export default function LoginPage() {
                   type="button"
                   onClick={() => handleKeypadPress('C')}
                   disabled={loading}
-                  className="h-14 sm:h-15 rounded-2xl bg-slate-800/80 hover:bg-slate-700/90 active:scale-95 border border-slate-700/60 text-lg font-bold text-slate-300 shadow-sm flex items-center justify-center transition cursor-pointer select-none"
+                  className="h-12 sm:h-13 rounded-2xl bg-slate-800/80 hover:bg-slate-700/90 active:scale-95 border border-slate-700/60 text-base font-bold text-slate-300 shadow-sm flex items-center justify-center transition cursor-pointer select-none"
                 >
                   C
                 </button>
@@ -471,7 +471,7 @@ export default function LoginPage() {
                   type="button"
                   onClick={() => handleKeypadPress('0')}
                   disabled={loading}
-                  className="h-14 sm:h-15 rounded-2xl bg-slate-800/80 hover:bg-slate-700/90 active:scale-95 border border-slate-700/60 text-xl font-bold text-white shadow-sm flex items-center justify-center transition cursor-pointer select-none"
+                  className="h-12 sm:h-13 rounded-2xl bg-slate-800/80 hover:bg-slate-700/90 active:scale-95 border border-slate-700/60 text-lg font-bold text-white shadow-sm flex items-center justify-center transition cursor-pointer select-none"
                 >
                   0
                 </button>
@@ -481,9 +481,9 @@ export default function LoginPage() {
                   type="button"
                   onClick={() => handleKeypadPress('backspace')}
                   disabled={loading}
-                  className="h-14 sm:h-15 rounded-2xl bg-slate-800/80 hover:bg-slate-700/90 active:scale-95 border border-slate-700/60 text-slate-300 shadow-sm flex items-center justify-center transition cursor-pointer select-none"
+                  className="h-12 sm:h-13 rounded-2xl bg-slate-800/80 hover:bg-slate-700/90 active:scale-95 border border-slate-700/60 text-slate-300 shadow-sm flex items-center justify-center transition cursor-pointer select-none"
                 >
-                  <Delete className="w-5 h-5" />
+                  <Delete className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
               </div>
             </div>
