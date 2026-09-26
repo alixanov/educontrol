@@ -31,24 +31,8 @@ Next
 
 WScript.Sleep 1000
 
-' 4. Launch app in Chrome app mode or Edge or default browser (forced new window)
-appUrl = "http://localhost:3000/cameras"
+' 4. Launch app in standard browser (no PWA, normal browser tab/window)
+appUrl = "http://localhost:3000"
+WshShell.Run "cmd.exe /c start """" """ & appUrl & """", 0, False
 
-Dim chromePath, chromePath86, edgePath, edgePath86
-chromePath = WshShell.ExpandEnvironmentStrings("%ProgramFiles%\Google\Chrome\Application\chrome.exe")
-chromePath86 = WshShell.ExpandEnvironmentStrings("%ProgramFiles(x86)%\Google\Chrome\Application\chrome.exe")
-edgePath = WshShell.ExpandEnvironmentStrings("%ProgramFiles%\Microsoft\Edge\Application\msedge.exe")
-edgePath86 = WshShell.ExpandEnvironmentStrings("%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe")
-
-If fso.FileExists(chromePath) Then
-    WshShell.Run """" & chromePath & """ --new-window --app=" & appUrl, 1, False
-ElseIf fso.FileExists(chromePath86) Then
-    WshShell.Run """" & chromePath86 & """ --new-window --app=" & appUrl, 1, False
-ElseIf fso.FileExists(edgePath) Then
-    WshShell.Run """" & edgePath & """ --new-window --app=" & appUrl, 1, False
-ElseIf fso.FileExists(edgePath86) Then
-    WshShell.Run """" & edgePath86 & """ --new-window --app=" & appUrl, 1, False
-Else
-    WshShell.Run "cmd.exe /c start """" """ & appUrl & """", 0, False
-End If
 

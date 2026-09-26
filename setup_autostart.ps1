@@ -27,40 +27,24 @@ $DesktopShortcut.WorkingDirectory = $ProjectDir
 $DesktopShortcut.IconLocation = "$IconPath,0"
 $DesktopShortcut.Description = "EduControl - Ish vaqti hisobi va nazorati"
 $DesktopShortcut.Save()
-Write-Host "[2/5] Ish stolidagi yorliq yangilandi (Desktop shortcut created)." -ForegroundColor Green
+Write-Host "[2/3] Ish stolidagi yorliq yangilandi (Desktop shortcut created)." -ForegroundColor Green
 
-# 2. Windows Startup Shortcut (shell:startup)
-$StartupLnk = Join-Path $StartupPath "EduControl.lnk"
-$StartupShortcut = $WshShell.CreateShortcut($StartupLnk)
-$StartupShortcut.TargetPath = $WscriptExe
-$StartupShortcut.Arguments = "`"$VbsPath`""
-$StartupShortcut.WorkingDirectory = $ProjectDir
-$StartupShortcut.IconLocation = "$IconPath,0"
-$StartupShortcut.Description = "EduControl AutoStart"
-$StartupShortcut.Save()
-Write-Host "[3/5] Windows avto-yuklanishiga (Startup) qo'shildi." -ForegroundColor Green
+# 2. Remove any lingering autostarts (Startup folder, Registry Run, Task Scheduler)
+$StartupLnk = Join-Path $StartupPath "EduControl*.lnk"
+Remove-Item $StartupLnk -Force -ErrorAction SilentlyContinue
 
-# 3. Windows Registry Run (HKCU - 100% reliable on every reboot)
 try {
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "EduControl" -Value "`"$WscriptExe`" `"$VbsPath`"" -Force
-    Write-Host "[4/5] Windows Registry Run kalitiga muvaffaqiyatli yozildi." -ForegroundColor Green
-} catch {
-    Write-Host "[4/5] Registry yozish o'tkazib yuborildi." -ForegroundColor Yellow
-}
+    Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "EduControl" -Force -ErrorAction SilentlyContinue
+} catch {}
 
-# 4. Windows Task Scheduler (OnLogon)
 $TaskName = "EduControl_AutoBoot"
-$TaskRun = "`"$WscriptExe`" `"$VbsPath`""
-schtasks.exe /create /tn $TaskName /tr $TaskRun /sc onlogon /f 2>$null
-if ($LASTEXITCODE -eq 0) {
-    Write-Host "[5/5] Windows Rejalashtiruvchisi (Task Scheduler) muvaffaqiyatli sozlandi." -ForegroundColor Green
-} else {
-    Write-Host "[5/5] Startup va Registry orqali avto-ishga tushirish to'liq faol." -ForegroundColor Yellow
-}
+schtasks.exe /delete /tn $TaskName /f 2>$null
+
+Write-Host "[3/3] Avto-ishga tushirish (Startup, Registry, Scheduler) butunlay o'chirildi." -ForegroundColor Green
 
 Write-Host ""
 Write-Host "=========================================================" -ForegroundColor Cyan
 Write-Host " [MUVOFAQIYATLI / УСПЕШНО] " -ForegroundColor Green
-Write-Host " Kompyuter yoqilganda EduControl avtomatik ishga tushadi!" -ForegroundColor White
-Write-Host " При включении компьютера EduControl запустится сам!" -ForegroundColor White
+Write-Host " EduControl faqat brauzerda localhost:3000 rejimida ishlaydi!" -ForegroundColor White
+Write-Host " Avtomatik ishga tushish o'chirildi (Без автозапуска)." -ForegroundColor White
 Write-Host "=========================================================" -ForegroundColor Cyan

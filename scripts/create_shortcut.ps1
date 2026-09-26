@@ -16,14 +16,15 @@ $shortcut.IconLocation = "$iconPath,0"
 $shortcut.Description = "EduControl - Ish vaqti hisobi"
 $shortcut.Save()
 
-# Startup shortcut
-$startupShortcutPath = Join-Path $startup "EduControl.lnk"
-$startupShortcut = $wsh.CreateShortcut($startupShortcutPath)
-$startupShortcut.TargetPath = "wscript.exe"
-$startupShortcut.Arguments = "`"$vbsPath`""
-$startupShortcut.WorkingDirectory = $targetDir
-$startupShortcut.IconLocation = "$iconPath,0"
-$startupShortcut.Description = "EduControl - Ish vaqti hisobi"
-$startupShortcut.Save()
+# Desktop shortcut (Starts EduControl and opens in standard browser)
+$shortcutPath = Join-Path $desktop "EduControl.lnk"
+$shortcut = $wsh.CreateShortcut($shortcutPath)
+$shortcut.TargetPath = "wscript.exe"
+$shortcut.Arguments = "`"$vbsPath`""
+$shortcut.WorkingDirectory = $targetDir
+$shortcut.IconLocation = "$iconPath,0"
+$shortcut.Description = "EduControl - Ish vaqti hisobi (Brauzer)"
+$shortcut.Save()
 
-Write-Output "Shortcuts created successfully: $shortcutPath and $startupShortcutPath"
+Write-Output "Desktop shortcut created successfully: $shortcutPath"
+
