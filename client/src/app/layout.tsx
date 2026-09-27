@@ -50,6 +50,10 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
+              window.addEventListener('beforeinstallprompt', function(e) {
+                e.preventDefault();
+                return false;
+              });
               if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.getRegistrations().then(function(registrations) {
                   for (var r of registrations) {
